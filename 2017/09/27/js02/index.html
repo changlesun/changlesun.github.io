@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>有自己的博客啦O(∩_∩)O | changlesun || more than</title>
+  <title>Javascript数据类型 | changlesun || more than</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="biubiubiu~~，折腾了一下午，终于搭建好属于自己的博客啦，有自己的小窝就是很开心啊，嘻嘻嘻。搜集了很多搭建方法，最终选了hexo+yilia，操作简单，外观也很简洁。啦啦啦，以后一定要勤快一点，多写一点。">
-<meta name="keywords" content="hexo">
+  <meta name="description" content="ECMAScript中有5种简单的数据类型：Undefined、Null、Boolean、Number、String，和1种复杂的数据类型：Object。ECMAScript不支持任何创建自定义类型的机制，因此所有值都将是上述6种数据类型之一。">
+<meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="有自己的博客啦O(∩_∩)O">
-<meta property="og:url" content="http://yoursite.com/2017/09/26/sb01/index.html">
+<meta property="og:title" content="Javascript数据类型">
+<meta property="og:url" content="http://yoursite.com/2017/09/27/js02/index.html">
 <meta property="og:site_name" content="changlesun || more than">
-<meta property="og:description" content="biubiubiu~~，折腾了一下午，终于搭建好属于自己的博客啦，有自己的小窝就是很开心啊，嘻嘻嘻。搜集了很多搭建方法，最终选了hexo+yilia，操作简单，外观也很简洁。啦啦啦，以后一定要勤快一点，多写一点。">
-<meta property="og:updated_time" content="2017-09-28T00:06:26.479Z">
+<meta property="og:description" content="ECMAScript中有5种简单的数据类型：Undefined、Null、Boolean、Number、String，和1种复杂的数据类型：Object。ECMAScript不支持任何创建自定义类型的机制，因此所有值都将是上述6种数据类型之一。">
+<meta property="og:updated_time" content="2017-09-29T06:25:47.925Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="有自己的博客啦O(∩_∩)O">
-<meta name="twitter:description" content="biubiubiu~~，折腾了一下午，终于搭建好属于自己的博客啦，有自己的小窝就是很开心啊，嘻嘻嘻。搜集了很多搭建方法，最终选了hexo+yilia，操作简单，外观也很简洁。啦啦啦，以后一定要勤快一点，多写一点。">
+<meta name="twitter:title" content="Javascript数据类型">
+<meta name="twitter:description" content="ECMAScript中有5种简单的数据类型：Undefined、Null、Boolean、Number、String，和1种复杂的数据类型：Object。ECMAScript不支持任何创建自定义类型的机制，因此所有值都将是上述6种数据类型之一。">
   
     <link rel="alternative" href="/atom.xml" title="changlesun || more than" type="application/atom+xml">
   
@@ -150,39 +150,134 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-sb01" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-js02" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      有自己的博客啦O(∩_∩)O
+      Javascript数据类型
     </h1>
   
 
         
-        <a href="/2017/09/26/sb01/" class="archive-article-date">
-  	<time datetime="2017-09-26T08:14:27.350Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-26</time>
+        <a href="/2017/09/27/js02/" class="archive-article-date">
+  	<time datetime="2017-09-27T08:50:03.632Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>biubiubiu~~，折腾了一下午，终于搭建好属于自己的博客啦，有自己的小窝就是很开心啊，嘻嘻嘻。搜集了很多搭建方法，最终选了hexo+yilia，操作简单，外观也很简洁。啦啦啦，以后一定要勤快一点，多写一点。<br><a id="more"></a></p>
+        <p>ECMAScript中有5种简单的数据类型：Undefined、Null、Boolean、Number、String，和1种复杂的数据类型：Object。ECMAScript不支持任何创建自定义类型的机制，因此所有值都将是上述6种数据类型之一。<br><a id="more"></a></p>
+<h3 id="typeof操作符"><a href="#typeof操作符" class="headerlink" title="typeof操作符"></a>typeof操作符</h3><p>typeof操作符用来检测给定变量的数据类型。</p>
+<ol>
+<li>未定义的值——返回”undefined”</li>
+<li>null——返回”object”（特殊值null被认为是一个空的对象引用）</li>
+<li>布尔值——返回”boolean”</li>
+<li>数值——返回”number”</li>
+<li>字符串——返回”string”</li>
+<li>对象——返回”object”</li>
+<li>函数——返回”function”（函数在ECMAScript中是对象，虽然它不是一种单独的数据类型，但是它有一些特殊的属性，因此需要区分函数与其它对象）</li>
+</ol>
+<h3 id="Undefined类型"><a href="#Undefined类型" class="headerlink" title="-Undefined类型-"></a>-Undefined类型-</h3><ul>
+<li><p>申明了变量，但未对其初始化时，这个变量的值就是undefined</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var message;</div><div class="line">alert(message==undefined);  //true</div></pre></td></tr></table></figure>
+</li>
+<li><p>包含undefined值的变量与尚未申明的变量是不一样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var message;</div><div class="line">alert(message);  //&quot;undefined&quot;</div><div class="line">alert(age);  //产生错误</div></pre></td></tr></table></figure>
+</li>
+<li><p>然而，执行typeof操作符，二者均会返回undefined</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var message;</div><div class="line">alert(typeof message);  //&quot;undefined&quot;</div><div class="line">alert(typeof age);  //&quot;undefined&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Null类型"><a href="#Null类型" class="headerlink" title="-Null类型-"></a>-Null类型-</h3><ul>
+<li><p>null值表示一个空对象指针，因此使用typeof检测时会返回”object”。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var car=null;</div><div class="line">alert(typeof car);  //&quot;object&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>如果某个变量将来准备用于保存对象，那么最好将它初始化为null，因为只要直接检查null的值就可以知道这个变量是否已经保存了一个对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if(car!=null)&#123;</div><div class="line">	//对car对象执行操作</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>undefined值派生自null值，它们的相等性测试返回true。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alert(null==undefined);  //true</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Boolean类型"><a href="#Boolean类型" class="headerlink" title="-Boolean类型-"></a>-Boolean类型-</h3><ul>
+<li>Boolean类型只有两个字面值：true和false，区分大小写，true不一定等于1，false也不一定等于0。对任何数据类型的值调用Boolean()函数，都会返回一个Boolean值，返回true还是false取决于转换值的数据类型及其实际值。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var message=&quot;Hello World!&quot;;</div><div class="line">alert(Boolean(message));  //true</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">数据类型</th>
+<th style="text-align:center">转换为true的值</th>
+<th style="text-align:center">转换为false的值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Undefined</td>
+<td style="text-align:center">n/a</td>
+<td style="text-align:center">undefined</td>
+</tr>
+<tr>
+<td style="text-align:center">Boolean</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">false</td>
+</tr>
+<tr>
+<td style="text-align:center">Number</td>
+<td style="text-align:center">任何非零数字值</td>
+<td style="text-align:center">0和NaN</td>
+</tr>
+<tr>
+<td style="text-align:center">String</td>
+<td style="text-align:center">任何非空字符串</td>
+<td style="text-align:center">“”(空字符串)</td>
+</tr>
+<tr>
+<td style="text-align:center">Object</td>
+<td style="text-align:center">任何对象</td>
+<td style="text-align:center">null</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Number类型"><a href="#Number类型" class="headerlink" title="-Number类型-"></a>-Number类型-</h3><p>Number类型最基本的数值字面量是十进制整数。还有八进制，以8为基数，第一位必须是0，然后跟0~7，如果字面值中的数值超出了范围，前导0被忽略，当做十进制解析，列如079被解析为79。还有十六进制，以16为基数，前两位必须是0x，然后跟0~9或A~F（大小写均可）。</p>
+<ul>
+<li>浮点数值<br>浮点数值中必须包含一个小数点，小数点后面必须至少有一位数字。由于保存浮点数值需要的内存空间是整数值的两倍，ECMAScript会不失时机地将浮点数值转换为整数值，比如1.小数点后没有任何数值，比如10.0自身表示的就是一个整数。对于极大极小的浮点数值，可以用e表示法，比如3.125e7表示3.125*10的7次方，在默认情况下，ECMAScript会将那些小数点后有6个以上0的浮点数值转换为以e表示法表示的数值，比如0.0000003被转换为3e-7。浮点数值的最高精度是17位小数，但在算术计算时其精度远远不如整数。</li>
+<li>数值范围<br>由于内存的限制，ECMAScript并不能表示世界上所有的数值。最小数值保存在Number.MIN_VALUE中，绝大多数浏览器中为5e-324；最大数值保存在Number.MAX_VALUE中，绝大多数浏览器中为1.7976931348623157e+308。超出此范围的数值会被自动转换为特殊的Infinity值，该值无法参与计算，负数转换为-Infinity（负无穷），正数转换为Infinity（正无穷），isInfinity()可判断是否位于此范围。</li>
+<li>NaN<br>非数值NaN是一个特殊的数值，用于表示一个本来要返回数值的操作数未返回数值的情况，这样就不会抛出错误，与其他编程语言不同，它不会停止代码执行。NaN有两个特点，任何涉及NaN的操作（比如NaN/10）都会返回NaN；NaN与任何值都不相等，包括NaN本身。isNaN()函数接收一个参数，可以判断该参数是否为数值，比如isNaN(10)返回false。isNaN()也适用于对象。</li>
+<li>数值转换<br>有3个函数可以把非数值转换为数值：Number()、parseInt()、parseFloat()。Number()用于任何数据类型，在转换字符串时比较复杂且不够合理。parseInt()、parseFloat()专门用于把字符串转换为数值。<br>parseInt()可接受两个参数，一般转换如下：<br>parseFloat()只接受一个参数，它会解析第一个小数点忽略第二个小数点，它始终都会忽略前导0只能用来解析十进制，一般转换如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var num1=parseInt(&quot;1234blue&quot;);  //1234</div><div class="line">var num2=parseInt(&quot;&quot;);  //NaN（Number()会转换为0）</div><div class="line">var num3=parseInt(22.5);  //22</div><div class="line">var num4=parseInt(&quot;0xA&quot;);  //10</div><div class="line">var num5=parseInt(&quot;070&quot;);  //56（ES3转换为八进制56，ES5转换为十进制70）</div><div class="line">var num6=parseInt(&quot;070&quot;,8);  //56（ES5转换为八进制56，因此无论在什么情况下最好明确指定基数）</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var num1=parseFloat(&quot;1234blue&quot;);  //1234</div><div class="line">var num2=parseFloat(&quot;22.5&quot;);  //22.5</div><div class="line">var num3=parseFloat(&quot;22.34.5&quot;);  //22.34</div><div class="line">var num4=parseFloat(&quot;0xA&quot;);  //0</div><div class="line">var num5=parseFloat(&quot;0908.5&quot;);  //908.5</div><div class="line">var num6=parseFloat(&quot;3.125e7&quot;);  //31250000</div></pre></td></tr></table></figure>
+<h3 id="String类型"><a href="#String类型" class="headerlink" title="-String类型-"></a>-String类型-</h3><p>字符串可以由双引号（””）或单引号（’’）表示。</p>
+<ul>
+<li><p>字符字面量<br>String数据类型包含一些特殊的字符字面量，也叫做转义序列。比如：\n换行，\t制表，\b退格，\r回车、\f进纸、\斜杠、\’单引号在单引号表示的字符串中使用、\”双引号在双引号表示的字符串中使用、\xnn、\unnnn。这些转义序列可以出现在字符串中的任意位置，也将被作为一个字符来解析。如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var text=&quot;He said, \&quot;hey.\&quot;&quot;;</div><div class="line">alert(text.length);  //15</div></pre></td></tr></table></figure>
+</li>
+<li><p>字符串的特点<br>不可变，一旦创建值就不可改变，要改变某个变量保存的字符串必须先销毁原来的字符串，再用另一个包含新值的字符串填充该变量。以下示例中变量lang开始时包含字符串”Java”，第二行把lang的值重新定义为”Java”与”Script”的组合即”JavaScript”。这操作过程在后台发生：首先创建一个能容纳10个字符的新字符串，然后填充”Java”和”Script”，最后销毁原来的字符串”Java”和”Script”，因为这两个字符串已经没用了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var lang=&quot;Java&quot;;</div><div class="line">lang=&quot;Java&quot;+&quot;Script&quot;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>转换为字符串<br>两种方式toString()和String()。<br>布尔值、数值、字符串、对象都有toStirng()方法，undefined和null值没有。多数情况下toString()方法不必传递参数，在调用数值的toString()方法时可以传递一个参数作为基数。一些例子如下：<br>String()转型函数可以判断undefined和null，如果值有toString()方法则会调用该方法（没有参数）并返回相应的结果。一些例子如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var num=10;</div><div class="line">alert(num.toString());  //&quot;10&quot;</div><div class="line">alert(num.toString(2));  //&quot;1010&quot;</div><div class="line">alert(num.toString(8));  //&quot;12&quot;</div><div class="line">alert(num.toString(10));  //&quot;10&quot;</div><div class="line">alert(num.toString(16));  //&quot;a&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var value1=10;  </div><div class="line">var value2=true;</div><div class="line">var value3=null;</div><div class="line">var value4;</div><div class="line">alert(String(value1));  //&quot;10&quot;</div><div class="line">alert(String(value2));  //&quot;true&quot;</div><div class="line">alert(String(value3));  //&quot;null&quot;</div><div class="line">alert(String(value4));  //&quot;undefined&quot;</div></pre></td></tr></table></figure>
+<h3 id="Object类型"><a href="#Object类型" class="headerlink" title="-Object类型-"></a>-Object类型-</h3><p>对象是一组数据和功能的集合，对象可以通过执行new操作符后跟要创建的对象类型的名称来创建。而创建Object类型的实例并未其添加属性和方法，就可以创建自定义对象，例如：<code>var o=new Object();</code>。创建Object实例的一个重要思想就是Object类型是它所有实例的基础，即Object所具有的任何属性和方法也同样存在于它具体的对象中。具有的属性和方法如下：</p>
+<ul>
+<li>constructor：保存着用于创建当前对象的函数（构造函数）</li>
+<li>hasOwnProperty(propertyName)：检查给定的属性在当前对象实例中是否存在（而不是在实例的原型中）</li>
+<li>isPrototypeof(object)：检查传入的对象是否是当前对象的原型</li>
+<li>propertyisEnumerable(propertyName) :检查给定的属性是否能够使用for-in语句来枚举</li>
+<li>toLoaclString()：返回对象的字符串表示，该字符串与执行环境的地区对应</li>
+<li>toString()：返回对象的字符串表示</li>
+<li>valueOf()：返回对象的布尔值、数值或字符串表示，通常与toString()方法返回的值相同</li>
+</ul>
+<p><strong>Object是所有对象的基础，因此所有对象都具有这些基本的属性和方法。</strong></p>
 <hr>
-<p>虽然搭建这个博客没有费太大的力气，我还是把大致的搭建过程写下来吧，免得自己以后忘了又要瞎折腾。</p>
-<p>一、搭建博客<br>1、安装node<br>到官网<a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a>下载安装即可。<br>2、安装git<br><a href="https://github.com/waylau/git-for-win" target="_blank" rel="external">Git for Windows 国内下载站</a>。<br>3、安装hexo<br>在git的安装目录下找到git-bash.exe，打开并执行命令<code>npm install -g hexo</code>。<br>4、github准备<br>博客最终会托管到github上，所以得先申请一个github账号，再点击New reponsitory创建一个名为changlesun.github.io的仓库。<br>5、git配置<br>要使用git命令来部署到github，需要先进行一些配置：<br>配置账户：<code>git config --global user.name changlesun</code> ，<code>git config --global user.email QQ@qq.com</code>。生成新的ssh key：<code>ssh-keygen -t rsa -C QQ@qq.com</code>，中途一直回车即可 。操作公钥ssh：在C:/Users/xxx/.ssh/下，打开id_rsa.pub文件，全选复制，登录github，Settings-SSH and GPG keys-New SSH key-Title自定义-Key粘贴复制内容-Add SSH key。<br>6、初始化<br>在D盘文件夹changlesun下新建文件夹Blog，git-bash进入Blog目录：<code>cd D:</code> 、<code>cd changlesun</code> 、<code>cd Blog</code>，初始化<code>hexo init</code>，现在已经生成一篇名为”hello word”的文章，执行命令<code>hexo generate</code>将其编译为静态页面，启动本地服务<code>hexo server</code>,在浏览器中输入 <a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> 查看搭建好的博客，博客外观和文章完整地显示！Yeah！成功啦！<br>7、部署到github<br>修改Blog/_config.yml文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">	type: git</div><div class="line">	repo: https://github.com/changlesun/changlesun.github.io.git </div><div class="line">	branch: master</div></pre></td></tr></table></figure></p>
-<p>执行命令<code>npm install hexo-deployer-git --save</code>，部署<code>hexo deploy</code>，部署过程中会弹出github登录框，账户密码登录即可。部署成功后，在浏览器中输入changlesun.github.io即可看到和本地一样的效果。Yeah！</p>
-<p>二、修改主题<br>1、主题我选择<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external">yilia</a><br>在Blog目录下执行命令<code>git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia</code>。<br>2、修改Blog/_config.yml文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">theme: yilia</div></pre></td></tr></table></figure></p>
-<p>另外，这个文件还有一些细节的地方也需要修改，查看<a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="external">官方文档</a>就可以。<br>3、修改themes/yilia/_config.yml文件<br>这里面的修改就看个人喜好啦，可以边改边预览。这里写一下导航分类：<br>在themes/yilia/_config.yml里添加分类如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">menu:</div><div class="line">	主页: /</div><div class="line">	技术: /categories/技术</div><div class="line">	随笔: /categories/随笔</div></pre></td></tr></table></figure></p>
-<p>在Blog/scaffolds/post.md添加如下，page.md、draft.md类似<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">title: &#123;&#123; title &#125;&#125;</div><div class="line">date: &#123;&#123; date &#125;&#125;</div><div class="line">tags:</div><div class="line">categories: //添加</div><div class="line">---</div></pre></td></tr></table></figure></p>
-<p>实际写作时在开头进行categories配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">title: 有自己的博客啦O(∩_∩)O</div><div class="line">tags: hexo</div><div class="line">categories: 随笔</div><div class="line">---</div></pre></td></tr></table></figure></p>
-<p>这样修改以后，文章发布时，在git中执行hexo generate命令，hexo会在根目录/public/categrises下自动生成相应的归档文件夹。</p>
-<p>三、功能完善<br>只要会写代码，还可以做很多其它的功能，比如评论、打赏之类的，之后我会慢慢完善的。O(∩_∩)O</p>
-<hr>
-<p>PS：写文章要用<a href="http://www.appinn.com/markdown/index.html" target="_blank" rel="external">Markdown</a>语法，简单易学。下面贴几个<a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="external">hexo最常用的命令</a>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hexo clean //清除缓存</div><div class="line">hexo generate //把文章生成页面</div><div class="line">hexo server //启动本地服务</div><div class="line">hexo deploy //部署到github</div></pre></td></tr></table></figure></p>
+<p>PS:《JavaScript高级程序设计》笔记</p>
 
       
 
@@ -196,7 +291,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		
 		</ul>
@@ -208,7 +303,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
+        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
         		</li>
       		
 		</ul>
@@ -263,7 +358,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/26/sb01/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/27/js02/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -277,15 +372,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/09/26/js01/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          OOP之static与const关键字
-        
-      </div>
-    </a>
   
+    <a href="/2017/09/26/js01/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">OOP之static与const关键字</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 

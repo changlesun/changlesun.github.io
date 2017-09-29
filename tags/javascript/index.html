@@ -6,19 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>有自己的博客啦O(∩_∩)O | changlesun || more than</title>
+  <title>Tag: javascript | changlesun || more than</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="biubiubiu~~，折腾了一下午，终于搭建好属于自己的博客啦，有自己的小窝就是很开心啊，嘻嘻嘻。搜集了很多搭建方法，最终选了hexo+yilia，操作简单，外观也很简洁。啦啦啦，以后一定要勤快一点，多写一点。">
-<meta name="keywords" content="hexo">
-<meta property="og:type" content="article">
-<meta property="og:title" content="有自己的博客啦O(∩_∩)O">
-<meta property="og:url" content="http://yoursite.com/2017/09/26/sb01/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="changlesun || more than">
+<meta property="og:url" content="http://yoursite.com/tags/javascript/index.html">
 <meta property="og:site_name" content="changlesun || more than">
-<meta property="og:description" content="biubiubiu~~，折腾了一下午，终于搭建好属于自己的博客啦，有自己的小窝就是很开心啊，嘻嘻嘻。搜集了很多搭建方法，最终选了hexo+yilia，操作简单，外观也很简洁。啦啦啦，以后一定要勤快一点，多写一点。">
-<meta property="og:updated_time" content="2017-09-28T00:06:26.479Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="有自己的博客啦O(∩_∩)O">
-<meta name="twitter:description" content="biubiubiu~~，折腾了一下午，终于搭建好属于自己的博客啦，有自己的小窝就是很开心啊，嘻嘻嘻。搜集了很多搭建方法，最终选了hexo+yilia，操作简单，外观也很简洁。啦啦啦，以后一定要勤快一点，多写一点。">
+<meta name="twitter:title" content="changlesun || more than">
   
     <link rel="alternative" href="/atom.xml" title="changlesun || more than" type="application/atom+xml">
   
@@ -150,173 +145,71 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-sb01" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      有自己的博客啦O(∩_∩)O
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/09/27/js02/" class="archive-article-date">
+  	<time datetime="2017-09-27T08:50:03.632Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-27</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/09/27/js02/">Javascript数据类型</a>
     </h1>
   
 
-        
-        <a href="/2017/09/26/sb01/" class="archive-article-date">
-  	<time datetime="2017-09-26T08:14:27.350Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>biubiubiu~~，折腾了一下午，终于搭建好属于自己的博客啦，有自己的小窝就是很开心啊，嘻嘻嘻。搜集了很多搭建方法，最终选了hexo+yilia，操作简单，外观也很简洁。啦啦啦，以后一定要勤快一点，多写一点。<br><a id="more"></a></p>
-<hr>
-<p>虽然搭建这个博客没有费太大的力气，我还是把大致的搭建过程写下来吧，免得自己以后忘了又要瞎折腾。</p>
-<p>一、搭建博客<br>1、安装node<br>到官网<a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a>下载安装即可。<br>2、安装git<br><a href="https://github.com/waylau/git-for-win" target="_blank" rel="external">Git for Windows 国内下载站</a>。<br>3、安装hexo<br>在git的安装目录下找到git-bash.exe，打开并执行命令<code>npm install -g hexo</code>。<br>4、github准备<br>博客最终会托管到github上，所以得先申请一个github账号，再点击New reponsitory创建一个名为changlesun.github.io的仓库。<br>5、git配置<br>要使用git命令来部署到github，需要先进行一些配置：<br>配置账户：<code>git config --global user.name changlesun</code> ，<code>git config --global user.email QQ@qq.com</code>。生成新的ssh key：<code>ssh-keygen -t rsa -C QQ@qq.com</code>，中途一直回车即可 。操作公钥ssh：在C:/Users/xxx/.ssh/下，打开id_rsa.pub文件，全选复制，登录github，Settings-SSH and GPG keys-New SSH key-Title自定义-Key粘贴复制内容-Add SSH key。<br>6、初始化<br>在D盘文件夹changlesun下新建文件夹Blog，git-bash进入Blog目录：<code>cd D:</code> 、<code>cd changlesun</code> 、<code>cd Blog</code>，初始化<code>hexo init</code>，现在已经生成一篇名为”hello word”的文章，执行命令<code>hexo generate</code>将其编译为静态页面，启动本地服务<code>hexo server</code>,在浏览器中输入 <a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> 查看搭建好的博客，博客外观和文章完整地显示！Yeah！成功啦！<br>7、部署到github<br>修改Blog/_config.yml文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">	type: git</div><div class="line">	repo: https://github.com/changlesun/changlesun.github.io.git </div><div class="line">	branch: master</div></pre></td></tr></table></figure></p>
-<p>执行命令<code>npm install hexo-deployer-git --save</code>，部署<code>hexo deploy</code>，部署过程中会弹出github登录框，账户密码登录即可。部署成功后，在浏览器中输入changlesun.github.io即可看到和本地一样的效果。Yeah！</p>
-<p>二、修改主题<br>1、主题我选择<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external">yilia</a><br>在Blog目录下执行命令<code>git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia</code>。<br>2、修改Blog/_config.yml文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">theme: yilia</div></pre></td></tr></table></figure></p>
-<p>另外，这个文件还有一些细节的地方也需要修改，查看<a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="external">官方文档</a>就可以。<br>3、修改themes/yilia/_config.yml文件<br>这里面的修改就看个人喜好啦，可以边改边预览。这里写一下导航分类：<br>在themes/yilia/_config.yml里添加分类如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">menu:</div><div class="line">	主页: /</div><div class="line">	技术: /categories/技术</div><div class="line">	随笔: /categories/随笔</div></pre></td></tr></table></figure></p>
-<p>在Blog/scaffolds/post.md添加如下，page.md、draft.md类似<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">title: &#123;&#123; title &#125;&#125;</div><div class="line">date: &#123;&#123; date &#125;&#125;</div><div class="line">tags:</div><div class="line">categories: //添加</div><div class="line">---</div></pre></td></tr></table></figure></p>
-<p>实际写作时在开头进行categories配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">title: 有自己的博客啦O(∩_∩)O</div><div class="line">tags: hexo</div><div class="line">categories: 随笔</div><div class="line">---</div></pre></td></tr></table></figure></p>
-<p>这样修改以后，文章发布时，在git中执行hexo generate命令，hexo会在根目录/public/categrises下自动生成相应的归档文件夹。</p>
-<p>三、功能完善<br>只要会写代码，还可以做很多其它的功能，比如评论、打赏之类的，之后我会慢慢完善的。O(∩_∩)O</p>
-<hr>
-<p>PS：写文章要用<a href="http://www.appinn.com/markdown/index.html" target="_blank" rel="external">Markdown</a>语法，简单易学。下面贴几个<a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="external">hexo最常用的命令</a>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hexo clean //清除缓存</div><div class="line">hexo generate //把文章生成页面</div><div class="line">hexo server //启动本地服务</div><div class="line">hexo deploy //部署到github</div></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">hexo</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/随笔//" class="article-tag-list-link color3">随笔</a>
+        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/26/sb01/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2017/09/26/js01/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          OOP之static与const关键字
-        
-      </div>
-    </a>
   
   
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -339,9 +232,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
