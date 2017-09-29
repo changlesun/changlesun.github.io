@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/29/js02/index.html">
 <meta property="og:site_name" content="changlesun || more than">
 <meta property="og:description" content="ECMAScript中有5种简单的数据类型：Undefined、Null、Boolean、Number、String，和1种复杂的数据类型：Object。ECMAScript不支持任何创建自定义类型的机制，因此所有值都将是上述6种数据类型之一。">
-<meta property="og:updated_time" content="2017-09-29T06:33:17.331Z">
+<meta property="og:updated_time" content="2017-09-29T06:50:05.049Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Javascript数据类型">
 <meta name="twitter:description" content="ECMAScript中有5种简单的数据类型：Undefined、Null、Boolean、Number、String，和1种复杂的数据类型：Object。ECMAScript不支持任何创建自定义类型的机制，因此所有值都将是上述6种数据类型之一。">
@@ -265,7 +265,7 @@
 </li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var value1=10;  </div><div class="line">var value2=true;</div><div class="line">var value3=null;</div><div class="line">var value4;</div><div class="line">alert(String(value1));  //&quot;10&quot;</div><div class="line">alert(String(value2));  //&quot;true&quot;</div><div class="line">alert(String(value3));  //&quot;null&quot;</div><div class="line">alert(String(value4));  //&quot;undefined&quot;</div></pre></td></tr></table></figure>
-<h3 id="Object类型"><a href="#Object类型" class="headerlink" title="-Object类型-"></a>-Object类型-</h3><p>对象是一组数据和功能的集合，对象可以通过执行new操作符后跟要创建的对象类型的名称来创建。而创建Object类型的实例并未其添加属性和方法，就可以创建自定义对象，例如：<code>var o=new Object();</code>。创建Object实例的一个重要思想就是Object类型是它所有实例的基础，即Object所具有的任何属性和方法也同样存在于它具体的对象中。具有的属性和方法如下：</p>
+<h3 id="Object类型"><a href="#Object类型" class="headerlink" title="-Object类型-"></a>-Object类型-</h3><p>对象是一组数据和功能的集合，对象可以通过执行new操作符后跟要创建的对象类型的名称来创建。而创建Object类型的实例并为其添加属性和方法，就可以创建自定义对象，例如：<code>var o=new Object();</code>。创建Object实例的一个重要思想就是Object类型是它所有实例的基础，即Object所具有的任何属性和方法也同样存在于它具体的对象中。具有的属性和方法如下：</p>
 <ul>
 <li>constructor：保存着用于创建当前对象的函数（构造函数）</li>
 <li>hasOwnProperty(propertyName)：检查给定的属性在当前对象实例中是否存在（而不是在实例的原型中）</li>
