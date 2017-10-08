@@ -15,12 +15,12 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/26/js01/index.html">
 <meta property="og:site_name" content="changlesun || more than">
 <meta property="og:description" content="static关键字用来描述在类中成员属性和成员方法是静态的。一个静态成员在内存中就只有一个，却能被很多对象共用。静态成员限制外部访问，只属于类不属于它的任何对象实例，是在类第一次被加载的时候分配的空间，只能对类的对象实例共享，其他类无法访问。">
-<meta property="og:image" content="http://yoursite.com/img/js0101.png">
-<meta property="og:updated_time" content="2017-09-26T12:11:19.372Z">
+<meta property="og:image" content="http://yoursite.com/img/7947554-a4a302a249229d54.png">
+<meta property="og:updated_time" content="2017-10-08T16:05:51.412Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OOP之static与const关键字">
 <meta name="twitter:description" content="static关键字用来描述在类中成员属性和成员方法是静态的。一个静态成员在内存中就只有一个，却能被很多对象共用。静态成员限制外部访问，只属于类不属于它的任何对象实例，是在类第一次被加载的时候分配的空间，只能对类的对象实例共享，其他类无法访问。">
-<meta name="twitter:image" content="http://yoursite.com/img/js0101.png">
+<meta name="twitter:image" content="http://yoursite.com/img/7947554-a4a302a249229d54.png">
   
     <link rel="alternative" href="/atom.xml" title="changlesun || more than" type="application/atom+xml">
   
@@ -177,7 +177,7 @@
 <p>因为静态成员是在类第一次加载的时候就创建的，所以在类的外部不需要对象而使用类名就可以访问到静态成员。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">	class Person&#123;</div><div class="line">		//静态属性</div><div class="line">		public static $myName=&quot;changlesun&quot;;</div><div class="line">		//静态方法</div><div class="line">		public static fuanction say()&#123;</div><div class="line">			echo &quot;My name is changlesun.&quot;;</div><div class="line">		&#125;   </div><div class="line">	&#125;</div><div class="line">	//输出静态属性</div><div class="line">	echo Person::$myName;</div><div class="line">	//访问静态方法</div><div class="line">	echo Person::say();</div><div class="line">	//重新给静态属性赋值</div><div class="line">	Person::$myName=&quot;jianmo&quot;;</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
 <p>虽然静态成员被这个类的每个实例对象所共享，但是使用对象却不能访问到静态成员。因为静态成员不存在于每个对象内部，如果使用对象访问静态成员的话就会出现没有这个成员定义。</p>
 <p>从内存角度，对象是放在“堆内存”里面，对象的引用被放到了“栈内存“里。而静态成员则放到了“初始化静态段”，在类第一次被加载的时候放入，可以让堆内存里面的每个对象所共享。如图：</p>
-<p><img src="/img/js0101.png" alt=""></p>
+<p><img src="/img/7947554-a4a302a249229d54.png" alt=""></p>
 <p>在类中，静态方法只能访问静态属性，不能访问非静态成员。因为访问时需要$this引用，而$this引用指针代表调用此成员的对象，然而静态成员是不用对象调用的，而是使用类名来访问， 所以根本就没有对象存在。</p>
 <p>既然$this不存在，在静态方法中访问其它静态成员就要使用一个特殊的类self，self和$this相似，只不过self代表的是这个静态方法所在的类。即“self::静态成员属性”的方式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">	class Person&#123;</div><div class="line">		//静态属性</div><div class="line">		public static $myName=&quot;changlesun&quot;;</div><div class="line">		//静态方法</div><div class="line">		public static fuanction say()&#123;</div><div class="line">			echo &quot;My name is &quot; . self::$myName;</div><div class="line">		&#125;	</div><div class="line">	&#125;</div><div class="line">	//访问静态方法</div><div class="line">	echo Person::say();</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
 <p>在类中，非静态方法也可以访问静态成员，但是也不能使用$this，也要使用self。</p>
@@ -411,11 +411,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color4">php</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">php</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
