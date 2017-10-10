@@ -6,18 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Javascript中的引用类型之基本包装类型 | changlesun || more than</title>
+  <title>ECMAScript中的引用类型之基本包装类型 | changlesun || more than</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="为了便于操作基本类型的值，ECMAScript提供了三个特殊的引用类型：Boolean、Number、String。">
 <meta name="keywords" content="javascript,js09">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Javascript中的引用类型之基本包装类型">
+<meta property="og:title" content="ECMAScript中的引用类型之基本包装类型">
 <meta property="og:url" content="http://yoursite.com/2017/10/09/js09/index.html">
 <meta property="og:site_name" content="changlesun || more than">
 <meta property="og:description" content="为了便于操作基本类型的值，ECMAScript提供了三个特殊的引用类型：Boolean、Number、String。">
-<meta property="og:updated_time" content="2017-10-10T00:57:26.926Z">
+<meta property="og:updated_time" content="2017-10-10T13:47:49.979Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Javascript中的引用类型之基本包装类型">
+<meta name="twitter:title" content="ECMAScript中的引用类型之基本包装类型">
 <meta name="twitter:description" content="为了便于操作基本类型的值，ECMAScript提供了三个特殊的引用类型：Boolean、Number、String。">
   
     <link rel="alternative" href="/atom.xml" title="changlesun || more than" type="application/atom+xml">
@@ -157,7 +157,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Javascript中的引用类型之基本包装类型
+      ECMAScript中的引用类型之基本包装类型
     </h1>
   
 
@@ -247,10 +247,49 @@
 <li><p>slice()、substring()、substr()基于子字符串创建新字符串。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var stringValue=&quot;hello world&quot;;</div><div class="line"></div><div class="line">&lt;!-- 一个参数指定字符串的起始位置，将字符串的末尾作为结束位置 --&gt;</div><div class="line">alert(stringValue.slice(3));  //&quot;lo world&quot;</div><div class="line">alert(stringValue.substring(3));  //&quot;lo world&quot;</div><div class="line">alert(stringValue.substr(3));  //&quot;lo world&quot;</div><div class="line"></div><div class="line">alert(stringValue.slice(3，7));  //&quot;lo w&quot;，[3,7)</div><div class="line">alert(stringValue.substring(3));  //&quot;lo w&quot;，[3,7)</div><div class="line">alert(stringValue.substr(3,7));  //&quot;lo worl&quot;，7指定返回的字符个数</div></pre></td></tr></table></figure>
 <p>传入负参数时，行为更不同。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var stringValue=&quot;hello world&quot;;</div><div class="line"></div><div class="line">alert(stringValue.slice(-3));  //&quot;rld&quot;，stringValue.slice(8)，将传入的负值与字符串长度相加</div><div class="line">alert(stringValue.substring(-3));  //&quot;hello world&quot;，stringValue.substring(0)，会把所有的负值参数转换为0</div><div class="line">alert(stringValue.substr(-3));  //&quot;rld&quot;，stringValue.substr(8)，将负的第一个参数加上字符串长度，将负的第二个参数转换为0</div><div class="line"></div><div class="line">alert(stringValue.slice(3,-4));  //&quot;lo w&quot;，stringValue.slice(3,8)</div><div class="line">alert(stringValue.substring(3,-4));  //&quot;hel&quot;，stringValue.substring(3,0)，即[0,3)</div><div class="line">alert(stringValue.substr(-3,-4));  //&quot;&quot;，stringValue.substr(8,0)</div></pre></td></tr></table></figure></li>
-</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var stringValue=&quot;hello world&quot;;</div><div class="line"></div><div class="line">alert(stringValue.slice(-3));  //&quot;rld&quot;，stringValue.slice(8)，将传入的负值与字符串长度相加</div><div class="line">alert(stringValue.substring(-3));  //&quot;hello world&quot;，stringValue.substring(0)，会把所有的负值参数转换为0</div><div class="line">alert(stringValue.substr(-3));  //&quot;rld&quot;，stringValue.substr(8)，将负的第一个参数加上字符串长度，将负的第二个参数转换为0</div><div class="line"></div><div class="line">alert(stringValue.slice(3,-4));  //&quot;lo w&quot;，stringValue.slice(3,8)</div><div class="line">alert(stringValue.substring(3,-4));  //&quot;hel&quot;，stringValue.substring(3,0)，即[0,3)</div><div class="line">alert(stringValue.substr(-3,-4));  //&quot;&quot;，stringValue.substr(8,0)</div></pre></td></tr></table></figure>
 </li>
 </ul>
+</li>
+<li><p>字符串位置方法<br>indexOf()和lastIndexOf()，从一个字符串中搜索给定的子字符串，找到则返回子字符串的位置，没找到则返回-1。indexOf()从头往后搜索，lastIndexOf()从后往前搜索。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var stringValue=&quot;hello world&quot;;</div><div class="line">alert(stringValue.indexOf(&quot;o&quot;));  //4</div><div class="line">alert(stringValue.lastIndexOf(&quot;o&quot;));  //7</div><div class="line">alert(stringValue.indexOf(&quot;o&quot;,6));  //7，第二个参数指定从位置6开始搜索</div><div class="line">alert(stringValue.lastIndexOf(&quot;o&quot;,6));  //4，从位置6往前搜索</div></pre></td></tr></table></figure>
+</li>
+<li><p>trim()，创建一个字符串的副本，删除前置及后缀的所有空格，然后返回结果。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var stringValue=&quot; hello world &quot;;</div><div class="line">var trimmedStringValue=stringValue.trim();</div><div class="line">alert(stringValue);  //&quot; hello world &quot;</div><div class="line">alert(trimmedStringValue);  //&quot;hello world&quot;</div></pre></td></tr></table></figure>
+<p>  此外，Firefox3.5+、Safari5+、Chrome8+还支持非标准的trimLeft()、trimRight()，分别用于删除字符串开头和末尾的空格。</p>
+</li>
+<li><p>字符串大小写转换方法。<br>toLowerCase()、toUpperCase()是两个经典方法，toLocaleLowerCase、toLocaleUpperCase()则针对特定地区。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var stringValue=&quot;hello world&quot;;</div><div class="line">alert(stringValue.toLowerCase());  //&quot;hello world&quot;</div><div class="line">alert(stringValue.toUpperCase());  //&quot;HELLO WORLD&quot;</div><div class="line">alert(stringValue.toLocaleLowerCase());  //&quot;hello world&quot;</div><div class="line">alert(stringValue.toLocaleUpperCase());  //&quot;HELLO WORLD&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>字符串的模式匹配方法。</p>
+<ul>
+<li><p>match()，本质上与RegExp的exec()相同，接收一个参数，要么是一个正则表达式，要么是一个RegExp对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var text=&quot;cat, bat, sat, fat&quot;;</div><div class="line">var pattern=/.at/;</div><div class="line">var matches=text.match(pattern);</div><div class="line">alert(matches.index);  //0</div><div class="line">alert(matches[0]);  //&quot;cat&quot;;</div><div class="line">alert(pattern.lastIndex);  //0</div></pre></td></tr></table></figure>
+</li>
+<li><p>search()，返回字符串中第一个匹配项的索引，如果没有找到匹配项则返回-1。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var text=&quot;cat, bat, sat, fat&quot;;</div><div class="line">var pos=text.search(/at/);</div><div class="line">alert(pos);  //1</div></pre></td></tr></table></figure>
+</li>
+<li><p>replace()，接收两个参数：RegExp对象或字符串、字符串或函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var text=&quot;cat, bat, sat, fat&quot;;</div><div class="line">var result=text.replace(&quot;at&quot;, &quot;ond&quot;);</div><div class="line">alert(result);  //&quot;cond, bat, sat, fat&quot;</div><div class="line">result=text.replace(/at/g, &quot;ond&quot;);</div><div class="line">alert(result);  //&quot;cond, bond, sond, fond&quot;</div></pre></td></tr></table></figure>
+<p>第二个参数是字符串时，还可以使用一些特殊的字符序列，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var text=&quot;cat, bat, sat, fat&quot;;</div><div class="line">result=text.replace(/.at/g, &quot;word($1)&quot;);</div><div class="line">alert(result);  //word($cat), word($bat), word($sat), word($fat)</div></pre></td></tr></table></figure>
+<p>第二个参数是函数时，可以实现更精细的替换操作。只有一个匹配项时，会向这个函数传递3个参数：模式的匹配项、模式的匹配项在字符串中的位置、原始字符串。在正则表达式中定义了多个捕获组时，会向这个函数传递的参数依次是：模式的匹配项、第一个捕获组的匹配项、第二个捕获组的匹配项……模式的匹配项在字符串中的位置、原始字符串。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">function htmlEscape(text)&#123;</div><div class="line">	return text.replace(/[&lt;&gt;&quot;&amp;]/g, function(match, pos, originalText)&#123;</div><div class="line">		switch(match)&#123;</div><div class="line">			case &quot;&lt;&quot;:</div><div class="line">			return &quot;&amp;lt;&quot;;</div><div class="line">			case &quot;&gt;&quot;:</div><div class="line">			return &quot;&amp;gt;&quot;;</div><div class="line">			case &quot;&amp;&quot;:</div><div class="line">			return &quot;&amp;amp;&quot;;</div><div class="line">			case &quot;\&quot;&quot;:</div><div class="line">			return &quot;&amp;quot;&quot;;</div><div class="line">		&#125;</div><div class="line">	&#125;);</div><div class="line">&#125;</div><div class="line">alert(htmlEscape(&quot;&lt;p class=\&quot;greeting\&quot;&gt;Hello world!&lt;/p&gt;&quot;));  //$lt;p class=&amp;quot;greeting&amp;quot;&amp;gt;Hello world!&amp;lt;/p&amp;gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>split()，基于指定的分隔符将一个字符串分割成多个字符串，并将结果放在一个数组中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var colorText=&quot;red, blue, green, yellow&quot;;</div><div class="line">var colors1=colorText.split(&quot;,&quot;);  //[&quot;red&quot;, &quot;blue&quot;, &quot;green&quot;, &quot;yellow&quot;];</div><div class="line">var colors2=colorText.split(&quot;,&quot;, 2);  //[&quot;red&quot;, &quot;blue&quot;]，第二个参数指定数组的大小</div><div class="line">var colos3=colorText.split(/[^\,]+/);  //[&quot;&quot;, &quot;,&quot;, &quot;,&quot;, &quot;,&quot;, &quot;&quot;]</div></pre></td></tr></table></figure>
+</li>
+<li><p>localeCompare()，比较两个字符串，返回1或0或-1，例子如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var stringValue=&quot;yellow&quot;;</div><div class="line">alert(stringValue.localeCompare(&quot;brick&quot;));  //1，字符串在字母表中排在字符串参数之后</div><div class="line">alert(stringValue.localeCompare(&quot;yellow&quot;));  //0</div><div class="line">alert(stringValue.localeCompare(&quot;zoo&quot;));  //-1</div></pre></td></tr></table></figure>
+<p>split()与众不同的地方是，实现所支持的地区决定了这个方法的行为，比如在美国大写字母在字母表中排在小写字母的前头，其他地区则不一定如此。</p>
+</li>
+</ul>
+</li>
+<li>fromCharCode()，静态方法，接收一个或多个字符编码，然后将它们转换成一个字符串，与charCodeAt()执行相反的操作。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alert(String.fromCharCode(104,101,108,108,111));  //&quot;hello&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p>PS:《JavaScript高级程序设计》笔记</p>
 
       
 
@@ -349,9 +388,18 @@
   
 <nav id="article-nav">
   
+    <a href="/2017/10/10/js10/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          ECMAScript中的引用类型之单体内置对象
+        
+      </div>
+    </a>
+  
   
     <a href="/2017/10/09/js08/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Javascript中的引用类型之Function类型</div>
+      <div class="article-nav-title">ECMAScript中的引用类型之Function类型</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -481,6 +529,10 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js03</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">php</a>
               </li>
              
@@ -489,19 +541,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js03</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js04</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js05</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js06</a>
+                <a href="javascript:void(0)" class="js-tag color5">js04</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -513,11 +557,19 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">js06</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js09</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js10</a>
               </li>
             
             <div class="clearfix"></div>
