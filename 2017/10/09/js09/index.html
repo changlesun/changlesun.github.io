@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: js04 | changlesun || more than</title>
+  <title>Javascript中的引用类型之基本包装类型 | changlesun || more than</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="changlesun || more than">
-<meta property="og:url" content="http://yoursite.com/tags/js04/index.html">
+  <meta name="description" content="为了便于操作基本类型的值，ECMAScript提供了三个特殊的引用类型：Boolean、Number、String。">
+<meta name="keywords" content="javascript,js09">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript中的引用类型之基本包装类型">
+<meta property="og:url" content="http://yoursite.com/2017/10/09/js09/index.html">
 <meta property="og:site_name" content="changlesun || more than">
+<meta property="og:description" content="为了便于操作基本类型的值，ECMAScript提供了三个特殊的引用类型：Boolean、Number、String。">
+<meta property="og:updated_time" content="2017-10-10T00:57:26.926Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="changlesun || more than">
+<meta name="twitter:title" content="Javascript中的引用类型之基本包装类型">
+<meta name="twitter:description" content="为了便于操作基本类型的值，ECMAScript提供了三个特殊的引用类型：Boolean、Number、String。">
   
     <link rel="alternative" href="/atom.xml" title="changlesun || more than" type="application/atom+xml">
   
@@ -145,36 +150,115 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-js09" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/30/js04/" class="archive-article-date">
-  	<time datetime="2017-09-30T07:18:22.447Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-30</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/30/js04/">Javascript中的执行环境及作用域</a>
+    <h1 class="article-title" itemprop="name">
+      Javascript中的引用类型之基本包装类型
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/10/09/js09/" class="archive-article-date">
+  	<time datetime="2017-10-09T14:40:10.103Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>为了便于操作基本类型的值，ECMAScript提供了三个特殊的引用类型：Boolean、Number、String。<br><a id="more"></a></p>
+<ul>
+<li><p>每当读取一个基本类型值的时候，后台就会创建一个对应的基本包装类型的对象，从而能够调用一些方法来操作这些数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var s1=&quot;some text&quot;;</div><div class="line">var s2=s1.substring(2);</div><div class="line"></div><div class="line">//当第二行代码访问s1时，访问过程处于一种读取模式，后台会自动完成下列处理</div><div class="line"></div><div class="line">var s1=new String(&quot;some text&quot;);  //创建String类型的一个实例</div><div class="line">var s2=s1.substring(2);  //在实例上调用指定的方法</div><div class="line">s1=null;  //销毁这个实例</div></pre></td></tr></table></figure>
+</li>
+<li><p>自动创建的基本包装类型的对象只存在于一行代码的执行瞬间，然后立即被销毁，意味着不能在运行时为基本类型值添加属性和方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var s1=&quot;some text&quot;;</div><div class="line">s1.color=&quot;red&quot;;</div><div class="line">alert(s1.color);  //undefined</div></pre></td></tr></table></figure>
+</li>
+<li><p>应该避免显示地调用Boolean、Number、String来创建基本包装类型的对象，因为会很容易让人分不清是在处理基本类型还是引用类型的值。对基本包装类型的实例调用typeof会返回”object”，所有的基本包装类型的对象在转换为布尔类型时值都是true。</p>
+</li>
+<li><p>Object构造函数会像工厂方法一样，根据传入值的类型返回相应基本包装类型的实例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var obj=new Object(&quot;some text&quot;);</div><div class="line">alert(obj instanceof String);  //true</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用new调用基本包装类型的构造函数与直接调用同名的转型函数是不一样的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var value=&quot;25&quot;;</div><div class="line"></div><div class="line">var number=Number(value);  //转型函数</div><div class="line">alert(typeof number);  //&quot;number&quot;</div><div class="line"></div><div class="line">var obj=new Number(value);  //构造函数</div><div class="line">alert(typeof obj);  //&quot;Object&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Boolean类型"><a href="#Boolean类型" class="headerlink" title="-Boolean类型-"></a>-Boolean类型-</h3><ul>
+<li><p>创建Boolean对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var booleanObject=new Boolean(true);</div></pre></td></tr></table></figure>
+</li>
+<li><p>Boolean类型重写了valueof()，返回基本类型值true或false；重写了toString()，返回字符串”true”或”false”。</p>
+</li>
+<li><p>Boolean对象经常会造成人们的误解，最常见的问题体现在布尔表达式中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var falseObject=new Boolean(false);</div><div class="line">var result=falseObject &amp;&amp; true;</div><div class="line">alert(result);  //true，因为布尔表达式中的所有基本包装类型的对象都会被转换为true</div><div class="line"></div><div class="line">var falseValue=false;</div><div class="line">result=falseValue &amp;&amp; true;</div><div class="line">alert(result);  //false</div><div class="line"></div><div class="line">alert(typeof falseObject);  //object</div><div class="line">alert(typeof falseValue);  //boolean</div><div class="line">alert(falseObject instanceof Boolean);  //true</div><div class="line">alert(falseValue instanceof Boolean);  //false</div></pre></td></tr></table></figure>
+</li>
+<li><p>理解基本类型的布尔值与Boolean对象之间的区别非常重要，建议是永远不要使用Boolean对象。</p>
+</li>
+</ul>
+<h3 id="Number类型"><a href="#Number类型" class="headerlink" title="-Number类型-"></a>-Number类型-</h3><ul>
+<li><p>创建Number对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var numberObject=new Number(10);</div></pre></td></tr></table></figure>
+</li>
+<li><p>Number类型重写了valueof()、toLocaleString()、toString()方法，重写后的valueof()返回对象表示的基本类型的数值，另外两个方法则返回字符串形式的数值。</p>
+</li>
+<li><p>除了继承的方法外，Number类型还提供了一些用于将数值格式化为字符串的方法。这三个方法都可以通过向上或向下舍入，做到以最准确地形式来表示带有正确小数位的值。</p>
+<ul>
+<li><p>toFixed()，按照指定的小数位返回数值的字符串表示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var num1=10;</div><div class="line">alert(num1.toFixed(2));  //&quot;10.00&quot;</div><div class="line">var num2=10.005;</div><div class="line">alert(num1.toFixed(2));  //&quot;10.01&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>toExponential()，返回以指数表示法表示的数值的字符串形式。参数指定输出结果中的小数位数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var num=10;</div><div class="line">alert(num.toExponential(1));  //&quot;1.0e+1&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>toPrecision()，得到表示某个数值的最合适的格式。参数指定表示数值的所有数字的位数（不包括指数部分）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var num=99;</div><div class="line">alert(num.toPrecision(1));  //&quot;1e+2&quot;;</div><div class="line">alert(num.toPrecision(2));  //&quot;99&quot;</div><div class="line">alert(num.toPrecision(3));  //&quot;99.0&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>不建议直接实例化Number类型。</p>
+<h3 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a>String类型</h3></li>
+<li><p>创建String对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var stringObject=new String(&quot;hello world&quot;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>继承的valueof()、toLocaleString()、toString()，都返回对象所表示的基本字符串。</p>
+</li>
+<li>String类型的每一个实例都有一个length属性，表示字符串中包含多少个字符。</li>
+<li><p>字符方法。</p>
+<ul>
+<li><p>charAt()，以单字符字符串的形式返回给定位置的那个字符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var stringValue=&quot;hello world&quot;;</div><div class="line">alert(stringValue.charAt(1));  //&quot;e&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>charCodeAt()，返回字符编码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var stringValue=&quot;hello world&quot;;</div><div class="line">alert(stringValue.charCodeAt(1));  //输出&quot;101&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>除了IE7及更早版本，可以使用方括号加数字索引来访问字符串中的特定字符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var stringValue=&quot;hello world&quot;;</div><div class="line">alert(stringValue[1]);  //&quot;e&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>字符串操作方法</p>
+<ul>
+<li><p>concat()，拼接一个或多个字符串返回得到的新字符串。（实践中更多的还是使用加号操作符+）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var stringValue=&quot;hello &quot;;</div><div class="line">var result=stringValue.concat(&quot;world&quot;,&quot;!&quot;);</div><div class="line">alert(result);  //&quot;hello world!&quot;;</div><div class="line">alert(stringValue);  //&quot;hello&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>slice()、substring()、substr()基于子字符串创建新字符串。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var stringValue=&quot;hello world&quot;;</div><div class="line"></div><div class="line">&lt;!-- 一个参数指定字符串的起始位置，将字符串的末尾作为结束位置 --&gt;</div><div class="line">alert(stringValue.slice(3));  //&quot;lo world&quot;</div><div class="line">alert(stringValue.substring(3));  //&quot;lo world&quot;</div><div class="line">alert(stringValue.substr(3));  //&quot;lo world&quot;</div><div class="line"></div><div class="line">alert(stringValue.slice(3，7));  //&quot;lo w&quot;，[3,7)</div><div class="line">alert(stringValue.substring(3));  //&quot;lo w&quot;，[3,7)</div><div class="line">alert(stringValue.substr(3,7));  //&quot;lo worl&quot;，7指定返回的字符个数</div></pre></td></tr></table></figure>
+<p>传入负参数时，行为更不同。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var stringValue=&quot;hello world&quot;;</div><div class="line"></div><div class="line">alert(stringValue.slice(-3));  //&quot;rld&quot;，stringValue.slice(8)，将传入的负值与字符串长度相加</div><div class="line">alert(stringValue.substring(-3));  //&quot;hello world&quot;，stringValue.substring(0)，会把所有的负值参数转换为0</div><div class="line">alert(stringValue.substr(-3));  //&quot;rld&quot;，stringValue.substr(8)，将负的第一个参数加上字符串长度，将负的第二个参数转换为0</div><div class="line"></div><div class="line">alert(stringValue.slice(3,-4));  //&quot;lo w&quot;，stringValue.slice(3,8)</div><div class="line">alert(stringValue.substring(3,-4));  //&quot;hel&quot;，stringValue.substring(3,0)，即[0,3)</div><div class="line">alert(stringValue.substr(-3,-4));  //&quot;&quot;，stringValue.substr(8,0)</div></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -184,13 +268,13 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js04</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js09</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -203,17 +287,104 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/10/09/js09/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/10/09/js08/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Javascript中的引用类型之Function类型</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -236,9 +407,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
