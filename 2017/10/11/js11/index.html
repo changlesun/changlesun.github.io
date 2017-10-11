@@ -6,21 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>PHP之OOP中的static与const关键字 | changlesun || more than</title>
+  <title>ECMAScript中的OOP之理解对象 | changlesun || more than</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="static关键字用来描述在类中成员属性和成员方法是静态的。一个静态成员在内存中就只有一个，却能被很多对象共用。静态成员限制外部访问，只属于类不属于它的任何对象实例，是在类第一次被加载的时候分配的空间，只能对类的对象实例共享，其他类无法访问。">
-<meta name="keywords" content="php,js01">
+  <meta name="description" content="ECMA-262把对象定义为：“无序属性的集合，其属性可以包含基本值、对象或函数。”">
+<meta name="keywords" content="javascript,js11">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PHP之OOP中的static与const关键字">
-<meta property="og:url" content="http://yoursite.com/2017/09/26/js01/index.html">
+<meta property="og:title" content="ECMAScript中的OOP之理解对象">
+<meta property="og:url" content="http://yoursite.com/2017/10/11/js11/index.html">
 <meta property="og:site_name" content="changlesun || more than">
-<meta property="og:description" content="static关键字用来描述在类中成员属性和成员方法是静态的。一个静态成员在内存中就只有一个，却能被很多对象共用。静态成员限制外部访问，只属于类不属于它的任何对象实例，是在类第一次被加载的时候分配的空间，只能对类的对象实例共享，其他类无法访问。">
-<meta property="og:image" content="http://yoursite.com/img/7947554-a4a302a249229d54.png">
-<meta property="og:updated_time" content="2017-10-09T08:09:17.049Z">
+<meta property="og:description" content="ECMA-262把对象定义为：“无序属性的集合，其属性可以包含基本值、对象或函数。”">
+<meta property="og:updated_time" content="2017-10-11T06:22:09.685Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PHP之OOP中的static与const关键字">
-<meta name="twitter:description" content="static关键字用来描述在类中成员属性和成员方法是静态的。一个静态成员在内存中就只有一个，却能被很多对象共用。静态成员限制外部访问，只属于类不属于它的任何对象实例，是在类第一次被加载的时候分配的空间，只能对类的对象实例共享，其他类无法访问。">
-<meta name="twitter:image" content="http://yoursite.com/img/7947554-a4a302a249229d54.png">
+<meta name="twitter:title" content="ECMAScript中的OOP之理解对象">
+<meta name="twitter:description" content="ECMA-262把对象定义为：“无序属性的集合，其属性可以包含基本值、对象或函数。”">
   
     <link rel="alternative" href="/atom.xml" title="changlesun || more than" type="application/atom+xml">
   
@@ -152,38 +150,57 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-js01" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-js11" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      PHP之OOP中的static与const关键字
+      ECMAScript中的OOP之理解对象
     </h1>
   
 
         
-        <a href="/2017/09/26/js01/" class="archive-article-date">
-  	<time datetime="2017-09-26T11:53:18.663Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-26</time>
+        <a href="/2017/10/11/js11/" class="archive-article-date">
+  	<time datetime="2017-10-11T02:17:10.765Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>static关键字用来描述在类中成员属性和成员方法是静态的。一个静态成员在内存中就只有一个，却能被很多对象共用。静态成员限制外部访问，只属于类不属于它的任何对象实例，是在类第一次被加载的时候分配的空间，只能对类的对象实例共享，其他类无法访问。<br><a id="more"></a></p>
-<hr>
-<p>因为静态成员是在类第一次加载的时候就创建的，所以在类的外部不需要对象而使用类名就可以访问到静态成员。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">	class Person&#123;</div><div class="line">		//静态属性</div><div class="line">		public static $myName=&quot;changlesun&quot;;</div><div class="line">		//静态方法</div><div class="line">		public static fuanction say()&#123;</div><div class="line">			echo &quot;My name is changlesun.&quot;;</div><div class="line">		&#125;   </div><div class="line">	&#125;</div><div class="line">	//输出静态属性</div><div class="line">	echo Person::$myName;</div><div class="line">	//访问静态方法</div><div class="line">	echo Person::say();</div><div class="line">	//重新给静态属性赋值</div><div class="line">	Person::$myName=&quot;jianmo&quot;;</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
-<p>虽然静态成员被这个类的每个实例对象所共享，但是使用对象却不能访问到静态成员。因为静态成员不存在于每个对象内部，如果使用对象访问静态成员的话就会出现没有这个成员定义。</p>
-<p>从内存角度，对象是放在“堆内存”里面，对象的引用被放到了“栈内存“里。而静态成员则放到了“初始化静态段”，在类第一次被加载的时候放入，可以让堆内存里面的每个对象所共享。如图：</p>
-<p><img src="/img/7947554-a4a302a249229d54.png" alt=""></p>
-<p>在类中，静态方法只能访问静态属性，不能访问非静态成员。因为访问时需要$this引用，而$this引用指针代表调用此成员的对象，然而静态成员是不用对象调用的，而是使用类名来访问， 所以根本就没有对象存在。</p>
-<p>既然$this不存在，在静态方法中访问其它静态成员就要使用一个特殊的类self，self和$this相似，只不过self代表的是这个静态方法所在的类。即“self::静态成员属性”的方式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">	class Person&#123;</div><div class="line">		//静态属性</div><div class="line">		public static $myName=&quot;changlesun&quot;;</div><div class="line">		//静态方法</div><div class="line">		public static fuanction say()&#123;</div><div class="line">			echo &quot;My name is &quot; . self::$myName;</div><div class="line">		&#125;	</div><div class="line">	&#125;</div><div class="line">	//访问静态方法</div><div class="line">	echo Person::say();</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
-<p>在类中，非静态方法也可以访问静态成员，但是也不能使用$this，也要使用self。</p>
-<hr>
-<p>const是一个定义常量的关键字，在PHP中定义常量使用的是define()这个函数，但是在类里面定义常量使用的是const这个关键字。如果在程序中改变了它的值，那么会出现错误。</p>
-<p>用“const”修饰的成员属性的访问方式和“static”修饰的成员访问的方式差不多，也是使用“类名”，在方法里面使用“self”关键字。但是不用使用“$”符号，也不能使用对象来访问。</p>
+        <p>ECMA-262把对象定义为：“无序属性的集合，其属性可以包含基本值、对象或函数。”<br><a id="more"></a><br>对象字面量是创建对象的首选模式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var person=&#123;</div><div class="line">	name: &quot;A&quot;,</div><div class="line">	age: 19,</div><div class="line">	job: &quot;Singer&quot;,</div><div class="line">	sayName: function()&#123;</div><div class="line">		alert(this.name);		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="属性类型"><a href="#属性类型" class="headerlink" title="-属性类型-"></a>-属性类型-</h3><p>ECMA-262第五版在定义内部特性时，描述了属性的各种特征。这些特性是为了实现JavaScript引擎用的，因此在JavaScript中不能直接访问它们。为了表示特性是内部值，该规范把它们放在了两对方括号中，例如[[Enumerable]]。</p>
+<ul>
+<li><p>数据属性<br>  数据属性包含一个数据值的位置，在这个位置可以读取和写入值。</p>
+<ul>
+<li><p>数据属性有4个可以描述其行为的特性：<br>[[Configurable]]：能否通过delete删除属性从而重新定义属性。默认值为true。<br>[[Enumerable]]：能否通过for-in循环返回属性。默认值为true。<br>[[Writable]]：能否修改属性的值。默认值为true。<br>[[Value]]：包含这个属性的数据值。读取属性值的时候从这个位置读，写入属性值的时候把新值保存在这个位置。默认值为undefined。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var person=&#123;</div><div class="line">	name: &quot;A&quot;;  //意味着[[Value]]特性将被设置为&quot;A&quot;，对这个值的任何修改都将反应在这个位置</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Object.defineProperty()，可以修改属性的默认值，这个方法接收3个参数：属性所在的对象、属性的名字、一个描述符对象（configurable、enumerable、writable、value）。<br>可以调用Object.defineProperty()修改同一个属性，但是在把configurable特性设置为false之后就会有限制了。<br>用Object.defineProperty()，新建一个属性，configurable、enumerable、writable默认为false；修改已定义的属性，则无此限制。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var person=&#123;&#125;;</div><div class="line">Object.defineProperty(person, &quot;name&quot;, &#123;</div><div class="line">	writable: false,</div><div class="line">	value: &quot;A&quot;</div><div class="line">&#125;);</div><div class="line">alert(person.name);  //&quot;A&quot;</div><div class="line">person.name=&quot;B&quot;;</div><div class="line">alert(person.name);  //&quot;B&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var person=&#123;&#125;;</div><div class="line">Object.defineProperty(person, &quot;name&quot;, &#123;</div><div class="line">	configurable: false,</div><div class="line">	value: &quot;A&quot;</div><div class="line">&#125;);</div><div class="line">alert(person.name);  //&quot;A&quot;</div><div class="line">delete person.name;</div><div class="line">alert(person.name);  //&quot;A&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var person=&#123;&#125;;</div><div class="line">Object.defineProperty(person, &quot;name&quot;, &#123;</div><div class="line">	configurable: false,</div><div class="line">	value: &quot;A&quot;</div><div class="line">&#125;);</div><div class="line">Object.defineProperty(person, &quot;name&quot;, &#123;</div><div class="line">	configurable: true,  //抛出错误</div><div class="line">	value: &quot;A&quot;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>访问器属性<br>  访问器属性不包含数据值包含一对getter()和setter()函数。读取访问器属性时，调用getter()，返回有效的值。写入访问器属性时，调用setter()并传入新值，决定如何处理数据。</p>
+<ul>
+<li>访问器属性有4个特性：<br>[[Configurable]]：能否通过delete删除属性从而重新定义属性。默认值为true。<br>[[Enumerable]]：能否通过for-in循环返回属性。默认值为true。<br>[[Get]]：在读取属性时调用的函数。默认值为undefined。<br>[[Set]]：在写入属性时调用的函数。默认值为undefined。</li>
+<li>访问器属性不能直接定义，必须使用Object.defineProperty()来定义。只指定getter意味着属性不能写，只指定setter意味着属性不能读。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">var book=&#123;</div><div class="line">	_year: 2004,  //下划线表示属性只能通过对象方法访问</div><div class="line">	edition: 1</div><div class="line">&#125;</div><div class="line">Object.defineProperty(book, &quot;year&quot;, &#123;</div><div class="line">	get: function()&#123;</div><div class="line">		return this._year;</div><div class="line">	&#125;,</div><div class="line">	set: function(newValue)&#123;</div><div class="line">		if(newValue&gt;2004)&#123;</div><div class="line">			this._year=newValue;</div><div class="line">			this.edition+=newValue-2004</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;);</div><div class="line">book.year=2005;</div><div class="line">alert(book.edition);  //2，这是使用访问器属性的常见方式，即设置一个属性的值会导致其它属性发生变化。</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="定义多个属性"><a href="#定义多个属性" class="headerlink" title="-定义多个属性-"></a>-定义多个属性-</h3><p>Object.defineProperties()，接收两个对象参数：第一个是要添加和修改其属性的对象、第二个对象的属性与第一个对象中要添加或修改的属性一一对应。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">var book=&#123;&#125;;</div><div class="line">Object.defineProperties(book,&#123;</div><div class="line">	_year:&#123;</div><div class="line">		writable: true,</div><div class="line">		value: 2004</div><div class="line">	&#125;,</div><div class="line">	edition:&#123;</div><div class="line">		writable: true,</div><div class="line">		value: 1</div><div class="line">	&#125;,</div><div class="line">	year: &#123;</div><div class="line">		get: function()&#123;</div><div class="line">			return this._year;</div><div class="line">		&#125;,</div><div class="line">		set: function(newValue)&#123;</div><div class="line">			if(newValue&gt;2004)&#123;</div><div class="line">				this._year=newValue;</div><div class="line">				this.edition+=newValue-2004;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;);</div><div class="line">//两个数据属性：_year、edition，一个访问器属性：year。</div></pre></td></tr></table></figure></p>
+<h3 id="读取属性的特性"><a href="#读取属性的特性" class="headerlink" title="-读取属性的特性-"></a>-读取属性的特性-</h3><ul>
+<li><p>Object.getOwnPropertyDescriptor()，取得给定属性的描述符。<br>Object.getOwnPropertyDescriptor()接收两个参数：属性所在的对象、要读取其描述符的属性名称。<br>Object.getOwnPropertyDescriptor()返回一个对象。如果是数据属性，这个对象的属性有：configurable、enumerable、writable、value；如果是访问器属性，这个对象的属性有：configurable、enumerable、get、set。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">var book=&#123;&#125;;</div><div class="line">Object.defineProperties(book,&#123;</div><div class="line">	_year:&#123;</div><div class="line">		value: 2004</div><div class="line">	&#125;,</div><div class="line">	edition:&#123;</div><div class="line">		value: 1</div><div class="line">	&#125;,</div><div class="line">	year: &#123;</div><div class="line">		get: function()&#123;</div><div class="line">			return this._year;</div><div class="line">		&#125;,</div><div class="line">		set: function(newValue)&#123;</div><div class="line">			if(newValue&gt;2004)&#123;</div><div class="line">				this._year=newValue;</div><div class="line">				this.edition+=newValue-2004;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">var descriptor1=object.getOwnPropertyDescriptor(book, &quot;_year&quot;);</div><div class="line">alert(descriptor1.value);  //2004</div><div class="line">alert(descriptor1.configurable);  //false</div><div class="line">alert(typeof descriptor1.get);  //&quot;undefined&quot;</div><div class="line"></div><div class="line">var descriptor2=object.getOwnPropertyDescriptor(book, &quot;year&quot;);</div><div class="line">alert(descriptor2.value);  //undefined</div><div class="line">alert(descriptor2.enumerable);  //false</div><div class="line">alert(typeof descriptor2.get);  //&quot;function&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>可以针对任何对象，包括DOM和BOM对象，使用Object.getOwnPropertyDecriptor()。 </p>
+</li>
+</ul>
 
       
 
@@ -197,11 +214,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">php</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js01</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js11</a>
         		</li>
       		
 		</ul>
@@ -268,7 +285,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/09/26/js01/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/10/11/js11/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -282,18 +299,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/09/29/js02/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          ECMAScript中的数据类型
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/09/26/sb01/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">有自己的博客啦O(∩_∩)O</div>
+    <a href="/2017/10/10/js10/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ECMAScript中的引用类型之单体内置对象</div>
       <i class="icon-circle-right"></i>
     </a>
   
