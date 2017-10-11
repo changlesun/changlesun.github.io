@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/10/11/js11/index.html">
 <meta property="og:site_name" content="changlesun || more than">
 <meta property="og:description" content="ECMA-262把对象定义为：“无序属性的集合，其属性可以包含基本值、对象或函数。”">
-<meta property="og:updated_time" content="2017-10-11T06:22:09.685Z">
+<meta property="og:updated_time" content="2017-10-11T06:28:42.700Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ECMAScript中的OOP之理解对象">
 <meta name="twitter:description" content="ECMA-262把对象定义为：“无序属性的集合，其属性可以包含基本值、对象或函数。”">
@@ -179,7 +179,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var person=&#123;</div><div class="line">	name: &quot;A&quot;;  //意味着[[Value]]特性将被设置为&quot;A&quot;，对这个值的任何修改都将反应在这个位置</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>Object.defineProperty()，可以修改属性的默认值，这个方法接收3个参数：属性所在的对象、属性的名字、一个描述符对象（configurable、enumerable、writable、value）。<br>可以调用Object.defineProperty()修改同一个属性，但是在把configurable特性设置为false之后就会有限制了。<br>用Object.defineProperty()，新建一个属性，configurable、enumerable、writable默认为false；修改已定义的属性，则无此限制。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var person=&#123;&#125;;</div><div class="line">Object.defineProperty(person, &quot;name&quot;, &#123;</div><div class="line">	writable: false,</div><div class="line">	value: &quot;A&quot;</div><div class="line">&#125;);</div><div class="line">alert(person.name);  //&quot;A&quot;</div><div class="line">person.name=&quot;B&quot;;</div><div class="line">alert(person.name);  //&quot;B&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var person=&#123;&#125;;</div><div class="line">Object.defineProperty(person, &quot;name&quot;, &#123;</div><div class="line">	writable: false,</div><div class="line">	value: &quot;A&quot;</div><div class="line">&#125;);</div><div class="line">alert(person.name);  //&quot;A&quot;</div><div class="line">person.name=&quot;B&quot;;</div><div class="line">alert(person.name);  //&quot;A&quot;</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var person=&#123;&#125;;</div><div class="line">Object.defineProperty(person, &quot;name&quot;, &#123;</div><div class="line">	configurable: false,</div><div class="line">	value: &quot;A&quot;</div><div class="line">&#125;);</div><div class="line">alert(person.name);  //&quot;A&quot;</div><div class="line">delete person.name;</div><div class="line">alert(person.name);  //&quot;A&quot;</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var person=&#123;&#125;;</div><div class="line">Object.defineProperty(person, &quot;name&quot;, &#123;</div><div class="line">	configurable: false,</div><div class="line">	value: &quot;A&quot;</div><div class="line">&#125;);</div><div class="line">Object.defineProperty(person, &quot;name&quot;, &#123;</div><div class="line">	configurable: true,  //抛出错误</div><div class="line">	value: &quot;A&quot;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
@@ -423,14 +423,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js02</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">php</a>
               </li>
              
@@ -439,7 +431,19 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js03</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js02</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js05</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -447,7 +451,7 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js05</a>
+                <a href="javascript:void(0)" class="js-tag color5">js06</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -459,11 +463,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js10</a>
+                <a href="javascript:void(0)" class="js-tag color5">js09</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js06</a>
+                <a href="javascript:void(0)" class="js-tag color5">js10</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -472,10 +476,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js09</a>
               </li>
             
             <div class="clearfix"></div>
