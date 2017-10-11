@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/10/11/js11/index.html">
 <meta property="og:site_name" content="changlesun || more than">
 <meta property="og:description" content="ECMA-262把对象定义为：“无序属性的集合，其属性可以包含基本值、对象或函数。”">
-<meta property="og:updated_time" content="2017-10-11T06:31:29.879Z">
+<meta property="og:updated_time" content="2017-10-11T06:34:36.628Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ECMAScript中的OOP之理解对象">
 <meta name="twitter:description" content="ECMA-262把对象定义为：“无序属性的集合，其属性可以包含基本值、对象或函数。”">
@@ -198,9 +198,11 @@
 <li><p>Object.getOwnPropertyDescriptor()，取得给定属性的描述符。<br>Object.getOwnPropertyDescriptor()接收两个参数：属性所在的对象、要读取其描述符的属性名称。<br>Object.getOwnPropertyDescriptor()返回一个对象。如果是数据属性，这个对象的属性有：configurable、enumerable、writable、value；如果是访问器属性，这个对象的属性有：configurable、enumerable、get、set。</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">var book=&#123;&#125;;</div><div class="line">Object.defineProperties(book,&#123;</div><div class="line">	_year:&#123;</div><div class="line">		value: 2004</div><div class="line">	&#125;,</div><div class="line">	edition:&#123;</div><div class="line">		value: 1</div><div class="line">	&#125;,</div><div class="line">	year: &#123;</div><div class="line">		get: function()&#123;</div><div class="line">			return this._year;</div><div class="line">		&#125;,</div><div class="line">		set: function(newValue)&#123;</div><div class="line">			if(newValue&gt;2004)&#123;</div><div class="line">				this._year=newValue;</div><div class="line">				this.edition+=newValue-2004;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">var descriptor1=object.getOwnPropertyDescriptor(book, &quot;_year&quot;);</div><div class="line">alert(descriptor1.value);  //2004</div><div class="line">alert(descriptor1.configurable);  //false</div><div class="line">alert(typeof descriptor1.get);  //&quot;undefined&quot;</div><div class="line"></div><div class="line">var descriptor2=object.getOwnPropertyDescriptor(book, &quot;year&quot;);</div><div class="line">alert(descriptor2.value);  //undefined</div><div class="line">alert(descriptor2.enumerable);  //false</div><div class="line">alert(typeof descriptor2.get);  //&quot;function&quot;</div></pre></td></tr></table></figure>
 </li>
-<li><p>可以针对任何对象，包括DOM和BOM对象，使用Object.getOwnPropertyDecriptor()。<br>**<br>PS:《JavaScript高级程序设计》笔记</p>
+<li><p>可以针对任何对象，包括DOM和BOM对象，使用Object.getOwnPropertyDecriptor()。 </p>
 </li>
 </ul>
+<hr>
+<p>PS:《JavaScript高级程序设计》笔记</p>
 
       
 
@@ -423,19 +425,19 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">php</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js01</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js02</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">php</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js01</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -455,7 +457,7 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js07</a>
+                <a href="javascript:void(0)" class="js-tag color5">js09</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -463,7 +465,7 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js09</a>
+                <a href="javascript:void(0)" class="js-tag color5">js07</a>
               </li>
              
               <li class="article-tag-list-item">
