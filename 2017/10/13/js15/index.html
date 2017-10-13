@@ -6,19 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>ECMAScript中的引用类型之单体内置对象 | changlesun || more than</title>
+  <title>ECMAScript中的OOP之创建对象(二) | changlesun || more than</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="内置对象是由ECMAScript实现提供的、不依赖宿主环境的对象。开发人员不必显示地实例化内置对象，因为这些对象在ECMAScript程序执行之前就已经存在了。前面已经接触过了大多数内置对象，比如Object、Array、String，除此还定义了两个单体内置对象：Global、Math。">
-<meta name="keywords" content="javascript,js10">
+  <meta name="description" content="虽然Object构造函数、对象字面量都可以用来创建单个对象，但这两个方式有个明显的缺点：使用同一个接口创建很多对象，会产生大量的重复代码。">
+<meta name="keywords" content="javascript,js15">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ECMAScript中的引用类型之单体内置对象">
-<meta property="og:url" content="http://yoursite.com/2017/10/10/js10/index.html">
+<meta property="og:title" content="ECMAScript中的OOP之创建对象(二)">
+<meta property="og:url" content="http://yoursite.com/2017/10/13/js15/index.html">
 <meta property="og:site_name" content="changlesun || more than">
-<meta property="og:description" content="内置对象是由ECMAScript实现提供的、不依赖宿主环境的对象。开发人员不必显示地实例化内置对象，因为这些对象在ECMAScript程序执行之前就已经存在了。前面已经接触过了大多数内置对象，比如Object、Array、String，除此还定义了两个单体内置对象：Global、Math。">
-<meta property="og:updated_time" content="2017-10-10T15:41:43.514Z">
+<meta property="og:description" content="虽然Object构造函数、对象字面量都可以用来创建单个对象，但这两个方式有个明显的缺点：使用同一个接口创建很多对象，会产生大量的重复代码。">
+<meta property="og:image" content="http://yoursite.com/img/js15.png">
+<meta property="og:updated_time" content="2017-10-13T11:25:21.896Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ECMAScript中的引用类型之单体内置对象">
-<meta name="twitter:description" content="内置对象是由ECMAScript实现提供的、不依赖宿主环境的对象。开发人员不必显示地实例化内置对象，因为这些对象在ECMAScript程序执行之前就已经存在了。前面已经接触过了大多数内置对象，比如Object、Array、String，除此还定义了两个单体内置对象：Global、Math。">
+<meta name="twitter:title" content="ECMAScript中的OOP之创建对象(二)">
+<meta name="twitter:description" content="虽然Object构造函数、对象字面量都可以用来创建单个对象，但这两个方式有个明显的缺点：使用同一个接口创建很多对象，会产生大量的重复代码。">
+<meta name="twitter:image" content="http://yoursite.com/img/js15.png">
   
     <link rel="alternative" href="/atom.xml" title="changlesun || more than" type="application/atom+xml">
   
@@ -150,75 +152,84 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-js10" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-js15" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      ECMAScript中的引用类型之单体内置对象
+      ECMAScript中的OOP之创建对象(二)
     </h1>
   
 
         
-        <a href="/2017/10/10/js10/" class="archive-article-date">
-  	<time datetime="2017-10-10T08:51:57.028Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
+        <a href="/2017/10/13/js15/" class="archive-article-date">
+  	<time datetime="2017-10-13T06:58:20.616Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-13</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>内置对象是由ECMAScript实现提供的、不依赖宿主环境的对象。开发人员不必显示地实例化内置对象，因为这些对象在ECMAScript程序执行之前就已经存在了。前面已经接触过了大多数内置对象，比如Object、Array、String，除此还定义了两个单体内置对象：Global、Math。<br><a id="more"></a></p>
-<h3 id="Global对象"><a href="#Global对象" class="headerlink" title="-Global对象-"></a>-Global对象-</h3><p>Global对象是ECMAScript中最特别的一个对象，在某种意义上是作为一个终极的”兜底儿对象“来定义的，不属于其它任何对象的属性和方法最终都是它的属性和方法。</p>
+        <p>虽然Object构造函数、对象字面量都可以用来创建单个对象，但这两个方式有个明显的缺点：使用同一个接口创建很多对象，会产生大量的重复代码。<br><a id="more"></a></p>
+<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="-原型模式-"></a>-原型模式-</h3><p>每一个函数都有一个原型属性，这个属性是一个指针，指向一个对象，这个对象拥有的属性和方法可以让所有实例共享。<br>把对象实例的信息直接添加到原型对象，将构造函数变成了一个空函数，实例访问的便都是同一组属性和同一个方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype.name=&quot;A&quot;;</div><div class="line">Person.prototype.age=31;</div><div class="line">Person.prototype.job=&quot;dancer&quot;;</div><div class="line">Person.prototype.sayName=function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var person1=new Person();</div><div class="line">person1.sayName();  //&quot;A&quot;</div><div class="line">var person2=new Person();</div><div class="line">person2.sayName();  //&quot;A&quot;</div></pre></td></tr></table></figure></p>
 <ul>
-<li><p>URI编码方法</p>
+<li><p>理解原型对象</p>
 <ul>
-<li><p>encodeURI()、encodeURIComponent()可以对URI进行编码，它们用特殊的UTF-8编码替换所有无效的字符，从而让浏览器能够接受和理解。encodeURI()作用于整个URI，不会对本身属于URI的特殊字符进行编码，例如冒号、正斜杠、问号、井字号。encodeURIComponent()作用于URI中的某一段，会对它发现的任何非标准字符编码。这也正是可以对整个URI使用encodeURI()，而只能对附加在现有URI后面的字符串使用encodeURIComponent()的原因。在实践中更多的使用encodeURIComponent()，因为更多的是对查询字符串参数而不是基础URI进行编码。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var uri=&quot;http://www.wrox.com/illegal value.htm#start&quot;;</div><div class="line">alert(encodeURI(uri));  //&quot;http://www.wrox.com/illegal%20value.htm#start&quot;</div><div class="line">alert(encodeURIComponent(uri));  //&quot;http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.htm%23start&quot;</div></pre></td></tr></table></figure>
+<li><p>只要创建了一个新函数，该函数就会拥有一个prototype属性，该属性是一个指针，指向函数的原型对象。原型对象会自动获得一个constructor属性，该属性是一个指针，指向prototype属性所在的函数。调用构造函数创建的新实例内部会包含一个[[Prototype]]属性，该属性是一个指针，指向构造函数的原型对象。<br>如下图所示：<br><img src="/img/js15.png" alt=""><br>没有标准的方式可以访问[[Prototype]]，但Firefox、Safari、Chrome会在每个对象上支持一个_proto_属性，而在其它实现中这个属性完全不可见。这个连接存在于实例与构造函数的原型对象之间，而不是存在于实例与构造函数之间。isPrototypeOf()可以确定这种关系是否存在。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alert(Person.prototype.isPrototypeOf(person1));  //true</div><div class="line">alert(Person.prototype.isPrototypeOf(person2));  //true</div></pre></td></tr></table></figure>
+<p>ES5方法Object.getPrototypeOf()可以返回[[Prototype]]的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alert(Object.getPrototypeOf(person1)==Person.prototype);  //true</div><div class="line">alert(Object.getPrototypeOf(person1).name);  //&quot;A&quot;</div></pre></td></tr></table></figure>
 </li>
-<li><p>decodeURI()对使用encodeURI()替换的字符解码，decodeURIComponent()对使用encodeURIComponent()替换的字符解码。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var uri=&quot;http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.htm%23start&quot;;</div><div class="line">alert(decodeURI(uri));  //http%3A%2F%2Fwww.wrox.com%2Fillegal value.htm%23start</div><div class="line">alert(decodeURIComponent(uri));  //http://www.wrox.com/illegal value.htm#start</div></pre></td></tr></table></figure>
+<li><p>调用person1.sayName()时，会执行先后两次搜索。第一次会在person1本身查找sayName属性，没有。第二次会在Person.prototype中查找sayName属性，有，读取。调用person2.sayName()同样会执行这个过程。这正是多个对象实例共享原型所保存的属性和方法的基本原理。</p>
+</li>
+<li><p>可以通过对象实例访问保存在原型中的值，却不能改写。如果为实例添加的属性与原型中的属性同名，该属性将会屏蔽掉原型中的那个属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype.name=&quot;A&quot;;</div><div class="line">Person.prototype.age=31;</div><div class="line">Person.prototype.job=&quot;dancer&quot;;</div><div class="line">Person.prototype.sayName=function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var person1=new Person();</div><div class="line">var person2=new Person();</div><div class="line"></div><div class="line">person1.name=&quot;B&quot;;</div><div class="line">alert(person1.name);  //&quot;B&quot;——来自实例  搜索1次</div><div class="line">alert(person2.name);  //&quot;A&quot;——来自原型  搜索2次</div><div class="line"></div><div class="line">delete person1.name;</div><div class="line">alert(person1.name);  //&quot;A&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>hasOwnProperty()从Object继承而来，可以检测属性存在于何处。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype.name=&quot;A&quot;;</div><div class="line">Person.prototype.age=31;</div><div class="line">Person.prototype.job=&quot;dancer&quot;;</div><div class="line">Person.prototype.sayName=function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var person1=new Person();</div><div class="line">var person2=new Person();</div><div class="line"></div><div class="line">alert(person1.hasOwnProperty(&quot;name&quot;));  //false</div><div class="line"></div><div class="line">person1.name=&quot;B&quot;;</div><div class="line">alert(person1.hasOwnProperty(&quot;name&quot;));  //true</div><div class="line"></div><div class="line">delete person1.name;</div><div class="line">alert(person1.hasOwnProperty(&quot;name&quot;));  //false</div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
-<li><p>eval()方法</p>
+<li><p>原型与in操作符<br>有两种方式使用in操作符：单独使用、在for-in循环中使用。</p>
 <ul>
-<li><p>整个ECMAScript中最强大的一个方法，像是一个完整的ECMAScript解析器，只接收一个参数，即要执行的ECMAScript字符串。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">eval(&quot;alert(&apos;hi&apos;)&quot;);</div><div class="line">//等价于</div><div class="line">alert(&quot;hi&quot;);</div></pre></td></tr></table></figure>
+<li><p>单独使用时，in操作符会在对象能够访问给定属性时返回true，无论这个属性存在哪里。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype.name=&quot;A&quot;;</div><div class="line">Person.prototype.age=31;</div><div class="line">Person.prototype.job=&quot;dancer&quot;;</div><div class="line">Person.prototype.sayName=function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var person1=new Person();</div><div class="line"></div><div class="line">alert(&quot;name&quot; in person1);  //true</div><div class="line"></div><div class="line">person1.name=&quot;B&quot;;</div><div class="line">alert(&quot;name&quot; in person1);  //true</div></pre></td></tr></table></figure>
+<p>同时使用hasOwnProperty()、in操作符可以确定属性到底存在哪里。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">function hasPrototypeProperty(object, name)&#123;</div><div class="line">	return !object.hasOwnProperty(name) &amp;&amp; (name in object);  //true代表属性存在于原型中</div><div class="line">&#125;</div><div class="line"></div><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype.name=&quot;A&quot;;</div><div class="line">Person.prototype.age=31;</div><div class="line">Person.prototype.job=&quot;dancer&quot;;</div><div class="line">Person.prototype.sayName=function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var person1=new Person();</div><div class="line"></div><div class="line">alert(hasPrototypeProperty(person1, &quot;name&quot;));  //true</div><div class="line"></div><div class="line">person1.name=&quot;B&quot;;</div><div class="line">alert(hasPrototypeProperty(person1, &quot;name&quot;));  //false</div></pre></td></tr></table></figure>
 </li>
-<li><p>通过eval()执行的代码被认为是包含该次调用的执行环境的一部分，因此被执行的代码具有与该执行环境相同的作用域链。意味着通过eval()执行的代码可以引用在包含环境中定义的变量，同样也可以在eval()调用中定义一个函数然后再在该调用的外部代码中引用这个函数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var msg=&quot;hello world&quot;;</div><div class="line">eval(&quot;alert(msg)&quot;);  //&quot;hello world&quot;</div><div class="line"></div><div class="line">eval(&quot;function sayHi() &#123; alert(&apos;hi&apos;); &#125;&quot;);</div><div class="line">sayHi();</div></pre></td></tr></table></figure>
+<li><p>在使用for-in循环时，返回的是所有能够通过对象访问到的、可枚举的属性。屏蔽了原型中不可枚举属性的实例属性也会被返回，因为根据规定，所有开发人员定义的属性都是可枚举的。</p>
 </li>
-<li><p>在eval()中创建的任何变量或函数都不会被提升，因为在解析代码时，它们被包含在一个字符串中，它们只在eval()执行的时候创建。</p>
-</li>
-<li>在严格模式下，外部访问不到eval()中创建的任何变量或函数，为eval赋值也会导致错误。</li>
-</ul>
-</li>
-<li>Global对象的属性</li>
-<li>window对象<br>ECMAScript没有指出如何直接访问Global对象，而是将这个全局对象作为window对象的一部分加以实现，因此在全局作用域中声明的所有变量和函数都成为了window对象的属性。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//全局变量color和全局函数sayColor都成为了window对象的属性</div><div class="line">var color=&quot;red&quot;;</div><div class="line">function sayColor()&#123;</div><div class="line">	alert(window.color);</div><div class="line">&#125;</div><div class="line">window.sayColor();  //&quot;red&quot;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="Math对象"><a href="#Math对象" class="headerlink" title="-Math对象-"></a>-Math对象-</h3><ul>
-<li>Math对象的属性<br>Math.E、Math.LN10、Math.LN2、Math.LOG2E、Math.LOG10E、Math.PI、Math.SQRT1_2(1/2的平方根)、Math.SQRT2(2的平方根)。</li>
-<li><p>min()和max()</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var max=Math.max(3,54,32,16);</div><div class="line">alert(max);  //54</div><div class="line">var min=Math.min(3,54,32,16);</div><div class="line">alert(min);  //3</div><div class="line"></div><div class="line">var values=[1,2,3,4,5,6,7,8];</div><div class="line">var max=Math.max.apply(Math, values);  //这个技巧的关键是把Math对象作为apply()的第一个参数，从而正确地设置this值</div></pre></td></tr></table></figure>
-</li>
-<li><p>舍入方法<br>Math.ceil()向上舍入，Math.floor()向下舍入，Math.round()标准舍入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">alert(Math.ceil(25.9));  //26</div><div class="line">alert(Math.ceil(25.5));  //26</div><div class="line">alert(Math.ceil(25.1));  //26</div><div class="line"></div><div class="line">alert(Math.floor(25.9));  //25</div><div class="line">alert(Math.floor(25.5));  //25</div><div class="line">alert(Math.floor(25.1));  //25</div><div class="line"></div><div class="line">alert(Math.round(25.9));  //26</div><div class="line">alert(Math.round(25.5));  //26</div><div class="line">alert(Math.round(25.1));  //25</div></pre></td></tr></table></figure>
-</li>
-<li><p>random()<br>Math.random()返回大于等于0小于1的一个随机数。</p>
-<ul>
-<li><p>值=Math.floor(Math.random()*可能的总数+第一个可能的值)，从某个整数范围内随即选择一个值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var num1=Math.floor(Math.random()*10+1);  //返回1到10之间的某个整数</div><div class="line">var num2=Math.floor(Math.random()*9+2);  //返回2到10之间的某个整数</div></pre></td></tr></table></figure>
-</li>
-<li><p>通过一个函数来计算。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function selectFrom(lowerValue, upperValue)&#123;</div><div class="line">	var choices=upperValue-lowerValue+1;</div><div class="line">	return Math.floor(Math.random()*choices+lowerValue);</div><div class="line">&#125;</div><div class="line">var num=selectFrom(2,10);</div><div class="line">alert(num);  //介于2和10之间的一个数值</div></pre></td></tr></table></figure>
+<li>ES5的Object.keys()取得对象上所有可枚举的实例属性，接收一个对象作为参数，返回一个数组。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype.name=&quot;A&quot;;</div><div class="line">Person.prototype.age=31;</div><div class="line">Person.prototype.job=&quot;dancer&quot;;</div><div class="line">Person.prototype.sayName=function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var keys1=Object.keys(Person.prototype);</div><div class="line">alert(keys1);  //&quot;name, age, job, sayName&quot;</div><div class="line"></div><div class="line">var p1=new Person();</div><div class="line">p1.name=&quot;B&quot;;</div><div class="line">person.age=33;</div><div class="line">var keys2=Object.keys(p1);</div><div class="line">alert(keys2);  //&quot;name, age&quot;</div><div class="line"></div><div class="line"></div><div class="line">//Object.getOwnPropertyNames()无论是否可枚举</div><div class="line">var keys3=Object.getOwnPropertyNames(Person.prototype);</div><div class="line">alert(keys3);  //&quot;constructor, name, age, job, sayName&quot;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
-<li><p>其他方法<br>Math.abs(num)，返回num的绝对值；Math.sqrt(num)，返回num的平方根；Math.sin(x)，返回x的正弦值……</p>
+<li><p>更简单的原型语法<br>  用一个包含所有属性和方法的对象字面量来重写整个原型对象。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype=&#123;</div><div class="line">	name: &quot;A&quot;,</div><div class="line">	age: 31,</div><div class="line">	job: &quot;dancer&quot;,</div><div class="line">	sayName: function()&#123;</div><div class="line">		alert(this.name);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  这里完全重写了默认的prototype对象，等于创建了一个新对象，这个对象会自动获得constructor属性。此时，constructor属性不再指向Person，而是指向Object构造函数。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var p1=new Person();</div><div class="line">alert(p1 instanceof Person);  //true</div><div class="line">alert(p1.constructor==Person);  //false</div><div class="line">alert(p1.constructor==Object);  //true</div></pre></td></tr></table></figure>
+<p>  可以特意设置constructor的值。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype=&#123;</div><div class="line">	constructor: Person  //[[Enumerable]]特性被设置为true；默认不可枚举</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  可以使用Object.defineProperty()，如果引擎兼容ES5。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype=&#123;</div><div class="line">	name: &quot;A&quot;,</div><div class="line">	age: 31,</div><div class="line">	job: &quot;dancer&quot;,</div><div class="line">	sayName: function()&#123;</div><div class="line">		alert(this.name);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">Object.defineProperty(Person.prototype, &quot;constructor&quot;, &#123;</div><div class="line">	enumerable: false,</div><div class="line">	value: Person</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>原型的动态性<br>  由于对原型的查找过程是一次搜索，因此对原型对象所做的任何修改都能立即从实例上反映出来，即使是先创建了实例后修改原型也照样如此。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line"></div><div class="line">var p1=new Person();</div><div class="line"></div><div class="line">Person.prototype.sayHi=function()&#123;</div><div class="line">	alert(&quot;hi&quot;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">p1.sayHi();  //&quot;hi&quot;</div></pre></td></tr></table></figure>
+<p>  如果是重新写整个原型对象，情况会不一样：调用构造函数时，为实例添加的[[Prototype]]属性指向的是最初原型，重写后，它们引用的仍然是最初的原型。而构造函数与最初原型之间的联系已经被切断。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line"></div><div class="line">var p1=new Person();</div><div class="line"></div><div class="line">Person.prototype=&#123;</div><div class="line">	constructor: Person,</div><div class="line">	name: &quot;A&quot;,</div><div class="line">	age: 31,</div><div class="line">	job: &quot;dancer&quot;,</div><div class="line">	sayName: function()&#123;</div><div class="line">		alert(this.name);</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">friend.sayName();  //error</div></pre></td></tr></table></figure>
+</li>
+<li><p>原生对象的原型<br>  除了自定义类型，原型模式也应用于所有原生的引用类型。所有原生的引用类型都在构造函数的原型上定义了方法，比如：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alert(typeof Array.prototype.sort);  //&quot;function&quot;</div><div class="line">alert(typeof String.prototype.substring);  //&quot;function&quot;</div></pre></td></tr></table></figure>
+<p>  可以像修改自定义类型的原型一样修改原生对象的原型，比如：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">String.prototype.startsWith=function(text)&#123;</div><div class="line">	return this.indexOf(text)==0;</div><div class="line">&#125;;</div><div class="line">var msg=&quot;Hello world!&quot;;</div><div class="line">alert(msg.startsWith(&quot;Hello&quot;));  //true</div></pre></td></tr></table></figure>
+<p>  尽管可以这样做，但不推荐。可能导致的问题太多。</p>
+</li>
+<li>缺点<ul>
+<li>它省略了为构造函数传递初始化参数，所有实例默认情况下都将取得相同的属性值。</li>
+<li>原型中的属性共享对于包含引用类型值的属性来说，问题比较突出：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype=&#123;</div><div class="line">	constructor: Person,</div><div class="line">	name: &quot;A&quot;,</div><div class="line">	age: 31,</div><div class="line">	job: &quot;dancer&quot;,</div><div class="line">	friends: [&quot;B&quot;, &quot;C&quot;],</div><div class="line">	sayName: function()&#123;</div><div class="line">		alert(this.name);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">var p1=new Person();</div><div class="line">p1.friends.push(&quot;D&quot;);</div><div class="line"></div><div class="line">alert(p1.friends);  //&quot;B, C, D&quot;</div><div class="line">alert(p2.friends);  //&quot;B, C, D&quot;</div><div class="line">alert(p1.friends==p2.friends);  //true</div></pre></td></tr></table></figure>
+</li>
+</ul>
 </li>
 </ul>
 <hr>
@@ -240,7 +251,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js10</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js15</a>
         		</li>
       		
 		</ul>
@@ -307,7 +318,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/10/10/js10/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/10/13/js15/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -321,18 +332,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/10/11/js11/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          ECMAScript中的OOP之理解对象
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/10/09/js09/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ECMAScript中的引用类型之基本包装类型</div>
+    <a href="/2017/10/13/js14/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ECMAScript中的OOP之创建对象(一)</div>
       <i class="icon-circle-right"></i>
     </a>
   
