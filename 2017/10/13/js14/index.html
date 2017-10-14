@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>ECMAScript中的OOP之创建对象(一) | changlesun || more than</title>
+  <title>ES中的OOP之创建对象(一) | changlesun || more than</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="虽然Object构造函数、对象字面量都可以用来创建单个对象，但这两个方式有个明显的缺点：使用同一个接口创建很多对象，会产生大量的重复代码。">
+  <meta name="description" content="工厂模式、构造函数模式。">
 <meta name="keywords" content="javascript,js14">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ECMAScript中的OOP之创建对象(一)">
+<meta property="og:title" content="ES中的OOP之创建对象(一)">
 <meta property="og:url" content="http://yoursite.com/2017/10/13/js14/index.html">
 <meta property="og:site_name" content="changlesun || more than">
-<meta property="og:description" content="虽然Object构造函数、对象字面量都可以用来创建单个对象，但这两个方式有个明显的缺点：使用同一个接口创建很多对象，会产生大量的重复代码。">
-<meta property="og:updated_time" content="2017-10-14T06:22:38.404Z">
+<meta property="og:description" content="工厂模式、构造函数模式。">
+<meta property="og:updated_time" content="2017-10-14T09:11:43.439Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ECMAScript中的OOP之创建对象(一)">
-<meta name="twitter:description" content="虽然Object构造函数、对象字面量都可以用来创建单个对象，但这两个方式有个明显的缺点：使用同一个接口创建很多对象，会产生大量的重复代码。">
+<meta name="twitter:title" content="ES中的OOP之创建对象(一)">
+<meta name="twitter:description" content="工厂模式、构造函数模式。">
   
     <link rel="alternative" href="/atom.xml" title="changlesun || more than" type="application/atom+xml">
   
@@ -157,7 +157,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      ECMAScript中的OOP之创建对象(一)
+      ES中的OOP之创建对象(一)
     </h1>
   
 
@@ -170,7 +170,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>虽然Object构造函数、对象字面量都可以用来创建单个对象，但这两个方式有个明显的缺点：使用同一个接口创建很多对象，会产生大量的重复代码。<br><a id="more"></a></p>
+        <p>工厂模式、构造函数模式。<br><a id="more"></a><br>虽然Object构造函数、对象字面量都可以用来创建单个对象，但这两个方式有个明显的缺点：使用同一个接口创建很多对象，会产生大量的重复代码。</p>
 <h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="-工厂模式-"></a>-工厂模式-</h3><ul>
 <li><p>工厂模式抽象了创建具体对象的过程。<br>  考虑到在ECMAScript中无法创建类，开发人员发明了一种函数，用函数来封装以特定接口创建对象的细节。</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function createPerson(name, age, job)&#123;</div><div class="line">	var o=new Object();</div><div class="line">	o.name=name;</div><div class="line">	o.age=age;</div><div class="line">	o.job=job;</div><div class="line">	o.sayName=function()&#123;</div><div class="line">		alert(this.name);</div><div class="line">	&#125;;</div><div class="line">	return o;</div><div class="line">&#125;</div><div class="line">var p1=createPerson(&quot;A&quot;, &quot;31&quot;, &quot;dancer&quot;);</div><div class="line">var p2=createPerson(&quot;B&quot;, &quot;33&quot;, singer);</div></pre></td></tr></table></figure>
@@ -295,7 +295,7 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          ECMAScript中的OOP之创建对象(二)
+          ES中的OOP之创建对象(二)
         
       </div>
     </a>
@@ -428,11 +428,7 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js03</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js04</a>
+                <a href="javascript:void(0)" class="js-tag color5">js02</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -444,11 +440,27 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js03</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js04</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js05</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js02</a>
+                <a href="javascript:void(0)" class="js-tag color5">js06</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js07</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js08</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -460,11 +472,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js15</a>
+                <a href="javascript:void(0)" class="js-tag color5">js11</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js11</a>
+                <a href="javascript:void(0)" class="js-tag color3">Webpack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js12</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -476,35 +492,19 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js16</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js14</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js06</a>
+                <a href="javascript:void(0)" class="js-tag color5">js15</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js08</a>
+                <a href="javascript:void(0)" class="js-tag color5">js16</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js07</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Webpack</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js12</a>
               </li>
             
             <div class="clearfix"></div>

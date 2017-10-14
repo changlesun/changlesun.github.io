@@ -6,14 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: js06 | changlesun || more than</title>
+  <title>ES中的OOP之继承（一） | changlesun || more than</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="changlesun || more than">
-<meta property="og:url" content="http://yoursite.com/tags/js06/index.html">
+  <meta name="description" content="OO语言支持两种继承方式：接口继承（只继承方法签名）、实现继承（继承实际的方法）。ES只支持实现继承，实现继承主要依靠原型链来实现。">
+<meta name="keywords" content="javascript,js16">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES中的OOP之继承（一）">
+<meta property="og:url" content="http://yoursite.com/2017/10/14/js17/index.html">
 <meta property="og:site_name" content="changlesun || more than">
+<meta property="og:description" content="OO语言支持两种继承方式：接口继承（只继承方法签名）、实现继承（继承实际的方法）。ES只支持实现继承，实现继承主要依靠原型链来实现。">
+<meta property="og:image" content="http://yoursite.com/img/js1701.png">
+<meta property="og:image" content="http://yoursite.com/img/js1702.png">
+<meta property="og:updated_time" content="2017-10-14T09:22:58.938Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="changlesun || more than">
+<meta name="twitter:title" content="ES中的OOP之继承（一）">
+<meta name="twitter:description" content="OO语言支持两种继承方式：接口继承（只继承方法签名）、实现继承（继承实际的方法）。ES只支持实现继承，实现继承主要依靠原型链来实现。">
+<meta name="twitter:image" content="http://yoursite.com/img/js1701.png">
   
     <link rel="alternative" href="/atom.xml" title="changlesun || more than" type="application/atom+xml">
   
@@ -145,36 +153,55 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-js17" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/09/js06/" class="archive-article-date">
-  	<time datetime="2017-10-09T07:26:12.069Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-09</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/09/js06/">ES中的引用类型之Array类型</a>
+    <h1 class="article-title" itemprop="name">
+      ES中的OOP之继承（一）
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/10/14/js17/" class="archive-article-date">
+  	<time datetime="2017-10-14T06:54:33.417Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>OO语言支持两种继承方式：接口继承（只继承方法签名）、实现继承（继承实际的方法）。ES只支持实现继承，实现继承主要依靠原型链来实现。<br><a id="more"></a></p>
+<h3 id="原型链"><a href="#原型链" class="headerlink" title="-原型链-"></a>-原型链-</h3><p>基本思想：利用原型，让一个引用类型继承另一个引用类型。实现的本质是重写原型对象，代之以一个新类型的实例。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">function SuperType()&#123;</div><div class="line">	this.superproperty=a;</div><div class="line">&#125;</div><div class="line">SuperType.prototype.getSuperValue=function()&#123;</div><div class="line">	return this.superproperty;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function SubType()&#123;</div><div class="line">	this.subproperty=b;</div><div class="line">&#125;</div><div class="line">SubType.prototype=new SuperType();</div><div class="line">SubType.prototype.getSubValue=function()&#123;</div><div class="line">	return this.subpropertys;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var s1=new SubType();</div><div class="line">alert(s1.getSuperValue());  //true</div><div class="line">//经历3个步骤：（1）搜索实例；（2）搜索SubType.prototype；（3）搜索SuperType.Prototype。</div><div class="line"></div><div class="line"></div><div class="line">//不使用SubType默认提供的原型，而是给它换了一个新原型，这个新原型就是SpuerType的实例</div></pre></td></tr></table></figure></p>
+<p><img src="/img/js1701.png" alt=""></p>
+<ul>
+<li>所有函数的默认原型都是Object的实例<br>比如当调用s1.toString()时，实际上是调用保存在Object.prototype中的那个方法。<br><img src="/img/js1702.png" alt=""></li>
+<li>确定原型与实例的关系<br>两种方式：instanceof操作符、isPrototypeOf()方法。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">alert(s1 instanceof Object);  //true</div><div class="line">alert(s1 instanceof SuperType);  //true</div><div class="line">alert(s1 instanceof SubType);  //true</div><div class="line"></div><div class="line">//由于原型链的关系，可以说s1是Object、Supertype、SubType中任何一个类型的实例</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">alert(Object.prototype.isPrototypeOf(s1));  //true</div><div class="line">alert(SuperType.prototype.isPrototypeOf(s1));  //true</div><div class="line">alert(SubType.prototype.isPrototypeOf(s1));  //true</div><div class="line"></div><div class="line">//只要是原型链中出现过的原型，都可以说是该原型链所派生的实例的原型</div></pre></td></tr></table></figure>
+<ul>
+<li><p>谨慎地定义方法<br>  给原型添加方法的代码一定要放在替换原型的语句之后。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">function SuperType()&#123;</div><div class="line">	this.superproperty=a;</div><div class="line">&#125;</div><div class="line">SuperType.prototype.getSuperValue=function()&#123;</div><div class="line">	return this.superproperty;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">function SubType()&#123;</div><div class="line">	this.subproperty=b;</div><div class="line">&#125;</div><div class="line">SubType.prototype=new SuperType();</div><div class="line">//添加新方法</div><div class="line">SubType.prototype.getSubValue=function()&#123;</div><div class="line">	return this.subpropertys;</div><div class="line">&#125;</div><div class="line">//重写超类型中的方法</div><div class="line">SubType.prototype.getSuperValue=function()&#123;</div><div class="line">	return b;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var s1=new SubType();</div><div class="line">alert(s1.getSuperValue());  //b</div></pre></td></tr></table></figure>
+<p>  通过原型链实现继承时，不能使用对象字面量创建原型方法。</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">function SuperType()&#123;</div><div class="line">	this.superproperty=a;</div><div class="line">&#125;</div><div class="line">SuperType.prototype.getSuperValue=function()&#123;</div><div class="line">	return this.superproperty;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">function SubType()&#123;</div><div class="line">	this.subproperty=b;</div><div class="line">&#125;</div><div class="line">SubType.prototype=new SuperType();</div><div class="line">//使用字面量添加新方法会导致上一行代码无效</div><div class="line">//现在的原型包含的是一个Object的实例，而非SuperType的实例，SubType、SuperType之间已无关系。</div><div class="line">SubType.prototype=&#123;</div><div class="line">	getSubValue: function()&#123;</div><div class="line">		return this.subproperty;</div><div class="line">	&#125;,</div><div class="line">	someOtherMethod: function()&#123;</div><div class="line">		return b;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">var s1=new SubType();</div><div class="line">alert(s1.getSuperValue());  //error!</div></pre></td></tr></table></figure>
+</li>
+<li><p>原型链的问题<br>实践中会很少单独使用原型链，存在两个问题：原型中包含引用类型值带来的问题、创建子类型的实例时不能向超类型的构造函数中传递参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">function SuperType()&#123;</div><div class="line">	this.colors=[&quot;red&quot;, &quot;blue&quot;];</div><div class="line">&#125;</div><div class="line"></div><div class="line">function SubType()&#123;&#125;</div><div class="line">SubType.prototype=new SuperType();</div><div class="line"></div><div class="line">var s1=new SubType();</div><div class="line">s1.colors.push(&quot;green&quot;);</div><div class="line">alert(s1.colors);  //&quot;red, blue, green&quot;</div><div class="line"></div><div class="line">var s2=new Subtype();</div><div class="line">alert(s2.colors);  //&quot;red, blue, green&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p>PS:《JavaScript高级程序设计》笔记</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -184,13 +211,13 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js06</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js16</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -203,17 +230,113 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/10/14/js17/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/10/14/js18/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          ES中的OOP之继承（二）
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/10/14/js16/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ES中的OOP之创建对象(三)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -236,9 +359,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
