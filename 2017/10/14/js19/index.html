@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>MySQL初识 | changlesun || more than</title>
+  <title>ES中的OOP之继承（三） | changlesun || more than</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="MySQL是最流行的关系型数据库管理系统。">
-<meta name="keywords" content="MySQL,js13">
+  <meta name="description" content="寄生式继承、寄生组合式继承。">
+<meta name="keywords" content="javascript,js19">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL初识">
-<meta property="og:url" content="http://yoursite.com/2017/10/13/js13/index.html">
+<meta property="og:title" content="ES中的OOP之继承（三）">
+<meta property="og:url" content="http://yoursite.com/2017/10/14/js19/index.html">
 <meta property="og:site_name" content="changlesun || more than">
-<meta property="og:description" content="MySQL是最流行的关系型数据库管理系统。">
-<meta property="og:updated_time" content="2017-10-13T02:34:31.094Z">
+<meta property="og:description" content="寄生式继承、寄生组合式继承。">
+<meta property="og:updated_time" content="2017-10-14T12:37:15.186Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL初识">
-<meta name="twitter:description" content="MySQL是最流行的关系型数据库管理系统。">
+<meta name="twitter:title" content="ES中的OOP之继承（三）">
+<meta name="twitter:description" content="寄生式继承、寄生组合式继承。">
   
     <link rel="alternative" href="/atom.xml" title="changlesun || more than" type="application/atom+xml">
   
@@ -150,66 +150,31 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-js13" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-js19" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      MySQL初识
+      ES中的OOP之继承（三）
     </h1>
   
 
         
-        <a href="/2017/10/13/js13/" class="archive-article-date">
-  	<time datetime="2017-10-13T01:06:58.967Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-13</time>
+        <a href="/2017/10/14/js19/" class="archive-article-date">
+  	<time datetime="2017-10-14T11:31:25.777Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>MySQL是最流行的关系型数据库管理系统。<br><a id="more"></a><br>数据库是按数据结构来组织、存储、管理数据的仓库。每个数据库都有一个或多个不同的API用于创建、访问、管理所保存的数据。也可以将数据存储在文件中，但是在文件中读写数据速度相对较慢。</p>
-<p>关系型数据库管理系统（RDBMS）是建立在关系模型基础上的数据库，借助于集合代数等数学概念和方法来处理数据库中的数据。</p>
-<p>RDBMS的特点：<br>1.数据以表格的形式出现。<br>2.每行为各种记录名称。<br>3.每列为记录名称所对应的数据域。<br>4.许多行和列组成一张表单。<br>5.若干的表单组成database。</p>
-<h3 id="MySQL的一些基本命令"><a href="#MySQL的一些基本命令" class="headerlink" title="MySQL的一些基本命令"></a>MySQL的一些基本命令</h3><p>在cmd中的一些基本命令（以下命令需要先转到MySQL安装的bin目录下）：</p>
-<pre><code>- 登录MySQL：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -u root -p</div></pre></td></tr></table></figure>
+        <p>寄生式继承、寄生组合式继承。<br><a id="more"></a></p>
+<h3 id="寄生式继承"><a href="#寄生式继承" class="headerlink" title="-寄生式继承-"></a>-寄生式继承-</h3><p>思路与寄生构造函数、工厂模式类似，创建一个仅用于封装继承过程的函数，该函数在内部以某种方式来增强对象，最后再像真的是它做了所有工作一样返回对象。<br>与构造函数模式类似，不能做到函数复用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function createPerson(original)&#123;</div><div class="line">	var clone=object(original);  //创建一个新对象  object()不是必需的，任何能够返回新对象的函数都适用于此模式</div><div class="line">	clone.sayHi=function()&#123;  //以某种方式来增强这个对象</div><div class="line">		alert(&quot;Hi&quot;);</div><div class="line">	&#125;;</div><div class="line">	return clone;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var p1=&#123;</div><div class="line">	name: &quot;A&quot;,</div><div class="line">	friends: [&quot;X&quot;, &quot;Y&quot;]</div><div class="line">&#125;</div><div class="line">var p2=createPerson(p1);</div><div class="line">p2.sayHi();  //hi</div></pre></td></tr></table></figure></p>
+<h3 id="寄生组合式继承"><a href="#寄生组合式继承" class="headerlink" title="-寄生组合式继承-"></a>-寄生组合式继承-</h3><p>寄生组合式继承是继承引用类型最理想的范式。<br>组合继承最大的问题就是无论在什么情况下，都会调用两次超类型构造函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">function SuperType(name)&#123;</div><div class="line">	this.name=name;</div><div class="line">	this.colors=[&quot;red&quot;, &quot;blue&quot;];</div><div class="line">&#125;</div><div class="line">SuperType.prototype.sayName=function()&#123;</div><div class="line">	alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line">function SubType(name, age)&#123;</div><div class="line">	SuperType.call(this, name);  //第二次调用</div><div class="line">	this.age=age;</div><div class="line">&#125;</div><div class="line">SubType.prototype=new SuperType();  //第一次调用</div><div class="line">SubType.prototype.constructor=SubType;</div><div class="line">SubType.prototype.sayAge=function()&#123;</div><div class="line">	alert(this.age);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var s1=new SubType(&quot;A&quot;, 31);</div><div class="line"></div><div class="line"></div><div class="line">//两次调用SuperType函数的结果，导致有两组name和colors属性：一组在实例s1上、一组在SubType原型中</div></pre></td></tr></table></figure></p>
+<p>寄生组合式继承的思路：不必为了指定子类型原型而调用超类型的构造函数，我们所需要的无非就是超类型原型的一个副本而已。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">function inheritPrototype(subType, superType)&#123;</div><div class="line">	var prototype=object(superType.prototype);  //创建对象，即创建超类型原型的一个副本</div><div class="line">	prototype.constructor=subType;  //增强对象</div><div class="line">	subType.prototype=prototype;  //指定对象</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">function SuperType(name)&#123;</div><div class="line">	this.name=name;</div><div class="line">	this.colors=[&quot;red&quot;, &quot;blue&quot;];</div><div class="line">&#125;</div><div class="line">SuperType.prototype.sayName=function()&#123;</div><div class="line">	alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"></div><div class="line">function SubType(name, age)&#123;</div><div class="line">	SuperType.call(this, name); </div><div class="line">	this.age=age;</div><div class="line">&#125;</div><div class="line">inheritPrototype(SubType, SuperType);</div><div class="line">SubType.prototype.sayAge=function()&#123;</div><div class="line">	alert(this.age);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 
-- 查看MySQL中存在的所有数据库：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">show databases;</div></pre></td></tr></table></figure>
-
-- 查看某个数据库的详细创建信息：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">show create database 数据库名;</div></pre></td></tr></table></figure>
-
-- 新建数据库：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">create database 数据库名;</div></pre></td></tr></table></figure>
-
-- 删除数据库：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">drop database 数据库名;</div></pre></td></tr></table></figure>
-
-- 选择要操作的数据库，之后所有的命令都只会在这个数据库中执行：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">use 数据库名;</div></pre></td></tr></table></figure>
-
-- 显示这个数据库中存在的所有表：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">show tables;</div></pre></td></tr></table></figure>
-
-- 查看表中的所有字段：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">show create table 表名;</div></pre></td></tr></table></figure>
-
-- 显示数据表的属性、属性类型、主键信息、是否为NULL、默认值等其他信息：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">show columns from 表名;</div></pre></td></tr></table></figure>
-
-- 查看表中的所有数据：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from 表名;</div></pre></td></tr></table></figure>
-
-- 删除表：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">drop table 表名;</div></pre></td></tr></table></figure>
-
-- 退出MySQL：
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">exit</div></pre></td></tr></table></figure>
-</code></pre>
       
 
       
@@ -222,11 +187,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js13</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js19</a>
         		</li>
       		
 		</ul>
@@ -293,7 +258,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/10/13/js13/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/10/14/js19/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -307,18 +272,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/10/13/js14/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          ES中的OOP之创建对象(一)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/10/11/js12/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Webpack学习笔记</div>
+    <a href="/2017/10/14/js18/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ES中的OOP之继承（二）</div>
       <i class="icon-circle-right"></i>
     </a>
   
