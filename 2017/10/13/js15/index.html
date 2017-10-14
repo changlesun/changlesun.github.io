@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>ECMAScript中的OOP之创建对象(二) | changlesun || more than</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="虽然Object构造函数、对象字面量都可以用来创建单个对象，但这两个方式有个明显的缺点：使用同一个接口创建很多对象，会产生大量的重复代码。">
+  <meta name="description" content="原型模式。">
 <meta name="keywords" content="javascript,js15">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ECMAScript中的OOP之创建对象(二)">
 <meta property="og:url" content="http://yoursite.com/2017/10/13/js15/index.html">
 <meta property="og:site_name" content="changlesun || more than">
-<meta property="og:description" content="虽然Object构造函数、对象字面量都可以用来创建单个对象，但这两个方式有个明显的缺点：使用同一个接口创建很多对象，会产生大量的重复代码。">
+<meta property="og:description" content="原型模式。">
 <meta property="og:image" content="http://yoursite.com/img/js15.png">
-<meta property="og:updated_time" content="2017-10-13T11:25:21.896Z">
+<meta property="og:updated_time" content="2017-10-14T06:22:15.306Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ECMAScript中的OOP之创建对象(二)">
-<meta name="twitter:description" content="虽然Object构造函数、对象字面量都可以用来创建单个对象，但这两个方式有个明显的缺点：使用同一个接口创建很多对象，会产生大量的重复代码。">
+<meta name="twitter:description" content="原型模式。">
 <meta name="twitter:image" content="http://yoursite.com/img/js15.png">
   
     <link rel="alternative" href="/atom.xml" title="changlesun || more than" type="application/atom+xml">
@@ -172,32 +172,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>虽然Object构造函数、对象字面量都可以用来创建单个对象，但这两个方式有个明显的缺点：使用同一个接口创建很多对象，会产生大量的重复代码。<br><a id="more"></a></p>
-<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="-原型模式-"></a>-原型模式-</h3><p>每一个函数都有一个原型属性，这个属性是一个指针，指向一个对象，这个对象拥有的属性和方法可以让所有实例共享。<br>把对象实例的信息直接添加到原型对象，将构造函数变成了一个空函数，实例访问的便都是同一组属性和同一个方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype.name=&quot;A&quot;;</div><div class="line">Person.prototype.age=31;</div><div class="line">Person.prototype.job=&quot;dancer&quot;;</div><div class="line">Person.prototype.sayName=function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var person1=new Person();</div><div class="line">person1.sayName();  //&quot;A&quot;</div><div class="line">var person2=new Person();</div><div class="line">person2.sayName();  //&quot;A&quot;</div></pre></td></tr></table></figure></p>
+        <p>原型模式。<br><a id="more"></a></p>
+<h3 id="原型模式"><a href="#原型模式" class="headerlink" title="-原型模式-"></a>-原型模式-</h3><p>每一个函数都有一个原型属性，这个属性是一个指针，指向一个对象，这个对象拥有的属性和方法可以让所有实例共享。<br>把对象实例的信息直接添加到原型对象，将构造函数变成了一个空函数，实例访问的便都是同一组属性和同一个方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype.name=&quot;A&quot;;</div><div class="line">Person.prototype.age=31;</div><div class="line">Person.prototype.job=&quot;dancer&quot;;</div><div class="line">Person.prototype.sayName=function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var p1=new Person();</div><div class="line">p1.sayName();  //&quot;A&quot;</div><div class="line">var p2=new Person();</div><div class="line">p2.sayName();  //&quot;A&quot;</div></pre></td></tr></table></figure></p>
 <ul>
 <li><p>理解原型对象</p>
 <ul>
 <li><p>只要创建了一个新函数，该函数就会拥有一个prototype属性，该属性是一个指针，指向函数的原型对象。原型对象会自动获得一个constructor属性，该属性是一个指针，指向prototype属性所在的函数。调用构造函数创建的新实例内部会包含一个[[Prototype]]属性，该属性是一个指针，指向构造函数的原型对象。<br>如下图所示：<br><img src="/img/js15.png" alt=""><br>没有标准的方式可以访问[[Prototype]]，但Firefox、Safari、Chrome会在每个对象上支持一个_proto_属性，而在其它实现中这个属性完全不可见。这个连接存在于实例与构造函数的原型对象之间，而不是存在于实例与构造函数之间。isPrototypeOf()可以确定这种关系是否存在。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alert(Person.prototype.isPrototypeOf(person1));  //true</div><div class="line">alert(Person.prototype.isPrototypeOf(person2));  //true</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alert(Person.prototype.isPrototypeOf(p1));  //true</div><div class="line">alert(Person.prototype.isPrototypeOf(p2));  //true</div></pre></td></tr></table></figure>
 <p>ES5方法Object.getPrototypeOf()可以返回[[Prototype]]的值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alert(Object.getPrototypeOf(person1)==Person.prototype);  //true</div><div class="line">alert(Object.getPrototypeOf(person1).name);  //&quot;A&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alert(Object.getPrototypeOf(p1)==Person.prototype);  //true</div><div class="line">alert(Object.getPrototypeOf(p1).name);  //&quot;A&quot;</div></pre></td></tr></table></figure>
 </li>
-<li><p>调用person1.sayName()时，会执行先后两次搜索。第一次会在person1本身查找sayName属性，没有。第二次会在Person.prototype中查找sayName属性，有，读取。调用person2.sayName()同样会执行这个过程。这正是多个对象实例共享原型所保存的属性和方法的基本原理。</p>
+<li><p>调用p1.sayName()时，会执行先后两次搜索。第一次会在p1本身查找sayName属性，没有。第二次会在Person.prototype中查找sayName属性，有，读取。调用p2.sayName()同样会执行这个过程。这正是多个对象实例共享原型所保存的属性和方法的基本原理。</p>
 </li>
 <li><p>可以通过对象实例访问保存在原型中的值，却不能改写。如果为实例添加的属性与原型中的属性同名，该属性将会屏蔽掉原型中的那个属性。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype.name=&quot;A&quot;;</div><div class="line">Person.prototype.age=31;</div><div class="line">Person.prototype.job=&quot;dancer&quot;;</div><div class="line">Person.prototype.sayName=function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var person1=new Person();</div><div class="line">var person2=new Person();</div><div class="line"></div><div class="line">person1.name=&quot;B&quot;;</div><div class="line">alert(person1.name);  //&quot;B&quot;——来自实例  搜索1次</div><div class="line">alert(person2.name);  //&quot;A&quot;——来自原型  搜索2次</div><div class="line"></div><div class="line">delete person1.name;</div><div class="line">alert(person1.name);  //&quot;A&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype.name=&quot;A&quot;;</div><div class="line">Person.prototype.age=31;</div><div class="line">Person.prototype.job=&quot;dancer&quot;;</div><div class="line">Person.prototype.sayName=function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var p1=new Person();</div><div class="line">var p2=new Person();</div><div class="line"></div><div class="line">p1.name=&quot;B&quot;;</div><div class="line">alert(p1.name);  //&quot;B&quot;——来自实例  搜索1次</div><div class="line">alert(p2.name);  //&quot;A&quot;——来自原型  搜索2次</div><div class="line"></div><div class="line">delete p1.name;</div><div class="line">alert(p1.name);  //&quot;A&quot;</div></pre></td></tr></table></figure>
 </li>
 <li><p>hasOwnProperty()从Object继承而来，可以检测属性存在于何处。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype.name=&quot;A&quot;;</div><div class="line">Person.prototype.age=31;</div><div class="line">Person.prototype.job=&quot;dancer&quot;;</div><div class="line">Person.prototype.sayName=function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var person1=new Person();</div><div class="line">var person2=new Person();</div><div class="line"></div><div class="line">alert(person1.hasOwnProperty(&quot;name&quot;));  //false</div><div class="line"></div><div class="line">person1.name=&quot;B&quot;;</div><div class="line">alert(person1.hasOwnProperty(&quot;name&quot;));  //true</div><div class="line"></div><div class="line">delete person1.name;</div><div class="line">alert(person1.hasOwnProperty(&quot;name&quot;));  //false</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype.name=&quot;A&quot;;</div><div class="line">Person.prototype.age=31;</div><div class="line">Person.prototype.job=&quot;dancer&quot;;</div><div class="line">Person.prototype.sayName=function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var p1=new Person();</div><div class="line">var p2=new Person();</div><div class="line"></div><div class="line">alert(p1.hasOwnProperty(&quot;name&quot;));  //false</div><div class="line"></div><div class="line">p1.name=&quot;B&quot;;</div><div class="line">alert(p1.hasOwnProperty(&quot;name&quot;));  //true</div><div class="line"></div><div class="line">delete person1.name;</div><div class="line">alert(person1.hasOwnProperty(&quot;name&quot;));  //false</div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p>原型与in操作符<br>有两种方式使用in操作符：单独使用、在for-in循环中使用。</p>
 <ul>
 <li><p>单独使用时，in操作符会在对象能够访问给定属性时返回true，无论这个属性存在哪里。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype.name=&quot;A&quot;;</div><div class="line">Person.prototype.age=31;</div><div class="line">Person.prototype.job=&quot;dancer&quot;;</div><div class="line">Person.prototype.sayName=function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var person1=new Person();</div><div class="line"></div><div class="line">alert(&quot;name&quot; in person1);  //true</div><div class="line"></div><div class="line">person1.name=&quot;B&quot;;</div><div class="line">alert(&quot;name&quot; in person1);  //true</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype.name=&quot;A&quot;;</div><div class="line">Person.prototype.age=31;</div><div class="line">Person.prototype.job=&quot;dancer&quot;;</div><div class="line">Person.prototype.sayName=function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var p1=new Person();</div><div class="line"></div><div class="line">alert(&quot;name&quot; in p1);  //true</div><div class="line"></div><div class="line">p1.name=&quot;B&quot;;</div><div class="line">alert(&quot;name&quot; in p1);  //true</div></pre></td></tr></table></figure>
 <p>同时使用hasOwnProperty()、in操作符可以确定属性到底存在哪里。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">function hasPrototypeProperty(object, name)&#123;</div><div class="line">	return !object.hasOwnProperty(name) &amp;&amp; (name in object);  //true代表属性存在于原型中</div><div class="line">&#125;</div><div class="line"></div><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype.name=&quot;A&quot;;</div><div class="line">Person.prototype.age=31;</div><div class="line">Person.prototype.job=&quot;dancer&quot;;</div><div class="line">Person.prototype.sayName=function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var person1=new Person();</div><div class="line"></div><div class="line">alert(hasPrototypeProperty(person1, &quot;name&quot;));  //true</div><div class="line"></div><div class="line">person1.name=&quot;B&quot;;</div><div class="line">alert(hasPrototypeProperty(person1, &quot;name&quot;));  //false</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">function hasPrototypeProperty(object, name)&#123;</div><div class="line">	return !object.hasOwnProperty(name) &amp;&amp; (name in object);  //true代表属性存在于原型中</div><div class="line">&#125;</div><div class="line"></div><div class="line">function Person()&#123;&#125;</div><div class="line">Person.prototype.name=&quot;A&quot;;</div><div class="line">Person.prototype.age=31;</div><div class="line">Person.prototype.job=&quot;dancer&quot;;</div><div class="line">Person.prototype.sayName=function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var p1=new Person();</div><div class="line"></div><div class="line">alert(hasPrototypeProperty(p1, &quot;name&quot;));  //true</div><div class="line"></div><div class="line">p1.name=&quot;B&quot;;</div><div class="line">alert(hasPrototypeProperty(p1, &quot;name&quot;));  //false</div></pre></td></tr></table></figure>
 </li>
 <li><p>在使用for-in循环时，返回的是所有能够通过对象访问到的、可枚举的属性。屏蔽了原型中不可枚举属性的实例属性也会被返回，因为根据规定，所有开发人员定义的属性都是可枚举的。</p>
 </li>
@@ -332,6 +332,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2017/10/14/js16/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          ECMAScript中的OOP之创建对象(三)
+        
+      </div>
+    </a>
+  
   
     <a href="/2017/10/13/js14/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">ECMAScript中的OOP之创建对象(一)</div>
@@ -456,19 +465,7 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">php</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js01</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js02</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -480,23 +477,19 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">php</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js01</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js05</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js06</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js07</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js08</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js10</a>
+                <a href="javascript:void(0)" class="js-tag color5">js02</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -504,15 +497,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js10</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js15</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js11</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Webpack</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js12</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -524,7 +517,19 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js16</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js14</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js06</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js08</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -532,7 +537,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js15</a>
+                <a href="javascript:void(0)" class="js-tag color5">js07</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Webpack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js12</a>
               </li>
             
             <div class="clearfix"></div>

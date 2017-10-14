@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/10/13/js14/index.html">
 <meta property="og:site_name" content="changlesun || more than">
 <meta property="og:description" content="虽然Object构造函数、对象字面量都可以用来创建单个对象，但这两个方式有个明显的缺点：使用同一个接口创建很多对象，会产生大量的重复代码。">
-<meta property="og:updated_time" content="2017-10-13T06:59:47.510Z">
+<meta property="og:updated_time" content="2017-10-14T06:22:38.404Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ECMAScript中的OOP之创建对象(一)">
 <meta name="twitter:description" content="虽然Object构造函数、对象字面量都可以用来创建单个对象，但这两个方式有个明显的缺点：使用同一个接口创建很多对象，会产生大量的重复代码。">
@@ -173,22 +173,22 @@
         <p>虽然Object构造函数、对象字面量都可以用来创建单个对象，但这两个方式有个明显的缺点：使用同一个接口创建很多对象，会产生大量的重复代码。<br><a id="more"></a></p>
 <h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="-工厂模式-"></a>-工厂模式-</h3><ul>
 <li><p>工厂模式抽象了创建具体对象的过程。<br>  考虑到在ECMAScript中无法创建类，开发人员发明了一种函数，用函数来封装以特定接口创建对象的细节。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function createPerson(name, age, job)&#123;</div><div class="line">	var o=new Object();</div><div class="line">	o.name=name;</div><div class="line">	o.age=age;</div><div class="line">	o.job=job;</div><div class="line">	o.sayName=function()&#123;</div><div class="line">		alert(this.name);</div><div class="line">	&#125;;</div><div class="line">	return o;</div><div class="line">&#125;</div><div class="line">var person1=createPerson(&quot;A&quot;, &quot;31&quot;, &quot;dancer&quot;);</div><div class="line">var person2=createPerson(&quot;B&quot;, &quot;33&quot;, singer);</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">function createPerson(name, age, job)&#123;</div><div class="line">	var o=new Object();</div><div class="line">	o.name=name;</div><div class="line">	o.age=age;</div><div class="line">	o.job=job;</div><div class="line">	o.sayName=function()&#123;</div><div class="line">		alert(this.name);</div><div class="line">	&#125;;</div><div class="line">	return o;</div><div class="line">&#125;</div><div class="line">var p1=createPerson(&quot;A&quot;, &quot;31&quot;, &quot;dancer&quot;);</div><div class="line">var p2=createPerson(&quot;B&quot;, &quot;33&quot;, singer);</div></pre></td></tr></table></figure>
 </li>
 <li><p>缺点：虽然解决了创建多个相似对象的问题，但却没有解决对象识别的问题，即怎样知道一个对象的类型。</p>
 <h3 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="-构造函数模式-"></a>-构造函数模式-</h3><p>构造函数本身也是函数，但是可以用来创建对象，且函数名第一个字母需要大写。</p>
 </li>
 <li><p>像Object、Array等这样的原生构造函数，在运行时会自动出现在执行环境中，此外，也可以创建自定义构造函数，从而定义自定义对象类型的属性和方法。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">function Person(name, age, job)&#123;</div><div class="line">	this.name=name;</div><div class="line">	this.age=age;</div><div class="line">	this.job=job;</div><div class="line">	this.sayName=function()&#123;</div><div class="line">		alert(this.name);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var person1=new Person(&quot;A&quot;, 31, &quot;dancer&quot;);</div><div class="line">var person2=new Person(&quot;B&quot;, 33, &quot;singer&quot;);</div><div class="line"></div><div class="line"></div><div class="line">//Pserson()没有显示地创建对象、直接将属性和方法赋给了this对象、没有return语句。</div><div class="line"></div><div class="line">//以这种方式会经历4个步骤：（1）创建一个新对象；（2）将构造函数的作用域赋给新对象（this就会指向这个新对象）；</div><div class="line">//(3)执行构造函数中的代码（为这个新对象添加属性）；（4）返回新对象。</div><div class="line"></div><div class="line"></div><div class="line">alert(person1.constructor==Person);  //true  constructor（构造函数属性）</div><div class="line">alert(person2.constructor==Person);  //true</div><div class="line"></div><div class="line"></div><div class="line">alert(person1 instanceof Person);  //true  创建自定义的构造函数意味着可以将它的实例标识为一种特定的类型</div><div class="line">alert(person1 instanceof Object);  //true  所有对象均继承自Object</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">function Person(name, age, job)&#123;</div><div class="line">	this.name=name;</div><div class="line">	this.age=age;</div><div class="line">	this.job=job;</div><div class="line">	this.sayName=function()&#123;</div><div class="line">		alert(this.name);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var p1=new Person(&quot;A&quot;, 31, &quot;dancer&quot;);</div><div class="line">var p2=new Person(&quot;B&quot;, 33, &quot;singer&quot;);</div><div class="line"></div><div class="line"></div><div class="line">//Pserson()没有显示地创建对象、直接将属性和方法赋给了this对象、没有return语句。</div><div class="line"></div><div class="line">//以这种方式会经历4个步骤：（1）创建一个新对象；（2）将构造函数的作用域赋给新对象（this就会指向这个新对象）；</div><div class="line">//(3)执行构造函数中的代码（为这个新对象添加属性）；（4）返回新对象。</div><div class="line"></div><div class="line"></div><div class="line">alert(p1.constructor==Person);  //true  constructor（构造函数属性）</div><div class="line">alert(p2.constructor==Person);  //true</div><div class="line"></div><div class="line"></div><div class="line">alert(p1 instanceof Person);  //true  创建自定义的构造函数意味着可以将它的实例标识为一种特定的类型</div><div class="line">alert(p1 instanceof Object);  //true  所有对象均继承自Object</div></pre></td></tr></table></figure>
 </li>
 <li><p>构造函数毕竟也是函数。<br>用new操作符来调用，它就可以作为构造函数；不用new操作符调用，它就跟普通函数没什么两样。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//当做构造函数调用</div><div class="line">var person=new Person(&quot;A&quot;, 31, &quot;dancer&quot;);</div><div class="line">person.sayName();</div><div class="line"></div><div class="line">//作为普通函数调用</div><div class="line">Person(&quot;A&quot;, 31, &quot;dancer&quot;);  //添加到window</div><div class="line">window.sayName();</div><div class="line"></div><div class="line">//在另一个对象的作用域中调用</div><div class="line">var o=new Object();</div><div class="line">Person.call(o, &quot;B&quot;, 33, &quot;singer&quot;);</div><div class="line">o.sayName();</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//当做构造函数调用</div><div class="line">var p1=new Person(&quot;A&quot;, 31, &quot;dancer&quot;);</div><div class="line">p1.sayName();</div><div class="line"></div><div class="line">//作为普通函数调用</div><div class="line">Person(&quot;A&quot;, 31, &quot;dancer&quot;);  //添加到window</div><div class="line">window.sayName();</div><div class="line"></div><div class="line">//在另一个对象的作用域中调用</div><div class="line">var o=new Object();</div><div class="line">Person.call(o, &quot;B&quot;, 33, &quot;singer&quot;);</div><div class="line">o.sayName();</div></pre></td></tr></table></figure>
 </li>
 <li><p>缺点：每个方法都要在每个实例上重新创建一遍。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">alert(person1.sayName==person2.sayName);  //false  </div><div class="line"></div><div class="line">//不同实例上的同名函数不相等，因为每一个Person实例都包含一个不同的Function实例，而创建两个完成同样任务的实例完全没有必要</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">alert(p1.sayName==p2.sayName);  //false  </div><div class="line"></div><div class="line">//不同实例上的同名函数不相等，因为每一个Person实例都包含一个不同的Function实例，而创建两个完成同样任务的实例完全没有必要</div></pre></td></tr></table></figure>
 </li>
 <li><p>改进：把函数定义转移到构造函数外部。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function Person(name, age, job)&#123;</div><div class="line">	this.name=name;</div><div class="line">	this.age=age;</div><div class="line">	this.job=job;</div><div class="line">	this.sayName=sayName;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function sayName()&#123;</div><div class="line">	alert(this.name);</div><div class="line">&#125;</div><div class="line"></div><div class="line">var person1=new Person(&quot;A&quot;, 31, &quot;dancer&quot;);</div><div class="line">var person2=new Person(&quot;B&quot;, 33, &quot;singer&quot;);</div><div class="line"></div><div class="line"></div><div class="line">//新问题：在全局作用域中定义的函数却只能被某个对象调用，让全局作用域名不副实；如果对象需要定义多个方法，那就需要定义多个全局函数，丝毫没有封装性可言</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function Person(name, age, job)&#123;</div><div class="line">	this.name=name;</div><div class="line">	this.age=age;</div><div class="line">	this.job=job;</div><div class="line">	this.sayName=sayName;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function sayName()&#123;</div><div class="line">	alert(this.name);</div><div class="line">&#125;</div><div class="line"></div><div class="line">var p1=new Person(&quot;A&quot;, 31, &quot;dancer&quot;);</div><div class="line">var p2=new Person(&quot;B&quot;, 33, &quot;singer&quot;);</div><div class="line"></div><div class="line"></div><div class="line">//新问题：在全局作用域中定义的函数却只能被某个对象调用，让全局作用域名不副实；如果对象需要定义多个方法，那就需要定义多个全局函数，丝毫没有封装性可言</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <hr>
@@ -424,19 +424,7 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">php</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js01</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js02</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -448,23 +436,19 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">php</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js01</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js05</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js06</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js07</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js08</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js10</a>
+                <a href="javascript:void(0)" class="js-tag color5">js02</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -472,15 +456,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js10</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js15</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js11</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Webpack</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js12</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -492,7 +476,19 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js16</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js14</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js06</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js08</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -500,7 +496,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js15</a>
+                <a href="javascript:void(0)" class="js-tag color5">js07</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Webpack</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js12</a>
               </li>
             
             <div class="clearfix"></div>
