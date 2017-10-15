@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/30/js04/index.html">
 <meta property="og:site_name" content="changlesun || more than">
 <meta property="og:description" content="一个执行环境有一个变量对象和一个作用域链，该作用域链上按次序保存着该执行环境有权访问到的来自多个执行环境的变量对象。">
-<meta property="og:updated_time" content="2017-10-14T07:01:13.107Z">
+<meta property="og:updated_time" content="2017-10-15T06:52:57.346Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES中的执行环境及作用域">
 <meta name="twitter:description" content="一个执行环境有一个变量对象和一个作用域链，该作用域链上按次序保存着该执行环境有权访问到的来自多个执行环境的变量对象。">
@@ -170,7 +170,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>一个执行环境有一个变量对象和一个作用域链，该作用域链上按次序保存着该执行环境有权访问到的来自多个执行环境的变量对象。<br><a id="more"></a><br>执行环境：内部环境可以通过作用域链访问所有的外部环境，但外部环境不能访问内部环境中的任何变量和函数。某个执行环境中的所有代码执行完毕后该环境被销毁，保存在其中的所有变量和函数定义也随之被销毁。<br>变量对象：每个执行环境都有一个与之关联的变量对象，环境中定义的所有变量和函数都保存在这个对象中。<br>作用域链：保证对执行环境有权访问的所有变量和函数的有序访问。作用域链的前端始终都是来自当前执行环境的变量对象，下一个变量对象来自包含环境，再下一个变量对象来自下一个包含环境，直至全局执行环境。</p>
+        <p>一个执行环境有一个变量对象和一个作用域链，该作用域链上按次序保存着该执行环境有权访问到的来自多个执行环境的变量对象。<br><a id="more"></a><br>执行环境：内部环境可以通过作用域链访问所有的外部环境，但外部环境不能访问内部环境中的任何变量和函数。某个执行环境中的所有代码执行完毕后该环境被销毁，保存在其中的所有变量和函数定义也随之被销毁，只有全局执行环境的变量对象能保存在内存中。</p>
+<p>变量对象：每个执行环境都有一个与之关联的变量对象，环境中定义的所有变量和函数都保存在这个对象中。</p>
+<p>作用域链：保证对执行环境有权访问的所有变量和函数的有序访问。作用域链的前端始终都是来自当前执行环境的变量对象，下一个变量对象来自包含环境，再下一个变量对象来自下一个包含环境，直至全局执行环境。</p>
 <hr>
 <p>在下面的代码中，共有三个执行环境：全局环境、changeColor()局部环境、swapColor()局部环境。全局环境中有一个变量color和一个函数changeColor()，changeColor()局部环境中有一个变量anotherColor和一个函数swapColor()，swapColor()局部环境中有一个变量tempColor。这三个执行环境都只能通过作用域链向上搜索。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var color=&quot;blue&quot;;</div><div class="line">function changeColor()&#123;</div><div class="line">	var anotherColor=&quot;red&quot;;</div><div class="line">	function swapColor()&#123;</div><div class="line">		var tempColor=anotherColor;</div><div class="line">		anotherColor=color;</div><div class="line">		color=tempColor;</div><div class="line">	&#125;</div><div class="line">	swapColor();</div><div class="line">&#125;</div><div class="line">changeColor();</div></pre></td></tr></table></figure></p>
 <h3 id="延长作用域链"><a href="#延长作用域链" class="headerlink" title="延长作用域链"></a>延长作用域链</h3><p>虽然执行环境的类型只有全局和局部两种，但是有些语句可以在作用域链的前端临时增加一个变量对象来延长作用域链，而该变量对象会在代码执行完后被移除。下面这两种情况会发生这种现象：</p>
@@ -421,14 +423,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">php</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js01</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
@@ -437,11 +431,19 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js04</a>
+                <a href="javascript:void(0)" class="js-tag color4">php</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js01</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js03</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js04</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -469,15 +471,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js11</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Webpack</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js12</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js11</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -505,7 +507,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">js19</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js20</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -513,7 +519,7 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js19</a>
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
             
             <div class="clearfix"></div>
