@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/10 | changlesun || more than</title>
+  <title>ES中的函数表达式（二） | changlesun || more than</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="changlesun || more than">
-<meta property="og:url" content="http://yoursite.com/archives/2017/10/index.html">
+  <meta name="description" content="模仿块级作用域、私有变量。">
+<meta name="keywords" content="javascript,js21">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES中的函数表达式（二）">
+<meta property="og:url" content="http://yoursite.com/2017/10/16/js21/index.html">
 <meta property="og:site_name" content="changlesun || more than">
+<meta property="og:description" content="模仿块级作用域、私有变量。">
+<meta property="og:updated_time" content="2017-10-16T15:46:15.249Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="changlesun || more than">
+<meta name="twitter:title" content="ES中的函数表达式（二）">
+<meta name="twitter:description" content="模仿块级作用域、私有变量。">
   
     <link rel="alternative" href="/atom.xml" title="changlesun || more than" type="application/atom+xml">
   
@@ -145,36 +150,48 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-js21" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/16/js21/" class="archive-article-date">
-  	<time datetime="2017-10-16T13:58:49.510Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-16</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/16/js21/">ES中的函数表达式（二）</a>
+    <h1 class="article-title" itemprop="name">
+      ES中的函数表达式（二）
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/10/16/js21/" class="archive-article-date">
+  	<time datetime="2017-10-16T13:58:49.510Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>模仿块级作用域、私有变量。<br><a id="more"></a></p>
+<h3 id="模仿块级作用域"><a href="#模仿块级作用域" class="headerlink" title="-模仿块级作用域-"></a>-模仿块级作用域-</h3><p>JS中没有块级作用域的概念，在块语句中定义的变量，实际上是在包含函数中而非语句中创建的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function f1(count)&#123;</div><div class="line">	for(var i=0; i&lt; count; i++)&#123;</div><div class="line">		alert(i);</div><div class="line">	&#125;</div><div class="line">	alert(i);  //在其它语言中变量i只会在for循环的语句块中有定义，循环一旦结束，变量i就会被销毁</div><div class="line">		  //但在JS中，变量i是定义在f1()的活动对象中的	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以用作块级作用域的匿名函数语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(function()&#123;</div><div class="line">	......</div><div class="line">&#125;)();</div><div class="line"></div><div class="line">//将函数声明放在一对圆括号中，表示它实际上是一个函数表达式，紧随其后的另一对圆括号会立即执行这个函数</div><div class="line">//函数声明后面不能跟圆括号，函数表达式可以跟，要把函数声明转换为函数表达式，在外面给它加一对圆括号即可</div></pre></td></tr></table></figure></p>
+<p>在临时需要一些变量的时候，就可以使用私有作用域，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function f1(count)&#123;</div><div class="line">	(function()&#123;</div><div class="line">		for(var i=0; i&lt; count; i++)&#123;</div><div class="line">			alert(i);</div><div class="line">		&#125;</div><div class="line">	&#125;)();</div><div class="line">	alert(i);  //错误！函数中定义的任何变量都会在执行结束时被销毁</div></pre></td></tr></table></figure></p>
+<p>这种技术经常在全局作用域中被用在函数外部，从而限制了向全局作用域中添加过多的变量和函数。这种做法可以减少闭包占用的内存问题，因为没有指向匿名函数的引用，只要函数执行完毕，就可以立即销毁其作用域链。</p>
+<h3 id="私有变量"><a href="#私有变量" class="headerlink" title="-私有变量-"></a>-私有变量-</h3><p>JS中有一个私有变量的概念。任何在函数中定义的变量，都可以认为是私有变量，因为不能在函数的外部访问这些变量。但是函数内部的闭包可以通过作用域链访问这些变量，利用这一点，可以创建用于访问私有变量的公有方法。<br>把有权访问私有变量和私有函数的公有方法称为特权方法。有两种在对象上创建特权方法的方式，第一种是在构造函数中定义特权方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">function MyObject()&#123;</div><div class="line">	//私有变量</div><div class="line">	var a=10;</div><div class="line">	//私有函数</div><div class="line">	function  f1()&#123;</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	//特权方法</div><div class="line">	this.publicMethod=function()&#123;</div><div class="line">		a++;</div><div class="line">		return f1();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">//变量a和函数f1()只能通过特权方法publicMethod()访问，在创建MyObject的实例后，除了使用publicMethod()这一个途径，没有任何方法可以访问a和f1()</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function Person(name)&#123;</div><div class="line">	this.getName=function()&#123;</div><div class="line">		return name;</div><div class="line">	&#125;;</div><div class="line">	this.setName=function(value)&#123;</div><div class="line">		name=value;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var p1=new Person(&quot;A&quot;);</div><div class="line">alert(p1.getName());</div><div class="line">p1.setName(&quot;B&quot;);</div><div class="line">alert(p1.getName());</div><div class="line"></div><div class="line"></div><div class="line">//特权方法getName()、setName()，可以在构造函数外部使用，有权访问私有变量name，但在构造函数外部，没有任何方法可以访问name。name变量在Person的每一个实例中都不相同，因为每次调用构造函数都会重新创建这个变量</div></pre></td></tr></table></figure>
+<p>特权方法也有一个缺点，那就是必须使用构造函数模式来达到这个目的，而构造函数模式的缺点是会针对每一个实例都创建同样一组新方法。使用静态私有变量来实现特权方法可以解决这个问题。</p>
+<ul>
+<li>静态私有变量<br>通过在私有作用域中定义私有变量或函数，同样也可以创建特权方法。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">(function()&#123;</div><div class="line">	//私有变量</div><div class="line">	var a=10;</div><div class="line">	//私有函数</div><div class="line">	function f1()&#123;</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">	//构造函数</div><div class="line">	MyObject=function()&#123;&#125;;	//初始化未经声明的变量（严格模式下出错），创建出来的是全局变量，MyObject能够在私有作用域之外被访问到</div><div class="line">	//特权方法</div><div class="line">	MyObject.prototype.publicMethod=function()&#123;</div><div class="line">		a++;</div><div class="line">		return f1();</div><div class="line">	&#125;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">(function()&#123;</div><div class="line">	var name=&quot;&quot;;</div><div class="line">	Person=function(value)&#123;</div><div class="line">		name=value;</div><div class="line">	&#125;;</div><div class="line">	Person.prototype.getName=function()&#123;</div><div class="line">		return name;</div><div class="line">	&#125;;</div><div class="line">	Person.prototype.setName=function(value)&#123;</div><div class="line">		name=value;</div><div class="line">	&#125;;</div><div class="line">&#125;)();</div><div class="line"></div><div class="line">var p1=new Person(&quot;A&quot;);</div><div class="line">alert(p1.getName());  //&quot;A&quot;</div><div class="line">p1.setName(&quot;B&quot;);</div><div class="line">alert(p1.getName());  //&quot;B&quot;</div><div class="line"></div><div class="line">var p2=new Person(&quot;C&quot;);</div><div class="line">alert(p2.getName());  //&quot;C&quot;</div><div class="line">alert(p1.getName());  //&quot;C&quot;</div><div class="line"></div><div class="line"></div><div class="line">//在这种模式下，name变成了一个由所有实例共享的属性，在一个实例上调用setName()会影响所有实例。所以到底是使用实例变量还是静态私有变量，要根据具体的需求而定</div></pre></td></tr></table></figure>
+<p>多查找作用域链中的一个层次，就会在一定程度上影响查找速度，这是闭包和私有变量的一个明显不足。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -190,7 +207,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -203,232 +220,103 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/10/16/js21/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/15/js20/" class="archive-article-date">
-  	<time datetime="2017-10-15T05:26:32.123Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-15</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/15/js20/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ES中的函数表达式（一）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/15/js20/">ES中的函数表达式（一）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js20</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/14/js19/" class="archive-article-date">
-  	<time datetime="2017-10-14T11:31:25.777Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/14/js19/">ES中的OOP之继承（三）</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js19</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/14/js18/" class="archive-article-date">
-  	<time datetime="2017-10-14T09:23:26.431Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/14/js18/">ES中的OOP之继承（二）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js18</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/14/js17/" class="archive-article-date">
-  	<time datetime="2017-10-14T06:54:33.417Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/14/js17/">ES中的OOP之继承（一）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js17</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/技术//" class="article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2017/10/page/2/">2</a><a class="page-number" href="/archives/2017/10/page/3/">3</a><a class="page-number" href="/archives/2017/10/page/4/">4</a><a class="extend next" rel="next" href="/archives/2017/10/page/2/">Next &raquo;</a>
-    </nav>
+  
+
+  
+
   
 
 
@@ -452,8 +340,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
