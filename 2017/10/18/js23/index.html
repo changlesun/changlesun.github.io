@@ -8,14 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>jQuery中的Ajax | changlesun || more than</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="js23,jQuery">
+  <meta name="description" content="jQuery对Ajax操作进行了封装。在jQuery中，最底层的方法是：$.ajax()，第2层是：load()、$.get()、$.post()，第3层是：$.getScript()、$.getJSON()。">
+<meta name="keywords" content="jQuery,js23">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jQuery中的Ajax">
 <meta property="og:url" content="http://yoursite.com/2017/10/18/js23/index.html">
 <meta property="og:site_name" content="changlesun || more than">
-<meta property="og:updated_time" content="2017-10-18T02:29:31.807Z">
+<meta property="og:description" content="jQuery对Ajax操作进行了封装。在jQuery中，最底层的方法是：$.ajax()，第2层是：load()、$.get()、$.post()，第3层是：$.getScript()、$.getJSON()。">
+<meta property="og:updated_time" content="2017-10-18T05:14:56.249Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jQuery中的Ajax">
+<meta name="twitter:description" content="jQuery对Ajax操作进行了封装。在jQuery中，最底层的方法是：$.ajax()，第2层是：load()、$.get()、$.post()，第3层是：$.getScript()、$.getJSON()。">
   
     <link rel="alternative" href="/atom.xml" title="changlesun || more than" type="application/atom+xml">
   
@@ -167,7 +170,87 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>jQuery对Ajax操作进行了封装。在jQuery中，最底层的方法是：$.ajax()，第2层是：load()、$.get()、$.post()，第3层是：$.getScript()、$.getJSON()。<br><a id="more"></a></p>
+<h2 id="———第2层———"><a href="#———第2层———" class="headerlink" title="———第2层———"></a>———第2层———</h2><h3 id="load"><a href="#load" class="headerlink" title="load()"></a>load()</h3><p>load()能远程载入HTML代码并插入DOM中，语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">load(url [, data] [, callback]);</div></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数名称</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">url</td>
+<td style="text-align:center">String</td>
+<td style="text-align:center">请求HTML页面的URL地址</td>
+</tr>
+<tr>
+<td style="text-align:center">data（可选）</td>
+<td style="text-align:center">Object</td>
+<td style="text-align:center">发送至服务器的key/value数据</td>
+</tr>
+<tr>
+<td style="text-align:center">callback（可选）</td>
+<td style="text-align:center">Function</td>
+<td style="text-align:center">请求完成时的回调函数，无论请求成功或失败</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>一个例子</strong></li>
+</ul>
+<p>创建一个名为test.html的文件，主要代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;comment&quot;&gt;</div><div class="line">	&lt;h6&gt;张三&lt;/h6&gt;</div><div class="line">	&lt;p class=&quot;para&quot;&gt;沙发&lt;/p&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;div class=&quot;comment&quot;&gt;</div><div class="line">	&lt;h6&gt;李四&lt;/h6&gt;</div><div class="line">	&lt;p class=&quot;para&quot;&gt;板凳&lt;/p&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;div class=&quot;comment&quot;&gt;</div><div class="line">	&lt;h6&gt;王五&lt;/h6&gt;</div><div class="line">	&lt;p class=&quot;para&quot;&gt;地板&lt;/p&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>再建一个名为index.html的文件，主要代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;input type=&quot;button&quot; id=&quot;send&quot; value=&quot;Ajax获取&quot;&gt;</div><div class="line">&lt;div class=&quot;comment&quot;&gt;已有评论：&lt;/div&gt;</div><div class="line">&lt;div id=&quot;resText&quot;&gt;&lt;/div&gt;</div><div class="line"></div><div class="line"></div><div class="line">//id为&quot;send&quot;的button按钮用来触发Ajax事件</div><div class="line">//id为&quot;resText&quot;的元素用来追加显示HTML的内容</div></pre></td></tr></table></figure></p>
+<p>编写jQuery，主要代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	$(&quot;#send&quot;).click(function()&#123;</div><div class="line">		$(&quot;#resText&quot;).load(&quot;test.html&quot;);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>筛选载入的HTML文档，比如只需要加载test.html页面中class为”para”的内容，主要代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&quot;#resText&quot;).load(&quot;test.html .para&quot;);</div></pre></td></tr></table></figure></p>
+<p>load()方法的传递方式根据参数data来自动指定。如果没有参数，采用GET方式；如果有参数，自动转换为POST方式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//GET</div><div class="line">$(&quot;#resText&quot;).load(&quot;test.php&quot;, function()&#123;</div><div class="line">	...</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//POST</div><div class="line">$(&quot;#resText&quot;).load(&quot;test.php&quot;, &#123;name: &quot;A&quot;, age: &quot;21&quot;&#125;,  function()&#123;</div><div class="line">	...</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>请求完成时执行的回调函数有3个参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$(&quot;#resText&quot;).load(&quot;test.html&quot;, function(responseText, textStatus, XMLHttpRequest)&#123;</div><div class="line">	......</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//responseText：请求返回的内容</div><div class="line">//textStatus：请求状态（success、error、notmodified、timeout）</div><div class="line">//XMLHttpRequest：XMLHttpRequest对象</div><div class="line"></div><div class="line">//无论Ajax请求是否成功，只要请求完成，该函数就会被触发</div></pre></td></tr></table></figure></p>
+<p>load()方法通常用来从web服务器上获取静态的数据文件，然而这并不能体现Ajax的全部价值。如果要传递一些参数给服务器中的页面，那么可以使用$.get()、$.post()。</p>
+<h3 id="get"><a href="#get" class="headerlink" title="$.get()"></a>$.get()</h3><p>$.get()使用GET方式进行异步请求。语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$.get(url [,data] [,callback] [,type]);</div></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数名称</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">url</td>
+<td style="text-align:center">String</td>
+<td style="text-align:center">请求HTML页面的URL地址</td>
+</tr>
+<tr>
+<td style="text-align:center">data（可选）</td>
+<td style="text-align:center">Object</td>
+<td style="text-align:center">发送至服务器的key/value数据会作为QueryString附加到请求URL中</td>
+</tr>
+<tr>
+<td style="text-align:center">callback（可选）</td>
+<td style="text-align:center">Function</td>
+<td style="text-align:center">载入成功时回调函数（只有当Response的状态是success才调用该方法）自动将请求结果和状态传递给该方法</td>
+</tr>
+<tr>
+<td style="text-align:center">type（可选）</td>
+<td style="text-align:center">String</td>
+<td style="text-align:center">服务器返回内容的格式，包括xml、html、script、json、text、_default</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>一个例子</strong></li>
+</ul>
+<p>编写一段HTML代码，主要如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;form id=&quot;form1&quot; action=&quot;#&quot;&gt;</div><div class="line">	&lt;p&gt;评论：&lt;/p&gt;</div><div class="line">	&lt;p&gt;姓名：&lt;input type=&quot;text&quot; name=&quot;username&quot; id=&quot;username&quot;&gt;&lt;/p&gt;</div><div class="line">	&lt;p&gt;内容：&lt;textarea type=&quot;text&quot; name=&quot;content&quot; id=&quot;content&quot; rows=&quot;2&quot; cols=&quot;20&quot;&gt;&lt;/textarea&gt;&lt;/p&gt;</div><div class="line">	&lt;p&gt;&lt;input type=&quot;button&quot; id=&quot;send&quot; value=&quot;提交&quot;&gt;&lt;/p&gt;</div><div class="line">&lt;/form&gt;</div><div class="line">&lt;div class=&quot;comment&quot;&gt;</div><div class="line">	已有评论：&lt;div id=&quot;resText&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>获取“姓名”、“内容”的值作为data参数传递给后台：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	$(&quot;#send&quot;).click(function()&#123;</div><div class="line">		$.get(&quot;get1.php&quot;, &#123;</div><div class="line">			username: $(&quot;#username&quot;).val(),</div><div class="line">			content: $(&quot;#content&quot;).val()</div><div class="line">		&#125;,回调函数);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>回调函数将返回的数据显示到页面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function(data, textStatus)&#123;</div><div class="line">	......</div><div class="line">&#125;</div><div class="line"></div><div class="line">//回调函数只有两个参数：</div><div class="line">//data：返回的内容，可以是XML文档、JSON文件、HTML片段等</div><div class="line">//textStatus：请求状态：sucess、error、notmodified、timeout</div><div class="line"></div><div class="line">//回调函数只有数据成功返回（sucess）后才能被调用</div></pre></td></tr></table></figure></p>
+<p>服务器返回的数据格式有多种：<br>1.HTML片段<br>对于HTML片段，不需要处理就可以将新的HTML数据插入到主页面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	$(&quot;#send&quot;).click(function()&#123;</div><div class="line">		$.get(&quot;get1.php&quot;, &#123;</div><div class="line">			username: $(&quot;#username&quot;).val(),</div><div class="line">			content: $(&quot;#content&quot;).val()</div><div class="line">		&#125;,function(data, textStatus)&#123;</div><div class="line">			$(&quot;#resText&quot;).html(data);</div><div class="line">		&#125;);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//看起来只需要很少的代码，但HTML片段这种固定的数据结构不一定能在其它的Web应用程序中得到重用</div></pre></td></tr></table></figure></p>
+<p>2.XML文档<br>处理XML文档与处理HTML文档一样，也可以使用常规的attr()、find()、filter()以及其它方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	$(&quot;#send&quot;).click(function()&#123;</div><div class="line">		$.get(&quot;get1.php&quot;, &#123;</div><div class="line">			username: $(&quot;#username&quot;).val(),</div><div class="line">			content: $(&quot;#content&quot;).val()</div><div class="line">		&#125;,function(data, textStatus)&#123;</div><div class="line">			var username=$(data).find(&quot;comment&quot;).attr(&quot;username&quot;);</div><div class="line">			var content=$(data).find(&quot;comment content&quot;).text();</div><div class="line">			var txtHtml=&quot;&lt;div class=&apos;comment&apos;&gt;&lt;h6&gt;&apos;+username+&apos;：&lt;/h6&gt;&lt;p class=&apos;para&apos;&gt;&apos;+content+&apos;&lt;/p&gt;&lt;/div&gt;&quot;;</div><div class="line">			$(&quot;#resText&quot;).html(txtHtml);</div><div class="line">		&#125;);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//虽然实现起来要稍微复杂一些，但是XML文档的可移植性是其它数据格式无法比拟的，重用性很高</div><div class="line">//XML文档体积相对较大，解析和操作的速度要慢一些</div></pre></td></tr></table></figure></p>
+<p>3.JSON文件<br>之所以会出现这种文件很大程度上是因为XML文档体积大和难以解析。JSON文件和XML文档一样，也可以方便的被重用，且简洁、易阅读。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	$(&quot;#send&quot;).click(function()&#123;</div><div class="line">		$.get(&quot;get1.php&quot;, &#123;</div><div class="line">			username: $(&quot;#username&quot;).val(),</div><div class="line">			content: $(&quot;#content&quot;).val()</div><div class="line">		&#125;,function(data, textStatus)&#123;</div><div class="line">			var username=data.username;</div><div class="line">			var content=data.content;</div><div class="line">			var txtHtml=&quot;&lt;div class=&apos;comment&apos;&gt;&lt;h6&gt;&apos;+username+&apos;：&lt;/h6&gt;&lt;p class=&apos;para&apos;&gt;&apos;+content+&apos;&lt;/p&gt;&lt;/div&gt;&quot;;</div><div class="line">			$(&quot;#resText&quot;).html(txtHtml);</div><div class="line">		&#125;, &quot;json&quot;);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//在不远的将来，新版JS中的XML将会和JSON一样容易解析，到时候通用且容易解析的XML将会成为主流，但在此之前，JSON依然有很强的生命力</div></pre></td></tr></table></figure></p>
+<p>基于以上3种数据格式的优缺点，可以得知：（1）在不需要与其它应用程序共享数据时，使用XML片段最简单；（2)数据需要重用，JSON是不错的格式，它在性能和文件大小方面具有优势；（3）当远程应用程序未知时，XML是明智的选择，它是Web服务领域的“世界语”。</p>
+<h3 id="post"><a href="#post" class="headerlink" title="$.post()"></a>$.post()</h3>
       
 
       
@@ -180,11 +263,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js23</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">jQuery</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">jQuery</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js23</a>
         		</li>
       		
 		</ul>
@@ -389,6 +472,14 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js02</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">php</a>
               </li>
              
@@ -397,19 +488,7 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js03</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js02</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js04</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -417,11 +496,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js06</a>
+                <a href="javascript:void(0)" class="js-tag color5">js04</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js08</a>
+                <a href="javascript:void(0)" class="js-tag color5">js06</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -429,7 +508,19 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js08</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js09</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js10</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js11</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -441,14 +532,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js09</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js11</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
@@ -457,15 +540,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js15</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js14</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js16</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js15</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -493,15 +576,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js23</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
             
             <div class="clearfix"></div>
