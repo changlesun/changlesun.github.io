@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: js06 | changlesun || more than</title>
+  <title>javascript中的Ajax | changlesun || more than</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="changlesun || more than">
-<meta property="og:url" content="http://yoursite.com/tags/js06/index.html">
+  <meta name="description" content="Ajax(Asynchronous JavaScript and XML)，是Web应用开发的一座里程碑，这种技术无需刷新页面就能够从服务器取得额外的数据。">
+<meta name="keywords" content="javascript,js22">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript中的Ajax">
+<meta property="og:url" content="http://yoursite.com/2017/10/17/js22/index.html">
 <meta property="og:site_name" content="changlesun || more than">
+<meta property="og:description" content="Ajax(Asynchronous JavaScript and XML)，是Web应用开发的一座里程碑，这种技术无需刷新页面就能够从服务器取得额外的数据。">
+<meta property="og:updated_time" content="2017-10-18T02:18:50.927Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="changlesun || more than">
+<meta name="twitter:title" content="javascript中的Ajax">
+<meta name="twitter:description" content="Ajax(Asynchronous JavaScript and XML)，是Web应用开发的一座里程碑，这种技术无需刷新页面就能够从服务器取得额外的数据。">
   
     <link rel="alternative" href="/atom.xml" title="changlesun || more than" type="application/atom+xml">
   
@@ -145,36 +150,121 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-js22" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/09/js06/" class="archive-article-date">
-  	<time datetime="2017-10-09T07:26:12.069Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-09</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/09/js06/">ES中的引用类型之Array类型</a>
+    <h1 class="article-title" itemprop="name">
+      javascript中的Ajax
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/10/17/js22/" class="archive-article-date">
+  	<time datetime="2017-10-17T08:11:15.293Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Ajax(Asynchronous JavaScript and XML)，是Web应用开发的一座里程碑，这种技术无需刷新页面就能够从服务器取得额外的数据。<br><a id="more"></a></p>
+<h3 id="Ajax的优势"><a href="#Ajax的优势" class="headerlink" title="Ajax的优势"></a>Ajax的优势</h3><p>1.不需要插件支持，就可以被绝大多数浏览器支持。<br>2.能在不刷新整个页面的前提下更新数据，能更为迅速地回应用户的操作。<br>3.提高了web程序的性能，Ajax通过XMLHttpRequest对象，只向服务器提交需要提交的数据，即按需发送。<br>4.减轻了服务器和带宽的负担，Ajax的工作原理相当于在用户和服务器之间加了一个中间层，使用户操作与服务器响应异步化。它在客户端创建Ajax引擎，把传统方式下一些服务器端需要负担的工作转移到客户端，便于客户端资源来处理，减轻了服务器和带宽的负担。</p>
+<h3 id="创建XMLHttpRequest对象"><a href="#创建XMLHttpRequest对象" class="headerlink" title="创建XMLHttpRequest对象"></a>创建XMLHttpRequest对象</h3><p>XMLHttpRequest对象是Ajax的核心，发送异步请求、接收响应、执行回调都通过它来完成。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function creatXHR()&#123;</div><div class="line">	if(window.ActiveXObject)&#123;</div><div class="line">		return new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);  //针对IE7之前的版本</div><div class="line">	&#125;else if(window.XMLHttpRequest)&#123;</div><div class="line">		return new XMLHttpRequest(); </div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">var xhr=createXHR();</div></pre></td></tr></table></figure></p>
+<h3 id="xhr的用法"><a href="#xhr的用法" class="headerlink" title="xhr的用法"></a>xhr的用法</h3><p><strong><em>open()</em></strong> 方法，接收三个参数：要发送的请求的类型、请求的URL、表示是否异步发送请求的布尔值。<br>注意：URL是相对于执行代码的当前页面（也可以使用绝对路径）。open()并不是真正发送请求，而是启动一个请求以备发送。<br>注意：由于同源策略，只能向同一个域中使用相同端口和协议的URL发送请求。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.open(&quot;get&quot;, &quot;example.php&quot;, false);</div></pre></td></tr></table></figure></p>
+<p><strong><em>send()</em></strong> 方法，接收一个参数，即要作为请求主体发送的数据，如果不需要发送数据也要传入null。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.send(null);</div></pre></td></tr></table></figure></p>
+<p>调用请求后请求就会被分配到服务器，由于这次请求是同步的<code>xhr.open(&quot;get&quot;, &quot;example.php&quot;, false)</code>，JS代码会等到服务器响应之后再继续执行。<br>在收到服务器的响应后，响应的数据会自动填充XHR对象的属性，相关的属性简介如下：</p>
+<blockquote>
+<ul>
+<li>responseText: 作为响应主体被返回的文本。</li>
+<li>responseXML: 如果响应的内容类型是“text/xml”或“application/xml”，这个属性中将保存着响应数据的XML DOM文档。</li>
+<li>status: 响应的HTTP状态。</li>
+<li>statusText: HTTP状态的说明。</li>
+</ul>
+</blockquote>
+<p>在接收到响应之后，第一步是检查 <strong><em>status</em></strong> 属性，以确定响应已经成功返回。状态码200代表成功，此时responseText属性的内容已经准备就绪，在内容正确的情况下，responseXML也可以被访问了（对于非XML的数据而言，responseText为null）。状态码304，表示请求的资源并没有被修改，可以直接使用浏览器中缓存的版本，这也意味着响应是有效的。<br>检查如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if((xhr.status&gt;=200 &amp;&amp; xhr.status&lt;300) || xhr.status==304)&#123;</div><div class="line">	alert(xhr.responseText);</div><div class="line">&#125;else&#123;</div><div class="line">	alert(&quot;error: &quot;+xhr.status);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在多数情况下还是要发送异步请求<code>xhr.open(&quot;get&quot;, &quot;example.php&quot;, true)</code>，才能让JS继续执行而不必等待。此时可以检测XHR对象的 <strong><em>readyState</em></strong> 属性，该属性表示请求/响应过程的当前活动阶段。这个属性可取值如下：</p>
+<blockquote>
+<ul>
+<li>0:未初始化。尚未调用open()。</li>
+<li>1：启动。调用了open()，还未调用send()。</li>
+<li>2：发送。调用了send()，还未接收到服务器的响应。</li>
+<li>3：接收。已经接收到部分响应数据。</li>
+<li>4：完成。已经接收到全部响应数据，而且已经可以在客户端使用了。</li>
+</ul>
+</blockquote>
+<p>只要readySate属性从一个值变成另一个，都会触发一次 <strong><em>readystatechange</em></strong> 事件，可以利用这个事件来检测每次状态后的变化，但我们只关心值为4的阶段，因为这时所有的数据已准备就绪。<br>但是，在调用open()之前指定readystatechange事件处理程序，才能确保跨浏览器兼容性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var xhr=createXHR();</div><div class="line">xhr.onreadystatechange=function()&#123;</div><div class="line">	if(xhr.readyState==4)&#123;</div><div class="line">		if((xhr.status&gt;=200 &amp;&amp; xhr.status&lt;300) || xhr.status==304)&#123;</div><div class="line">			alert(xhr.responseText);</div><div class="line">		&#125;else&#123;</div><div class="line">			alert(&quot;error: &quot;+xhr.status);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line">xhr.open(&quot;get&quot;, &quot;example.php&quot;, true);</div><div class="line">xhr.send(null);</div><div class="line"></div><div class="line"></div><div class="line">//利用DOM0级方法为对象添加事件处理程序，因为并非所有的浏览器都支持DOM2级方法。而且这里没有向onreadystatechange事件处理程序中传递event对象，必须通过XHR对象本身确定下一步该怎么做。</div></pre></td></tr></table></figure></p>
+<p>在接收到响应之前，可以调用 <strong><em>abort()</em></strong> 来取消异步请求。调用这个方法后，XHR对象会停止触发事件，也不再允许访问任何与响应有关的对象属性。在终止请求之后，还应该对XHR对象进行解引用操作。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.abort();</div></pre></td></tr></table></figure></p>
+<h3 id="HTTP头部信息"><a href="#HTTP头部信息" class="headerlink" title="HTTP头部信息"></a>HTTP头部信息</h3><p>每个HTTP请求和响应都会带有相应的头部信息，其中有的对开发人员有用，有的无用。<br>在发送XHR请求的同时还会发送下列头部信息：</p>
+<blockquote>
+<ul>
+<li>Accept：浏览器能够处理的内容类型。</li>
+<li>Accept-Charset：浏览器能够显示的字符集。</li>
+<li>Accept-Encoding：浏览器能够处理的压缩编码。</li>
+<li>Accept-Language：浏览器当前设置的语言。</li>
+<li>Connection：浏览器与服务器之间连接的类型。</li>
+<li>Cookie：当前页面设置的任何Cookie。</li>
+<li>Host：发出请求的页面所在的域。</li>
+<li>Referer：发出请求的页面的URI。</li>
+<li>User-Agent：浏览器的用户代理字符串。</li>
+</ul>
+</blockquote>
+<p><strong><em>setRequestHeader()</em></strong> 可以设置自定义的请求头部信息，接收两个参数：头部字段的名称、头部字段的值。这个方法必须放在open()、send()之间。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var xhr=createXHR();</div><div class="line">xhr.onreadystatechange=function()&#123;</div><div class="line">	if(xhr.readyState==4)&#123;</div><div class="line">		if((xhr.status&gt;=200 &amp;&amp; xhr.status&lt;300) || xhr.status==304)&#123;</div><div class="line">			alert(xhr.responseText);</div><div class="line">		&#125;else&#123;</div><div class="line">			alert(&quot;error: &quot;+xhr.status);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line">xhr.open(&quot;get&quot;, &quot;example.php&quot;, true);</div><div class="line">xhr.setRequestHeader(&quot;MyHeader&quot;, &quot;MyValue&quot;);</div><div class="line">xhr.send(null);</div></pre></td></tr></table></figure></p>
+<p>调用XHR对象的<strong><em>getResponseHeader()</em></strong> ，并传入头部字段名称，可以取得相应的响应头部信息。调用XHR对象的 <strong><em>getAllResponseHeaders()</em></strong> 则可以取得一个包含所有头部信息的长字符串。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var myHeader=xhr.getResponseHeader();</div><div class="line">var allHeaders=xhr.getAllResponseHeaders();</div></pre></td></tr></table></figure></p>
+<h3 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h3><p>GET，最常用于向服务器查询某些信息，必要时，可以将查询字符串参数追加到URL末尾，以便将信息发送给服务器。<br>对XHR而言，传入末尾的查询字符串必须经过正确的编码才行，用 <strong><em>encodeURIComponent()</em></strong> 进行编码，所有名-值对必须由&amp;分割。</p>
+<p>例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.open(&quot;get&quot;, &quot;example.php?name1=value1&amp;name2=value2&quot;, true);</div></pre></td></tr></table></figure></p>
+<p>辅助函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function addURLParam(url, name, value)&#123;</div><div class="line">	url+=(url.indexOf(&quot;?&quot;)==-1 ? &quot;?&quot; : &quot;&amp;&quot;);</div><div class="line">	url+=encodeURIComponent(name)+&quot;=&quot;+encodeURIComponent(value);</div><div class="line">	return url;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//确保查询字符串的格式良好</div></pre></td></tr></table></figure></p>
+<p>最终：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var url=&quot;example.php&quot;;</div><div class="line"></div><div class="line">//添加参数</div><div class="line">url=addURLParam(url, &quot;name&quot;, &quot;A&quot;);</div><div class="line">url=addURLParam(url, &quot;book&quot;, &quot;B&quot;);</div><div class="line"></div><div class="line">//初始化请求</div><div class="line">xhr.open(&quot;get&quot;, url, false);</div></pre></td></tr></table></figure></p>
+<h3 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h3><p>POST，用于向服务器发送应该被保存的数据，把数据作为请求的主体提交，请求的主体可以包含非常多的数据，而且格式不限。</p>
+<p>首先：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.open(&quot;post&quot;, &quot;example.php&quot;, false);</div></pre></td></tr></table></figure></p>
+<p>再向send()传入某些数据。<br>默认情况下，服务器对POST请求和提交web表单请求并不会一视同仁，服务器端必须有程序来读取发送过来的原始数据，并从中解析出有用的部分。<br>可以使用XHR来模仿表单提交：首先将Content-Type头部信息设置为application/x-www-form-urlencode，也就是表单提交时的内容类型，其次是以一个适当的格式创建一个字符串，可以用seialize()来创建这个字符串，将表单中的数据进行序列化，最后通过XHR发送到服务器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">function submitData()&#123;</div><div class="line">	var xhr=createXHR();</div><div class="line">	xhr.onreadystatechange=function()&#123;</div><div class="line">		if(xhr.readyState==4)&#123;</div><div class="line">			if((xhr.status&gt;=200 &amp;&amp; xhr.status&lt;300) || xhr.status==304)&#123;</div><div class="line">				alert(xhr.responseText);</div><div class="line">			&#125;else&#123;</div><div class="line">				alert(&quot;error: &quot;+xhr.status);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">	xhr.open(&quot;post&quot;, &quot;postexample.php&quot;, false);</div><div class="line">	xhr.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencode&quot;);</div><div class="line">	var form=document.getElementById(&quot;user-info&quot;);</div><div class="line">	xhr.send(serialize(form));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>postexample.php就可以通过$_POST取得提交的数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">	header(&quot;Content-Type: text/plain&quot;);</div><div class="line">	echo &lt;&lt;&lt;EOF</div><div class="line">	Name: ($_POST[&apos;user-name&apos;])</div><div class="line">	Email: ($_POST[&apos;user-eamil&apos;])</div><div class="line">	EOF;</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
+<p>如果不设置Content-Type头部信息，那么发送给服务器的数据就不会出现在$_POST超级全局变量中。这时要访问同样的数据，就得借助$HTTP_RAW_POST_DATA。</p>
+<h3 id="XMLHttpRequest2级"><a href="#XMLHttpRequest2级" class="headerlink" title="XMLHttpRequest2级"></a>XMLHttpRequest2级</h3><p>XMLHttpRequest2级进一步发展了XHR，但并非所有浏览器都完整实现了2级规范，但所有浏览器都实现了它规定的部分内容。</p>
+<ul>
+<li><strong>FormData</strong></li>
+</ul>
+<p>FormData类型为序列化表单以及创建与表单格式相同的数据提供了便利。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var data=new FormData();</div><div class="line">data.append(&quot;name&quot;, &quot;A&quot;);</div></pre></td></tr></table></figure></p>
+<p>append()接收两个参数：键、值，分别对应表单字段的名字，和名字中包含的值。也可以用表单元素的数据预先向其中填入键值对。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var data=new FormData(document.forms[0]);</div></pre></td></tr></table></figure></p>
+<p>使用FormData的方便之处在于不必明确地在XHR对象上设置请求头部信息，创建了FormData实例后，可以将它直接传给XHR的send()方法，XHR对象能够识别传入的数据类型是FormData的实例，并配置适当的头部信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xhr.open(&quot;post&quot;, &quot;postexample.php&quot;, false);</div><div class="line">var form=document.getElementById(&quot;user-info&quot;);</div><div class="line">xhr.send(new FormData(form));</div></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>超时设定</strong></li>
+</ul>
+<p>IE8（目前仍然只有IE8+支持）为XHR对象添加了一个timeout属性，表示请求在等待多少毫秒之后就终止。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">var xhr=createXHR();</div><div class="line">xhr.onreadystatechange=function()&#123;</div><div class="line">	if(xhr.readyState==4)&#123;</div><div class="line">		//请求终止时，readyState可能已经变为4，这意味着会调用onreadystatechange事件处理程序</div><div class="line">		//但是请求终止时再访问status属性会导致错误，因此可以将检查status属性的语句封装在一个try-catch语句块中</div><div class="line">		try&#123;</div><div class="line">			if((xhr.status&gt;=200 &amp;&amp; xhr.status&lt;300) || xhr.status==304)&#123;</div><div class="line">				alert(xhr.responseText);</div><div class="line">			&#125;else&#123;</div><div class="line">				alert(&quot;error: &quot;+xhr.status);</div><div class="line">			&#125;</div><div class="line">		&#125;catch(ex)&#123;</div><div class="line">			//假设由ontimeout事件处理程序处理</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line">xhr.open(&quot;get&quot;, &quot;postexample.php&quot;, false);</div><div class="line"> //将超时设置为1秒钟，1秒钟后请求终止</div><div class="line">xhr.timeout=1000; </div><div class="line">//请求终止时调用事件处理程序</div><div class="line">xhr.ontimeout=function()&#123;</div><div class="line">	alert(&quot;Request did not return in a second&quot;);</div><div class="line">&#125;;</div><div class="line">xhr.send(null);</div></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>overrideMimeType()</strong></li>
+</ul>
+<p>overrideMimeType()，用于重写XHR响应的MIME类型。<br>比如服务器返回的数据中实际包含的是XML，但响应类型却是text/plain，这导致responseXML属性仍是null。而响应类型决定了XHR如何处理数据。overrideMimeType()可以保证把响应当做XML而非纯文本处理。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var xhr=createXHR();</div><div class="line">xhr.open(&quot;get&quot;, &quot;example.php&quot;, true);</div><div class="line">xhr.overrideMimeType(&quot;text/xml&quot;);  //必须位于send()之前，才能保证重写响应的MIME类型</div><div class="line">xhr.send(null);</div></pre></td></tr></table></figure></p>
+<h3 id="进度事件"><a href="#进度事件" class="headerlink" title="进度事件"></a>进度事件</h3><p>Progress Events规范是W3C的一个草案，定义了与客户端服务器通信的有关事件。这些事件最早只针对XHR对象，但目前也被其他API借鉴。有以下6个进度事件：</p>
+<blockquote>
+<ul>
+<li>loadstart：在接收到响应数据第一个字节时触发。</li>
+<li>progress：在接收响应期间持续不断地触发。</li>
+<li>error：在请求发生错误时触发。</li>
+<li>abort：在因为调用absort()而终止连接时触发。</li>
+<li>load：在接收到完整的响应数据时触发。</li>
+<li>loadend：在通信完成，或者触发error、absort、load事件后触发。</li>
+</ul>
+</blockquote>
+<p>每个请求都从loadstart事件开始，接下来是一个或多个progress事件，然后触发error、absort、load中的一个，最后以触发loadend事件结束。<br>支持前5个事件的浏览器有：Firefox3.5+、Safari4+、Chrome、IOS版Safari、Android版WebKit、Opera从第11版开始、IE8+只支持load事件。目前还没有浏览器支持loadend事件。</p>
+<ul>
+<li><strong>load事件</strong></li>
+</ul>
+<p>Firefox实现引入了load事件，用以替代readystate事件，因为响应接收完毕后将会触发load事件，也就没有必要去检查readyState属性了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var xhr=creatXHR();</div><div class="line">xhr.onload=function()&#123;</div><div class="line">	if((xhr.status&gt;=200 &amp;&amp; xhr.status&lt;300) || xhr.status==304)&#123;</div><div class="line">		alert(xhr.responseText);</div><div class="line">	&#125;else&#123;</div><div class="line">		alert(&quot;error: &quot;+xhr.status);</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line">xhr.open(&quot;get&quot;, &quot;example.php&quot;, true);</div><div class="line">xhr.send(null);</div><div class="line"></div><div class="line"></div><div class="line">//onload事件处理程序会接收到一个event对象，其target属性就指向XHR对象实例，因而可以访问XHR对象所有属性和方法。然而，并非所有浏览器都为这个事件实现了适当的对象，结果，开发人员还是要被迫使用XHR对象变量</div><div class="line">//只要浏览器接收到服务器的响应，不管其状态如何，都会触发load事件，这意味着必须要检测status属性，才能确定数据是否已经真的可用</div></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>progress事件</strong></li>
+</ul>
+<p>Mozilla添加了progress事件，该事件会在浏览器接收新数据期间被周期性地触发。<br>onprogress事件处理程序会接收到一个event对象，其target属性是XHR对象，但event对象包含额外3个属性：lengthComputable（进度信息是否可用的布尔值）、position（已经接收的字节数）、totalSize（根据Content-Length响应头部确定的预期字节数）。<br>为用户创建一个进度指示器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">```</div><div class="line">var xhr=creatXHR();</div><div class="line">xhr.onload=function()&#123;</div><div class="line">	if((xhr.status&gt;=200 &amp;&amp; xhr.status&lt;300) || xhr.status==304)&#123;</div><div class="line">		alert(xhr.responseText);</div><div class="line">	&#125;else&#123;</div><div class="line">		alert(&quot;error: &quot;+xhr.status);</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line">xhr.onprogress=function()&#123;</div><div class="line">	var divStatus=document.getElementById(&quot;status&quot;);</div><div class="line">	if(event.lengthComputable)&#123;</div><div class="line">		divStatus.innerHTML=&quot;Received&quot;+event.position+&quot;of&quot;+event.totalSize+&quot; bytes&quot;;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line">xhr.open(&quot;get&quot;, &quot;example.php&quot;, true);</div><div class="line">xhr.send(null);</div></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -184,13 +274,13 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js06</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js22</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -203,17 +293,113 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/10/17/js22/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/10/18/js23/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          jQuery中的Ajax
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/10/16/js21/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ES中的函数表达式（二）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -236,9 +422,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

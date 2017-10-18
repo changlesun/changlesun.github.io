@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/10/16/js21/index.html">
 <meta property="og:site_name" content="changlesun || more than">
 <meta property="og:description" content="模仿块级作用域、私有变量。">
-<meta property="og:updated_time" content="2017-10-16T15:46:15.249Z">
+<meta property="og:updated_time" content="2017-10-17T08:09:43.909Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES中的函数表达式（二）">
 <meta name="twitter:description" content="模仿块级作用域、私有变量。">
@@ -173,8 +173,8 @@
         <p>模仿块级作用域、私有变量。<br><a id="more"></a></p>
 <h3 id="模仿块级作用域"><a href="#模仿块级作用域" class="headerlink" title="-模仿块级作用域-"></a>-模仿块级作用域-</h3><p>JS中没有块级作用域的概念，在块语句中定义的变量，实际上是在包含函数中而非语句中创建的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function f1(count)&#123;</div><div class="line">	for(var i=0; i&lt; count; i++)&#123;</div><div class="line">		alert(i);</div><div class="line">	&#125;</div><div class="line">	alert(i);  //在其它语言中变量i只会在for循环的语句块中有定义，循环一旦结束，变量i就会被销毁</div><div class="line">		  //但在JS中，变量i是定义在f1()的活动对象中的	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>可以用作块级作用域的匿名函数语法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(function()&#123;</div><div class="line">	......</div><div class="line">&#125;)();</div><div class="line"></div><div class="line">//将函数声明放在一对圆括号中，表示它实际上是一个函数表达式，紧随其后的另一对圆括号会立即执行这个函数</div><div class="line">//函数声明后面不能跟圆括号，函数表达式可以跟，要把函数声明转换为函数表达式，在外面给它加一对圆括号即可</div></pre></td></tr></table></figure></p>
-<p>在临时需要一些变量的时候，就可以使用私有作用域，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function f1(count)&#123;</div><div class="line">	(function()&#123;</div><div class="line">		for(var i=0; i&lt; count; i++)&#123;</div><div class="line">			alert(i);</div><div class="line">		&#125;</div><div class="line">	&#125;)();</div><div class="line">	alert(i);  //错误！函数中定义的任何变量都会在执行结束时被销毁</div></pre></td></tr></table></figure></p>
-<p>这种技术经常在全局作用域中被用在函数外部，从而限制了向全局作用域中添加过多的变量和函数。这种做法可以减少闭包占用的内存问题，因为没有指向匿名函数的引用，只要函数执行完毕，就可以立即销毁其作用域链。</p>
+<p>在临时需要一些变量的时候，就可以使用私有作用域，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function f1(count)&#123;</div><div class="line">	(function()&#123;</div><div class="line">		for(var i=0; i&lt; count; i++)&#123;</div><div class="line">			alert(i);</div><div class="line">		&#125;</div><div class="line">	&#125;)();</div><div class="line">	alert(i);  //错误！函数中定义的任何变量都会在执行结束时被销毁</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这种做法可以减少闭包占用的内存问题，因为没有指向匿名函数的引用，只要函数执行完毕，就可以立即销毁其作用域链。<br>这种技术经常在全局作用域中被用在函数外部，从而限制了向全局作用域中添加过多的变量和函数。</p>
 <h3 id="私有变量"><a href="#私有变量" class="headerlink" title="-私有变量-"></a>-私有变量-</h3><p>JS中有一个私有变量的概念。任何在函数中定义的变量，都可以认为是私有变量，因为不能在函数的外部访问这些变量。但是函数内部的闭包可以通过作用域链访问这些变量，利用这一点，可以创建用于访问私有变量的公有方法。<br>把有权访问私有变量和私有函数的公有方法称为特权方法。有两种在对象上创建特权方法的方式，第一种是在构造函数中定义特权方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">function MyObject()&#123;</div><div class="line">	//私有变量</div><div class="line">	var a=10;</div><div class="line">	//私有函数</div><div class="line">	function  f1()&#123;</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	//特权方法</div><div class="line">	this.publicMethod=function()&#123;</div><div class="line">		a++;</div><div class="line">		return f1();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">//变量a和函数f1()只能通过特权方法publicMethod()访问，在创建MyObject的实例后，除了使用publicMethod()这一个途径，没有任何方法可以访问a和f1()</div></pre></td></tr></table></figure></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function Person(name)&#123;</div><div class="line">	this.getName=function()&#123;</div><div class="line">		return name;</div><div class="line">	&#125;;</div><div class="line">	this.setName=function(value)&#123;</div><div class="line">		name=value;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var p1=new Person(&quot;A&quot;);</div><div class="line">alert(p1.getName());</div><div class="line">p1.setName(&quot;B&quot;);</div><div class="line">alert(p1.getName());</div><div class="line"></div><div class="line"></div><div class="line">//特权方法getName()、setName()，可以在构造函数外部使用，有权访问私有变量name，但在构造函数外部，没有任何方法可以访问name。name变量在Person的每一个实例中都不相同，因为每次调用构造函数都会重新创建这个变量</div></pre></td></tr></table></figure>
 <p>特权方法也有一个缺点，那就是必须使用构造函数模式来达到这个目的，而构造函数模式的缺点是会针对每一个实例都创建同样一组新方法。使用静态私有变量来实现特权方法可以解决这个问题。</p>
@@ -184,6 +184,18 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">(function()&#123;</div><div class="line">	var name=&quot;&quot;;</div><div class="line">	Person=function(value)&#123;</div><div class="line">		name=value;</div><div class="line">	&#125;;</div><div class="line">	Person.prototype.getName=function()&#123;</div><div class="line">		return name;</div><div class="line">	&#125;;</div><div class="line">	Person.prototype.setName=function(value)&#123;</div><div class="line">		name=value;</div><div class="line">	&#125;;</div><div class="line">&#125;)();</div><div class="line"></div><div class="line">var p1=new Person(&quot;A&quot;);</div><div class="line">alert(p1.getName());  //&quot;A&quot;</div><div class="line">p1.setName(&quot;B&quot;);</div><div class="line">alert(p1.getName());  //&quot;B&quot;</div><div class="line"></div><div class="line">var p2=new Person(&quot;C&quot;);</div><div class="line">alert(p2.getName());  //&quot;C&quot;</div><div class="line">alert(p1.getName());  //&quot;C&quot;</div><div class="line"></div><div class="line"></div><div class="line">//在这种模式下，name变成了一个由所有实例共享的属性，在一个实例上调用setName()会影响所有实例。所以到底是使用实例变量还是静态私有变量，要根据具体的需求而定</div></pre></td></tr></table></figure>
 <p>多查找作用域链中的一个层次，就会在一定程度上影响查找速度，这是闭包和私有变量的一个明显不足。</p>
+<ul>
+<li>模块模式<br>模块模式是来为单例（只有一个实例的对象）创建私有变量和特权方法的。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var f=function()&#123;</div><div class="line">	var privateVariable=10;</div><div class="line">	function privateFunction()&#123;</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">	return &#123;</div><div class="line">		publicVariable: true,</div><div class="line">		publicFunction: function()&#123;</div><div class="line">			a++;</div><div class="line">			return f1();</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line">&#125;();</div><div class="line"></div><div class="line"></div><div class="line">//这种模块模式使用了一个返回对象的匿名函数。在这个函数内部定义了私有变量和函数，将一个对象字面量作为返回。被返回的对象字面量中只包含可以公开的方法和属性，而对象是在匿名函数内部定义的，它的公有方法有权访问私有变量和函数</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这种模式在需要对单例进行某些初始化，而又需要维护其私有变量时是非常有用的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">var application=function()&#123;</div><div class="line">	//私有变量</div><div class="line">	var components=new Array();</div><div class="line">	//初始化</div><div class="line">	components.push(new BaseComponent());  //向数组中添加BaseComponent的一个实例，这里不关心它的代码，只需知道它是用来初始化数组的</div><div class="line"></div><div class="line">	return &#123;</div><div class="line">		getComponentCount: function()&#123;</div><div class="line">			return components.length;</div><div class="line">		&#125;,</div><div class="line">		registerComponent: function(component)&#123;</div><div class="line">			if(typeof component==&quot;object&quot;)&#123;</div><div class="line">				components.push(component);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line">&#125;();</div></pre></td></tr></table></figure></p>
+<ul>
+<li>增强的模块模式<br>在返回对象之前，加入对其增强的代码，这种增强的模块模式适合那些单例必须是某种类型的特例，同时还必须添加某些属性和方法对其加以增强的情况。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">var f=function()&#123;</div><div class="line">	//私有变量</div><div class="line">	var privateVariable=10;</div><div class="line">	//私有函数</div><div class="line">	function privateFunction()&#123;</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	//创建对象</div><div class="line">	var object=new CustomType();</div><div class="line">	//添加公有属性</div><div class="line">	object.publicProperty=true;</div><div class="line">	//添加公有方法</div><div class="line">	object.publicMethod=function()&#123;</div><div class="line">		privateVariable++;</div><div class="line">		return privateFunction();</div><div class="line">	&#125;</div><div class="line">	//返回这个对象</div><div class="line">	return object;</div><div class="line">&#125;();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>比如，如果前面的例子中的application对象必须是Basecomponent的实例，可以改进如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">var application=function()&#123;</div><div class="line">	//私有变量</div><div class="line">	var components=new Array();</div><div class="line">	//初始化</div><div class="line">	components.push(new BaseComponent()); </div><div class="line"></div><div class="line">	//创建application的一个局部副本</div><div class="line">	var app=new BaseComponent();</div><div class="line">	//公共接口</div><div class="line">	app.getComponentCount=function()&#123;</div><div class="line">		return components.length;</div><div class="line">	&#125;;</div><div class="line">	app.registerComponent=function(component)&#123;</div><div class="line">		if(typeof component==&quot;object&quot;)&#123;</div><div class="line">			components.push(component);</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line">	//返回这个副本</div><div class="line">	return app;</div><div class="line">&#125;();</div></pre></td></tr></table></figure></p>
+<hr>
+<p>PS:《JavaScript高级程序设计》笔记</p>
 
       
 
@@ -281,6 +293,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2017/10/17/js22/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          javascript中的Ajax
+        
+      </div>
+    </a>
   
   
     <a href="/2017/10/15/js20/" id="article-nav-older" class="article-nav-link-wrap">
@@ -406,14 +427,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js03</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">php</a>
               </li>
              
@@ -422,11 +435,19 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js02</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js04</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js02</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js03</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -450,19 +471,19 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js10</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js11</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Webpack</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js12</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js10</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js11</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -474,11 +495,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js14</a>
+                <a href="javascript:void(0)" class="js-tag color5">js15</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js15</a>
+                <a href="javascript:void(0)" class="js-tag color5">js14</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -487,6 +508,10 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js17</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -502,11 +527,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">js18</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js18</a>
+                <a href="javascript:void(0)" class="js-tag color5">js22</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js23</a>
               </li>
             
             <div class="clearfix"></div>
