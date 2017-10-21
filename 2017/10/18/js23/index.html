@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/10/18/js23/index.html">
 <meta property="og:site_name" content="changlesun || more than">
 <meta property="og:description" content="jQuery对Ajax操作进行了封装。在jQuery中，最底层的方法是：$.ajax()，第2层是：load()、$.get()、$.post()，第3层是：$.getScript()、$.getJSON()。">
-<meta property="og:updated_time" content="2017-10-18T05:14:56.249Z">
+<meta property="og:updated_time" content="2017-10-20T01:22:09.157Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jQuery中的Ajax">
 <meta name="twitter:description" content="jQuery对Ajax操作进行了封装。在jQuery中，最底层的方法是：$.ajax()，第2层是：load()、$.get()、$.post()，第3层是：$.getScript()、$.getJSON()。">
@@ -250,7 +250,63 @@
 <p>2.XML文档<br>处理XML文档与处理HTML文档一样，也可以使用常规的attr()、find()、filter()以及其它方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	$(&quot;#send&quot;).click(function()&#123;</div><div class="line">		$.get(&quot;get1.php&quot;, &#123;</div><div class="line">			username: $(&quot;#username&quot;).val(),</div><div class="line">			content: $(&quot;#content&quot;).val()</div><div class="line">		&#125;,function(data, textStatus)&#123;</div><div class="line">			var username=$(data).find(&quot;comment&quot;).attr(&quot;username&quot;);</div><div class="line">			var content=$(data).find(&quot;comment content&quot;).text();</div><div class="line">			var txtHtml=&quot;&lt;div class=&apos;comment&apos;&gt;&lt;h6&gt;&apos;+username+&apos;：&lt;/h6&gt;&lt;p class=&apos;para&apos;&gt;&apos;+content+&apos;&lt;/p&gt;&lt;/div&gt;&quot;;</div><div class="line">			$(&quot;#resText&quot;).html(txtHtml);</div><div class="line">		&#125;);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//虽然实现起来要稍微复杂一些，但是XML文档的可移植性是其它数据格式无法比拟的，重用性很高</div><div class="line">//XML文档体积相对较大，解析和操作的速度要慢一些</div></pre></td></tr></table></figure></p>
 <p>3.JSON文件<br>之所以会出现这种文件很大程度上是因为XML文档体积大和难以解析。JSON文件和XML文档一样，也可以方便的被重用，且简洁、易阅读。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	$(&quot;#send&quot;).click(function()&#123;</div><div class="line">		$.get(&quot;get1.php&quot;, &#123;</div><div class="line">			username: $(&quot;#username&quot;).val(),</div><div class="line">			content: $(&quot;#content&quot;).val()</div><div class="line">		&#125;,function(data, textStatus)&#123;</div><div class="line">			var username=data.username;</div><div class="line">			var content=data.content;</div><div class="line">			var txtHtml=&quot;&lt;div class=&apos;comment&apos;&gt;&lt;h6&gt;&apos;+username+&apos;：&lt;/h6&gt;&lt;p class=&apos;para&apos;&gt;&apos;+content+&apos;&lt;/p&gt;&lt;/div&gt;&quot;;</div><div class="line">			$(&quot;#resText&quot;).html(txtHtml);</div><div class="line">		&#125;, &quot;json&quot;);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//在不远的将来，新版JS中的XML将会和JSON一样容易解析，到时候通用且容易解析的XML将会成为主流，但在此之前，JSON依然有很强的生命力</div></pre></td></tr></table></figure></p>
 <p>基于以上3种数据格式的优缺点，可以得知：（1）在不需要与其它应用程序共享数据时，使用XML片段最简单；（2)数据需要重用，JSON是不错的格式，它在性能和文件大小方面具有优势；（3）当远程应用程序未知时，XML是明智的选择，它是Web服务领域的“世界语”。</p>
-<h3 id="post"><a href="#post" class="headerlink" title="$.post()"></a>$.post()</h3>
+<h3 id="post"><a href="#post" class="headerlink" title="$.post()"></a>$.post()</h3><p>与$.get()使用方式相同，但仍然有以下区别：</p>
+<blockquote>
+<ul>
+<li>GET请求会将参数跟在URL后进行传递，POST则是作为HTTP消息的实体内容发送给Web服务器。</li>
+<li>GET对传输数据有大小限制（通常不能大于2KB），而使用POST传递的数据量要比GET大得多（理论上不受限制）。</li>
+<li>GET请求的数据会被浏览器缓存起来，其他人可以从浏览器的历史记录中读取到这些数据，在某种情况下，GET会带来严重的安全性问题，而POST可以避免这些问题。</li>
+<li>GET与POST传递的数据在服务器端的获取也不同，在PHP中，GET的数据可以用$_GET[]获取，而POST则可以用$_POST[]获取。这两种方式都可以用$_REQUEST[]来获取。</li>
+</ul>
+</blockquote>
+<p>由于POST、GET提交的数据都可以通过$_REQUEST[]获取，因此只要改变jQuery函数，就可以将程序在GET和POST之间切换。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	$(&quot;#send&quot;).click(function()&#123;</div><div class="line">		$.get(&quot;post1.php&quot;, &#123;</div><div class="line">			username: $(&quot;#username&quot;).val(),</div><div class="line">			content: $(&quot;#content&quot;).val()</div><div class="line">		&#125;,function(data, textStatus)&#123;</div><div class="line">			$(&quot;#resText&quot;).append(data);</div><div class="line">		&#125;);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>另外，当load()带有参数传递时，会使用POST方式发送请求，因此也可以使用load()来完成相同的功能。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	$(&quot;#send&quot;).click(function()&#123;</div><div class="line">		$(&quot;#resText&quot;).load(&quot;post1.php&quot;,&#123;</div><div class="line">			username: $(&quot;#username&quot;).val(),</div><div class="line">			content: $(&quot;#content&quot;).val()</div><div class="line">		&#125;);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h2 id="———第3层———"><a href="#———第3层———" class="headerlink" title="———第3层———"></a>———第3层———</h2><h3 id="getScript"><a href="#getScript" class="headerlink" title="$.getScript()"></a>$.getScript()</h3><p>有时候，在页面初次加载时就取得所需的全部JS文件是完全没有必要的。虽然可以在需要哪个JS文件时，动态地创建&lt; script &gt;标签，jQuery代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(document.createElement(&quot;script&quot;)).attr(&quot;src&quot;, &quot;test.js&quot;).appendTo(&quot;head&quot;);</div></pre></td></tr></table></figure></p>
+<p>或者：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&quot;&lt;script type=&apos;text/javascript&apos; src=&quot;test.js&quot; /&gt;&quot;).appendTo(&quot;head&quot;);</div></pre></td></tr></table></figure></p>
+<p>但这种方式并不理想。为此，jQuery提供了$.getScript()来直接加载.js文件，与加载一个HTML片段一样方便，并且不需要对JS文件进行处理，JS文件会自动执行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	$(&quot;#send&quot;).click(function()&#123;</div><div class="line">		$.getScript(&quot;test.js&quot;);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>$.getScript()也有回调函数，它会在JS文件成功载入后运行，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	$.getScript(&quot;jquery.color.js&quot;, function()&#123;</div><div class="line">		$(&quot;#go&quot;).click(function()&#123;</div><div class="line">			$(&quot;block&quot;).animate(&#123;backgroundColor: &quot;pink&quot;&#125;, 1000)</div><div class="line">					 .animate(&#123;backgroundColor: &quot;blue&quot;&#125;, 1000);</div><div class="line">		&#125;);</div><div class="line">	&#125;);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<h3 id="getJSON"><a href="#getJSON" class="headerlink" title="$.getJSON()"></a>$.getJSON()</h3><p>$.getJSON()用于加载JSON文件，与$.getScript()用法相同。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	$(&quot;#send&quot;).click(function()&#123;</div><div class="line">		$.getJSON(&quot;test.json&quot;);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>单击加载按钮后，网页上看不到任何效果，还需要回调函数处理返回的数据：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	$(&quot;#send&quot;).click(function()&#123;</div><div class="line">		$.getJSON(&quot;test.json&quot;, function(data)&#123;</div><div class="line">			//data：返回的数据</div><div class="line">			......</div><div class="line">		&#125;);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>通用的遍历方法$.each()，可以用于遍历对象和数组。$.each()是一个全局函数，不操作jQuery对象，而是以一个数组或对象作为第一个参数，以一个回调函数作为第二个参数。回调函数拥有两个参数：数组的索引或对象的成员、对应内容或变量。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	$(&quot;#send&quot;).click(function()&#123;</div><div class="line">		$.getJSON(&quot;test.json&quot;, function(data)&#123;</div><div class="line">			$(&quot;#resText&quot;).empty();</div><div class="line">			var html=&quot;&quot;;</div><div class="line">			$.each(data, function(commentIndex, comment)&#123;</div><div class="line">				html+=&quot;&lt;div class=&apos;comment&apos;&gt;&lt;h6&gt;&quot;</div><div class="line">					+comment[&quot;username&quot;]</div><div class="line">					+&quot;:&lt;/h6&gt;&lt;p class=&apos;para&apos;&gt;&quot;</div><div class="line">					+comment[&quot;content&quot;]</div><div class="line">					+&quot;&lt;/p&gt;&lt;/div&gt;&quot;;</div><div class="line">			&#125;);</div><div class="line">			$(&quot;resText&quot;).html(html);</div><div class="line">		&#125;);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>不仅如此，还能通过使用JSON形式的回调函数来加载其它网站的JSON数据，列如从图片网站<a href="http://Flickr.com" target="_blank" rel="external">http://Flickr.com</a> 搜索汽车类别的4张最新图片。如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	$(&quot;#send&quot;).click(function()&#123;</div><div class="line">		$.getJSON(&quot;http://api.flicker.com/services/feeds/photo_public.gne?</div><div class="line">		tags=car&amp;tagmode=any&amp;format=json&amp;jsoncall back=?&quot;, function(data)&#123;</div><div class="line">			$.each(data.items, function(i, item)&#123;</div><div class="line">				$(&quot;&lt;img class=&apos;para&apos; /&gt;&quot;).attr(&quot;src&quot;, item.media.m).appenTo(&quot;#resText&quot;);</div><div class="line">				if(i==3)&#123;</div><div class="line">					return false;</div><div class="line">				&#125;</div><div class="line">			&#125;);</div><div class="line">		&#125;);</div><div class="line">	&#125;);	</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h2 id="———第1层———"><a href="#———第1层———" class="headerlink" title="———第1层———"></a>———第1层———</h2><h3 id="ajax"><a href="#ajax" class="headerlink" title="$.ajax()"></a>$.ajax()</h3><p>第2层方法能够完成一些常规的Ajax程序，如果还需要编写一些复杂的Ajax程序，那么就要用到jQuery中的$.ajax()。<br>$.ajax()不仅能实现与$.load()、$.get()、$.post()相同的功能，而且还可以设定beforeSend（提交回调函数）、error（请求失败后处理）、sucess（请求成功后处理）、complete（请求完成后处理）回调函数，通过这些回调函数，可以给用户更多的Ajax提示信息。另外，还有一些参数，可以设置Ajax请求的超时时间或者页面的“最后更改状态”等。<br>语法为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$.ajax(options);</div><div class="line"></div><div class="line">//接收一个参数，该参数是一个对象，对象内包含了所需要的请求设置以及回调函数等信息，以key/value的形式存在，并且所有参数都是可选的</div></pre></td></tr></table></figure></p>
+<p>第2层、第3层方法都是基于$.ajax()构建的，$.ajax()是jQuery的最底层实现，因此可以用它来替代前面的所有方法。<br>例如替代$.getScript()：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	$(&quot;#send&quot;).click(function()&#123;</div><div class="line">		$.ajax(&#123;</div><div class="line">			type: &quot;GET&quot;,</div><div class="line">			url: &quot;test.js&quot;,</div><div class="line">			dataType: &quot;script&quot;</div><div class="line">		&#125;);</div><div class="line">	&#125;);	</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>例如替代$.getJSON()：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	$(&quot;#send&quot;).click(function()&#123;</div><div class="line">		$.ajax(&#123;</div><div class="line">			type: &quot;GET&quot;,</div><div class="line">			url: &quot;test.json&quot;,</div><div class="line">			dataType: &quot;json&quot;,</div><div class="line">			success: function(data)&#123;</div><div class="line">				$(&quot;#resText&quot;).empty();</div><div class="line">				var html=&quot;&quot;;</div><div class="line">				$.each(data, function(commentIndex, comment)&#123;</div><div class="line">				html+=&quot;&lt;div class=&apos;comment&apos;&gt;&lt;h6&gt;&quot;</div><div class="line">					+comment[&quot;username&quot;]</div><div class="line">					+&quot;:&lt;/h6&gt;&lt;p class=&apos;para&apos;&gt;&quot;</div><div class="line">					+comment[&quot;content&quot;]</div><div class="line">					+&quot;&lt;/p&gt;&lt;/div&gt;&quot;;</div><div class="line">				&#125;);</div><div class="line">				$.(&quot;#resText&quot;).html(html);</div><div class="line">			&#125;</div><div class="line">		&#125;);</div><div class="line">	&#125;);	</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h2 id="———序列化元素———"><a href="#———序列化元素———" class="headerlink" title="———序列化元素———"></a>———序列化元素———</h2><h3 id="serialize"><a href="#serialize" class="headerlink" title="serialize()"></a>serialize()</h3><p>serialize()作用于jQuery对象，能够将DOM元素内容序列化为字符串，用于Ajax请求。对表单数据处理进行简化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	$(&quot;#send&quot;).click(function()&#123;</div><div class="line">		$.get(&quot;get1.php&quot;, $(&quot;#form&quot;).serialize(), function(data, textStatus)&#123;</div><div class="line">			$(&quot;#resText&quot;).html(data);</div><div class="line">		&#125;);</div><div class="line">	&#125;);	</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>serialize()作用于jQuery对象，不光只有表单能使用它，其它选择器选取的元素也都能使用它。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&quot;:checkbox, :radio&quot;).serialize();</div></pre></td></tr></table></figure></p>
+<h3 id="serializeArray"><a href="#serializeArray" class="headerlink" title="serializeArray()"></a>serializeArray()</h3><p> serializeArray()不返回字符串，而是将DOM元素序列化后，返回JSON格式的数据。<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var fields=$(&quot;:checkbox, :radio&quot;).serializeArray();</div><div class="line">console.log(fields);  //用Firebug输出，可以查看该对象</div></pre></td></tr></table></figure></p>
+<p> 既然是一个对象，那么就可以使用$.each()对其进行迭代输出。<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$(function()&#123;</div><div class="line">	var fields=$(&quot;:checkbox, :radio&quot;).serializeArray();</div><div class="line">	$.each(fields, function(i, field)&#123;</div><div class="line">		$(&quot;#results&quot;).append(field.value+&quot; , &quot;);</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="param"><a href="#param" class="headerlink" title="$.param()"></a>$.param()</h3><p> 是serialize()的核心，用来对一个数组或对象按照key/value进行序列化。<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var obj=&#123;a:1, b:2, c:3&#125;;</div><div class="line">var k=$.param(obj);</div><div class="line">alert(k);  //输出a=1&amp;b=2&amp;c=3</div></pre></td></tr></table></figure></p>
+<h2 id="———Ajax中的全局事件———"><a href="#———Ajax中的全局事件———" class="headerlink" title="———Ajax中的全局事件———"></a>———Ajax中的全局事件———</h2><p> 通过jQuery提供的一些自定义全局函数，能够为各种与Ajax相关的事件注册回调函数。<br> 比如请求开始时，触发ajaxStart()，请求结束时触发ajaxStop()。这些方法都是全局的，无论创建它们的代码位于何处，只要有Ajax请求发生，就会触发它们。<br> 比如例子中远程读取网站的图片速度可能比较慢，如果在加载的过程中，不给用户一些提示信息，会让用户觉得单击按钮没有反应。<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;loading&quot;&gt;加载中&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p> 用CSS先控制元素隐藏，当Ajax开始时，显示此元素，当Ajax结束时，隐藏此元素。<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$(&quot;#loading&quot;).ajaxStart(function()&#123;</div><div class="line">	$(this).show();</div><div class="line">&#125;);</div><div class="line">$(&quot;#loading&quot;).ajaxStop(function()&#123;</div><div class="line">	$(this).hide();</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>其它方法：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法名称</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ajaxComplete(callback)</td>
+<td style="text-align:center">Ajax请求完成时执行</td>
+</tr>
+<tr>
+<td style="text-align:center">ajaxError(callback)</td>
+<td style="text-align:center">Ajax请求错误时执行，被捕捉到的错误可以作为最后一个参数传递。</td>
+</tr>
+<tr>
+<td style="text-align:center">ajaxSend(callback)</td>
+<td style="text-align:center">Ajax请求发送前执行</td>
+</tr>
+<tr>
+<td style="text-align:center">ajaxSuccess(callback)</td>
+<td style="text-align:center">Ajax请求成功执行</td>
+</tr>
+</tbody>
+</table>
+
       
 
       
@@ -472,14 +528,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js02</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">php</a>
               </li>
              
@@ -488,15 +536,23 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js02</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js04</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js03</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js05</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js04</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,10 +572,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js10</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js11</a>
               </li>
              
@@ -532,6 +584,10 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js10</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
@@ -540,11 +596,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js15</a>
+                <a href="javascript:void(0)" class="js-tag color5">js14</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js14</a>
+                <a href="javascript:void(0)" class="js-tag color5">js15</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -552,7 +608,7 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js17</a>
+                <a href="javascript:void(0)" class="js-tag color5">js19</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -560,7 +616,7 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js19</a>
+                <a href="javascript:void(0)" class="js-tag color5">js17</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -576,15 +632,15 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js23</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
             
             <div class="clearfix"></div>
