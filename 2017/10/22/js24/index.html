@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="changlesun || more than">
 <meta property="og:description" content="JavaScript与HTML之间的交互是通过事件实现的。可以使用侦听器（处理程序）来预订事件，以便事件发生时执行相应的代码。IE9、Firefox、Opera、Safari、Chrome全都已经实现了“DOM2级事件”模块的核心部分，IE8是最后一个仍然使用其专有事件系统的主要浏览器。">
 <meta property="og:image" content="http://yoursite.com/img/js2401.png">
-<meta property="og:updated_time" content="2017-10-22T04:02:59.739Z">
+<meta property="og:updated_time" content="2017-10-22T14:16:18.390Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javascript中的事件">
 <meta name="twitter:description" content="JavaScript与HTML之间的交互是通过事件实现的。可以使用侦听器（处理程序）来预订事件，以便事件发生时执行相应的代码。IE9、Firefox、Opera、Safari、Chrome全都已经实现了“DOM2级事件”模块的核心部分，IE8是最后一个仍然使用其专有事件系统的主要浏览器。">
@@ -198,9 +198,10 @@
 <p>通过addEventListener()添加的事件处理程序只能用removeEventListener()来移除。<br>移除时传入的参数与添加处理程序时使用的参数相同，这意味着通过addEventListener()添加的匿名函数将无法移除。可以向下面这样写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var btn=document.getElementById(&quot;myBtn&quot;);</div><div class="line">var hander=function()&#123;</div><div class="line">	alert(this.id);</div><div class="line">&#125;;</div><div class="line">btn.addEventListener(&quot;click&quot;, handler, false);</div><div class="line">btn.removeEventListener(&quot;click&quot;, handler, false);</div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>大多数情况下，都是将事件处理程序添加到事件流的冒泡阶段，这样可以最大限度地兼容各种浏览器。<br>最好是只在需要在事件到达目标之前截获它的时候将事件处理程序添加到捕获阶段。如果不是特别需要，不建议在事件捕获阶段注册事件处理程序。</p>
-<h3 id="IE事件处理程序"><a href="#IE事件处理程序" class="headerlink" title="IE事件处理程序"></a>IE事件处理程序</h3><p>IE实现了与DOM中类似的两个方法：attachEvent()、detachEvent()。这两个方法接受2个相同的参数：事件处理程序名称、事件处理程序函数。由于IE8以及更早版本只支持事件冒泡，所以通过attachEvent()添加的事件处理程序都会被添加到冒泡阶段。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var btn=document.getElementById(&quot;myBtn&quot;);</div><div class="line">btn.attachEvent(&quot;onclick&quot;, function()&#123;</div><div class="line">	alert(&quot;Clicked&quot;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 </blockquote>
+<h3 id="IE事件处理程序"><a href="#IE事件处理程序" class="headerlink" title="IE事件处理程序"></a>IE事件处理程序</h3><p>IE实现了与DOM中类似的两个方法：attachEvent()、detachEvent()。这两个方法接受2个相同的参数：事件处理程序名称、事件处理程序函数。由于IE8以及更早版本只支持事件冒泡，所以通过attachEvent()添加的事件处理程序都会被添加到冒泡阶段。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var btn=document.getElementById(&quot;myBtn&quot;);</div><div class="line">btn.attachEvent(&quot;onclick&quot;, function()&#123;</div><div class="line">	alert(&quot;Clicked&quot;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 <p>在使用attachEvent()的情况下，事件处理程序会在全局作用域中运行，因此this等于window。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var btn=document.getElementById(&quot;myBtn&quot;);</div><div class="line">btn.attachEvent(&quot;onclick&quot;, function()&#123;</div><div class="line">	alert(this===window);  //true</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>也可以为一个元素添加多个事件处理程序，但是这些事件处理程序不是以添加它们的顺序执行，而是以相反的顺序被触发。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var btn=document.getElementById(&quot;myBtn&quot;);</div><div class="line">btn.attachEvent(&quot;onclick&quot;, function()&#123;</div><div class="line">	alert(&quot;Clicked&quot;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 
       
 
@@ -423,6 +424,14 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">php</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js01</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
@@ -447,6 +456,10 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js07</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js08</a>
               </li>
              
@@ -463,10 +476,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js14</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Webpack</a>
               </li>
              
@@ -475,7 +484,19 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js07</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js13</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js14</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js15</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -488,18 +509,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">js18</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js13</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js15</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -519,10 +528,6 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js24</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">jQuery</a>
               </li>
              
@@ -531,15 +536,11 @@ getOwnMetadataKeys:function(t){return o(i(t),arguments.length<2?void 0:u(argumen
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">js24</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">php</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">js01</a>
               </li>
             
             <div class="clearfix"></div>
